@@ -1,0 +1,22 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_etapa_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('tupi_etapa_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% block main %}
+<div class="formulario esp_top row">
+	{{ form_start(form) }}
+		{{ form_row(form.id) }}
+		<div class="col-md-12 col-sm-12"> 
+			<ul class="row">
+				<ul class="col-md-12 col-sm-12">
+					<li class="col-md-9 col-sm-7">{{ form_row(form.name) }}</li>
+				</ul>
+			</ul>
+		</div>	
+	{{ form_end(form) }}
+</div>
+{% endblock %}

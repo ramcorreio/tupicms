@@ -1,0 +1,86 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	//ativação styleForm
+	$("form").styleForm();
+	$(function() {
+		$( '.tabs' ).tabs({ active: 0 });
+		$( "#slider" ).slider();
+		$( "#datepicker" ).datepicker();
+	});
+	</script>
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_page_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.form_button('tupi_page_new', 'Adicionar', {'class': 'adicionar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('tupi_page_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% set title_controle = title_controle ~ ' Página' %}
+
+{% block main %} 
+<div class="formulario esp_top row">
+	
+	{{ form_start(form) }}
+		{{ form_row(form.id) }}
+		<div class="tabs col-md-8">
+			<ul class="controle">
+				<li><a href="#geral">Geral</a></li>
+				<li><a href="#metatags">Meta tags</a></li>
+				<li><a href="#media">Arquivos e imagens</a></li>
+			</ul>
+		
+			<div id="geral" class="box">
+				<ul class="row">
+					<li class="col-md-12">{{ form_row(form.title) }}</li>
+					<li class="col-md-6">{{ form_row(form.url) }}</li>
+					<li class="col-md-6">{{ form_row(form.status) }}</li>
+					<li class="col-md-12">{{ form_row(form.summary) }}</li>
+					<li class="col-md-12">{{ form_row(form.source) }}</li>
+					<li class="col-md-12">{{ form_row(form.body) }}</li>
+				</ul>
+			</div>
+			
+			<div id="metatags" class="box">
+				<ul class="row">
+					<li class="col-md-12">{{ form_row(form.header) }}</li>
+					<li class="col-md-12">{{ form_row(form.metaKeywords) }}</li>
+					<li class="col-md-12">{{ form_row(form.description) }}</li>
+				</ul>
+			</div>
+			
+			<div id="media" class="box">
+				<ul class="row">
+				{% for image in form.images %}
+					{{ image|get_image }}
+					<li {% if loop.index % 4 != 0 %} class="esp {{ loop.index }}" {% endif %}>
+        				<div class="body-image {% if image.vars.checked %} checked {% endif %}">
+	        				{{ form_widget(image, {'attr': { 'onchange': '$(this).onCheck()'} } ) }}
+	        				{% if image.vars.data.thumb is null %}
+	        				    <img onclick="$(this).checkImage()" title="{{ image.vars.data.title }}" alt="{{ image.vars.data.title }}" src="{{ asset('bundles/tupiadmin/media/img/logo_tupi.png') }}"/>
+	        				{% else %}
+	        				    {{ admin.thumb(image.vars.data, { 'onclick': "$(this).checkImage()" }) }}
+                            {% endif %}
+	        			</div>
+        			</li>
+    			{% endfor %}
+    			</ul>
+			</div>
+		
+		</div>
+		
+		<aside class="col-md-4">
+			<ul>
+				<li class="checkbox">{{ form_row(form.home) }}</li>
+				<li>{{ form_row(form.visible) }}</li>
+				<li>{{ form_row(form.templateName) }}</li>
+				<!-- <li class="esp_top"><a href="" class="botao_acao visualizar">Visualizar página</a></li> -->
+			</ul>
+		</aside>
+	{{ form_end(form) }}	
+</div>
+
+{% endblock %}

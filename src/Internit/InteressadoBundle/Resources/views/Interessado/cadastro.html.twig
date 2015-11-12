@@ -1,0 +1,48 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$('.tabs').tabs({ active: 0 });
+	</script>	
+	<script type="text/javascript" src="{{ asset('bundles/internitacompanhante/js/plupload.full.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitacompanhante/js/jquery.ui.plupload.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/mask.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/geral.js') }}"></script>
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_interessado_home', 'Voltar', {'class': 'voltar'}) }}
+{% endblock %}
+
+{% set title_controle = 'Interessado' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs col-md-12 col-sm-12">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<ul class="controle">
+				<li><a href="#geral">Geral</a></li>
+			</ul>
+				
+			<div id="geral" class="box">
+			    <ul class="col-md-8">
+					<li>{{ form_row(form.nome) }}</li>
+				</ul>
+				<ul class="col-md-8">
+					<li>{{ form_row(form.email) }}</li>
+					{{ form_label(form.imovel, 'Imóvel') }}
+					<li>{{ form_widget(form.imovel, {'attr': {'class': '','disabled': 'true'}}) }}</li>
+				</ul>
+			    <ul class="col-md-4">
+				    <li>{{ form_row(form.celular) }}</li>
+				    <li>{{ form_row(form.telefone) }}</li>
+				</ul>
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

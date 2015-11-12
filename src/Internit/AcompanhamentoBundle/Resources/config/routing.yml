@@ -1,0 +1,132 @@
+tupi_acompanhamento_sort:
+    pattern:  /admin/acompanhamento/sort
+    defaults: { _controller: "InternitAcompanhamentoBundle:Acompanhamento:sort" }    
+
+tupi_acompanhamento_home:
+    pattern:  /admin/acompanhamento/{actionName}/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Acompanhamento:index", actionName: null, id: null }
+
+tupi_acompanhamento_bloco:
+    pattern:  /acompanhamento/bloco/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Front:bloco", id: null }
+    
+tupi_acompanhamento_galeria:
+    pattern:  /acompanhamento/galeria
+    defaults: { _controller: "InternitAcompanhamentoBundle:Front:galeria" }
+    
+tupi_acompanhamento_new:
+    pattern:  /admin/acompanhamento/new
+
+tupi_acompanhamento_edit:
+    pattern:  /admin/acompanhamento/edit/{id}
+
+tupi_acompanhamento_remove:
+    pattern:  /admin/acompanhamento/remove/{id}
+
+tupi_acompanhamento_ficha:
+    pattern:  /acompanhamento/{url}.html
+    defaults: { _controller: "InternitAcompanhamentoBundle:Front:ficha", url: null }
+
+acompanhamento_ajax:
+   pattern:  /acompanhamento/acompanhamentos-ajax
+   defaults: { _controller: "InternitAcompanhamentoBundle:Front:acompanhamentosAjax", status: null}
+    
+tupi_acompanhamento_imovel_home:
+    pattern:  /admin/acompanhamento/imovel/{actionName}/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:AcompanhamentoImovel:index", actionName: null, id: null }
+    
+tupi_acompanhamento_imovel_new:
+    pattern:  /admin/acompanhamento/imovel/new
+
+tupi_acompanhamento_imovel_edit:
+    pattern:  /admin/acompanhamento/imovel/edit/{id}
+
+tupi_acompanhamento_imovel_remove:
+    pattern:  /admin/acompanhamento/imovel/remove/{id}    
+
+tupi_acompanhamento_galeria_imagem:
+    pattern:  /admin/acompanhamento/bloco/{bloco}/galeria/{filter}/imagem
+    defaults: { _controller: "InternitAcompanhamentoBundle:Imagem:index", bloco: null, filter: null }
+    
+tupi_acompanhamento_galeria_imagem_new:
+    pattern:  /admin/acompanhamento/galeria/{filter}/imagem/new
+    defaults: { _controller: "InternitAcompanhamentoBundle:Imagem:new", id: null, filter: null }
+
+tupi_acompanhamento_galeria_imagem_edit:
+    pattern:  /admin/acompanhamento/galeria/{filter}/imagem/edit/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Imagem:edit", id: null, filter: null }
+
+tupi_acompanhamento_galeria_imagem_remove:
+    pattern:  /admin/acompanhamento/galeria/{filter}/imagem/remove/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Imagem:remove", id: null, filter: null }
+    
+tupi_etapa_sort:
+    pattern:  /admin/etapa/sort
+    defaults: { _controller: "InternitAcompanhamentoBundle:Etapa:sort" }    
+    
+    
+tupi_acompanhamento_bloco_relatorio:
+    pattern:  /admin/acompanhamento/bloco/{filter}/relatorio
+    defaults: { _controller: "InternitAcompanhamentoBundle:Relatorio:index", filter: null }
+    
+tupi_acompanhamento_bloco_relatorio_new:
+    pattern:  /admin/acompanhamento/bloco/{filter}/relatorio/new
+    defaults: { _controller: "InternitAcompanhamentoBundle:Relatorio:new", id: null, filter: null }
+
+tupi_acompanhamento_bloco_relatorio_edit:
+    pattern:  /admin/acompanhamento/bloco/{filter}/relatorio/edit/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Relatorio:edit", id: null, filter: null }
+
+tupi_acompanhamento_bloco_relatorio_remove:
+    pattern:  /admin/acompanhamento/bloco/{filter}/relatorio/remove/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Relatorio:remove", id: null, filter: null }    
+    
+    
+    
+
+tupi_acompanhamento_bloco_home:
+    pattern:  /admin/acompanhamento/{filter}/bloco/{actionName}/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Bloco:index", actionName: null, id: null, filter: null }
+    
+tupi_acompanhamento_bloco_new:
+    pattern:  /admin/acompanhamento/{filter}/bloco/new
+
+tupi_acompanhamento_bloco_edit:
+    pattern:  /admin/acompanhamento/{filter}/bloco/edit/{id}
+
+tupi_acompanhamento_bloco_remove:
+    pattern:  /admin/acompanhamento/{filter}/bloco/remove/{id}
+    
+tupi_acompanhamento_etapa_home:
+    pattern:  /admin/acompanhamento/bloco/{filter}/etapa
+    defaults: { _controller: "InternitAcompanhamentoBundle:AcompanhamentoEtapa:index", filter: null }
+
+tupi_acompanhamento_etapa_new:
+    pattern:  /admin/acompanhamento/bloco/{filter}/etapa/new
+    defaults: { _controller: "InternitAcompanhamentoBundle:AcompanhamentoEtapa:new", filter: null }
+
+tupi_acompanhamento_galeria_home:
+    pattern:  /admin/acompanhamento/bloco/{filter}/galeria/{actionName}/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Galeria:index", actionName: null, id: null, filter: null }
+    
+tupi_acompanhamento_galeria_new:
+    pattern:  /admin/acompanhamento/bloco/{filter}/galeria/new
+
+tupi_acompanhamento_galeria_edit:
+    pattern:  /admin/acompanhamento/bloco/{filter}/galeria/edit/{id}
+
+tupi_acompanhamento_galeria_remove:
+    pattern:  /admin/acompanhamento/bloco/{filter}/galeria/remove/{id}
+    
+tupi_etapa_home:
+    pattern:  /admin/etapa/{actionName}/{id}
+    defaults: { _controller: "InternitAcompanhamentoBundle:Etapa:index", actionName: null, id: null }
+    
+tupi_etapa_new:
+    pattern:  /admin/etapa/new
+
+tupi_etapa_edit:
+    pattern:  /admin/etapa/edit/{id}
+
+tupi_etapa_remove:
+    pattern:  /admin/etapa/remove/{id}

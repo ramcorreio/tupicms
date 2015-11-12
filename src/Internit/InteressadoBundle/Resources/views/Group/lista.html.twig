@@ -1,0 +1,27 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Grupos de E-mails' %}
+{% set actions = {'tupi_groupInteressado_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Nome do Grupo</th>
+	<th class="titulo">E-mails</th>
+	<th class="item1">Criado em</th>
+{% endblock %}
+
+{% block table_body %}
+	<td>
+		<a href="{{ path('tupi_groupInteressado_edit', {'id':item.id}) }}">
+			<span>{{item.name}}</span>
+		</a>
+	</td>	
+	<td>	
+	{% set join_emails = '' %}
+	{% for email in item.emails %}				
+		{% set join_emails = join_emails ~ email.email %}
+		{% if not loop.last %}{% set join_emails = join_emails ~ ', ' %}{% endif %}
+	{% endfor %}		
+	{{ join_emails|length > 100 ? join_emails|slice(0, 100) ~ '...' : join_emails  }}
+	</td>
+	<td>{{item.createdAt|date("d/m/Y")}}</td>
+{% endblock %}

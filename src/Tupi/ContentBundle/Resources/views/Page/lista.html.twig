@@ -1,0 +1,24 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Páginas' %}
+{% set actions = {'tupi_page_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Nome</th>
+	<th class="item2">Criado em</th>
+	<th class="item2">Alterado em</th>
+	<th class="status2">Status</th>
+{% endblock %}
+{% block table_body %}
+	<td>
+		<a href="{{ path('tupi_page_edit', {'id':item.id}) }}" title="{{item.url}}">
+			{{item.title}}
+			{% if item.home %}
+			<span class="raiz">(Página inicial)</span>
+			{% endif %}
+		</a>
+	</td>
+	<td>{{item.createdAt|date("d/m/Y")}}</td>
+	<td>{{item.updatedAt|date("d/m/Y")}}</td>
+	<td>{{ item.status|page_status }}</td>
+{% endblock %}

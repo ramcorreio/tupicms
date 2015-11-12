@@ -1,0 +1,40 @@
+{% import 'TupiAdminBundle:Form:macros.html.twig' as admin %}
+{% extends 'TupiAdminBundle:Template:base.html.twig' %}
+
+{% block metatags %}
+	<meta name="robots" content="noindex, nofollow"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/x-icon" href="{{ asset('bundles/tupiadmin/media/img/favicon.png') }}" />
+{% endblock metatags %}
+
+{% block stylesheets %}
+	<link href="{{ asset('bundles/tupiadmin/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('bundles/tupiadmin/css/jquery-ui.css') }}" rel="stylesheet" type="text/css" />	
+	<link href="{{ asset('bundles/tupiadmin/css/fontes.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('bundles/tupiadmin/css/main.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('bundles/tupiadmin/css/formularios.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('bundles/tupiadmin/css/combobox.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('bundles/tupiadmin/css/admin.css') }}" rel="stylesheet" type="text/css" />	
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('bundles/tupiadmin/js/jquery-1.10.2.js') }}"></script>
+	<script src="{{ asset('bundles/tupiadmin/js/bootstrap.js') }}"></script>
+	<script src="{{ asset('bundles/tupiadmin/js/ui/1.11.2/jquery-ui.js') }}"></script>
+	<script src="{{ asset('bundles/tupiadmin/js/jquery.combobox.js') }}"></script>
+	<script src="{{ asset('bundles/tupiadmin/js/admin.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="wrap">		
+		{% block header %}{% endblock %}
+		<div class="clearfix"></div>
+		
+	    <section id="conteudo">
+	    	<div class="container">
+				{% block base %}{% endblock %}
+			</div>
+	    </section>
+	</div>
+	{% block footer %}{% endblock %}
+{% endblock %}

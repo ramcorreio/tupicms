@@ -1,0 +1,41 @@
+# Interessado Conosco
+tupi_interessado_documento:
+    pattern:  /admin/interessado/documento/{url}
+    defaults: { _controller: "InternitInteressadoBundle:InteressadoAdmin:documento" }
+    
+tupi_interessado_home:
+    pattern:  /admin/interessado/{actionName}/{id}
+    defaults: { _controller: "InternitInteressadoBundle:InteressadoAdmin:index", actionName: null, id: null }
+
+tupi_interessado_front:
+    pattern:  /interessado/{imovelId}
+    defaults: { _controller: "InternitInteressadoBundle:Submit:interessado", imovelId: null }
+
+tupi_interessado_edit:
+    pattern:  /admin/interessado/edit/{id}
+
+
+#Assunto       
+tupi_subjectInteressado_home:
+    pattern:  /admin/subjectInteressado/{actionName}/{id}
+    defaults: { _controller: "InternitInteressadoBundle:Subject:index", actionName: null, id: null }
+
+tupi_subjectInteressado_new:
+    pattern:  /admin/subjectInteressado/new
+
+tupi_subjectInteressado_edit:
+    pattern:  /admin/subjectInteressado/edit/{id}
+
+#Grupos de Email    
+tupi_groupInteressado_home:
+    pattern:  /admin/groupInteressado/{actionName}/{id}
+    defaults: { _controller: "InternitInteressadoBundle:Group:index", actionName: null, id: null }
+
+tupi_groupInteressado_new:
+    pattern:  /admin/groupInteressado/new
+
+tupi_groupInteressado_edit:
+    pattern:  /admin/groupInteressado/edit/{id}
+    
+tupi_groupInteressado_remove:
+    pattern:  /admin/groupInteressado/remove

@@ -1,0 +1,20 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Etapas' %}
+{% set actions = {'tupi_etapa_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } }%}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/internitacompanhamento/js/sort.js') }}"></script>
+{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">Etapa</th>
+{% endblock %}
+{% block table_body %}
+	<td id="etapa_{{ item.id }}">
+		<a href="{{ path('tupi_etapa_edit', {'id':item.id}) }}">
+			<span>{{item.name}}</span>
+		</a>
+	</td>
+{% endblock %}

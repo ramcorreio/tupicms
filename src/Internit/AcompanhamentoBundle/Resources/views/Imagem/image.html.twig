@@ -1,0 +1,7 @@
+<li id="image_{{ image.id }}">
+	<div class="body-image">
+         <a class="remove_image" href="{{ path("tupi_acompanhamento_galeria_imagem_remove", { "id" : image.id , "filter" : filter}) }}">&times;</a>
+         <img src="{{ path("image_acompanhamento", { "id" : image.id , "thumb" : 1 }) }}">    		         
+         <input type="text" data-url="{{ path("tupi_acompanhamento_galeria_imagem_edit", { "id" : image.id , "filter" : filter}) }}" value="{{ image.label }}">       
+	</div>
+</li>

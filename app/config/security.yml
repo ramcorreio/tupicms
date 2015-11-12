@@ -1,0 +1,2 @@
+imports:
+  - { resource: "@TupiSecurityBundle/Resources/config/security.yml" }

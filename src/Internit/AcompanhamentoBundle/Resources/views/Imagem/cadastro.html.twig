@@ -1,0 +1,119 @@
+<script type="text/javascript">
+var media_index = {{ images.count }};
+var uploader = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'pickfiles',
+	container: document.getElementById('container'),
+	url : "{{ path("tupi_acompanhamento_galeria_imagem_new", { "filter" : filter }) }}",
+	flash_swf_url : "{{ asset("bundles/internitacompanhamento/swf/Moxie.swf") }}",
+	silverlight_xap_url : "{{ asset("bundles/internitacompanhamento/swf/Moxie.xap") }}",
+	
+	filters : {
+		max_file_size : '10mb',
+		mime_types: [
+			{title : "Imagens", extensions : "jpg,gif,png,jpeg"}
+		]
+	},
+
+	init: {
+		PostInit: function() {
+			document.getElementById('filelist').innerHTML = '';
+
+			document.getElementById('uploadfiles').onclick = function() {
+				uploader.start();
+				return false;
+			};
+		},
+
+		FilesAdded: function(up, files) {
+			plupload.each(files, function(file) {
+				document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+			});
+		},
+
+		FileUploaded: function(up, file, info) {
+			$(".sort_image").append(info.response);
+			media_index++;
+         },
+
+		UploadProgress: function(up, file) {
+			document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+		},
+
+		Error: function(up, err) {
+			document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+		},
+
+		UploadComplete: function(up, files) {
+			
+		},
+	}
+});
+
+uploader.init();
+
+$('.sort_image').on('click','.remove_image',function(e) {
+	e.preventDefault();
+	$this = $(this);
+	if(confirm("Deseja realmente excluir?"))
+	{
+		var url = $(this).attr("href");
+ 	    $.post(url)
+ 		 .done(function( data ) 
+ 		 {
+ 			  if(!data.erro)
+ 			  {
+ 				   $(".alerta.sucesso").html(data.message).show();
+ 				  $this.parent().parent().remove();
+ 			  }
+ 			 mensagemAlerta(data.erro, data.message);
+ 		});
+	}
+});
+
+var valueInput;
+
+$('.sort_image').on('focusin','.body-image input',function(e) {
+	valueInput = $(this).val();
+});
+
+$('.sort_image').on('focusout','.body-image input',function(e) {
+	if(valueInput != $(this).val())
+	{
+		var $this = $(this);
+		var url = $this.attr("data-url");
+		var data = "legenda="+ $this.val();
+ 	    $.post(url, data)
+ 		 .done(function(data) 
+ 		 {
+ 			 mensagemAlerta(data.erro, data.message);
+ 		});
+	}
+});
+
+
+</script>
+<button class="new botao_acao changeTab" type="button" onclick="changeTab(4,'{{ path('tupi_acompanhamento_galeria_new' , { 'filter' : bloco }) }}')">Voltar</button>
+<div id="media" class="box">
+	<ul class="sort_image col-md-12 col-sm-12">
+		{% for image in images %}
+			<li id="image_{{ image.id }}">
+				<div class="body-image">
+    		         <a class="remove_image" href="{{ path("tupi_acompanhamento_galeria_imagem_remove", { "id" : image.id , "filter" : filter}) }}">&times; Remover</a>
+    		         <img src="{{ path("image_acompanhamento", { "id" : image.id , "thumb" : 1 }) }}">    		         
+    		         <input type="text" data-url="{{ path("tupi_acompanhamento_galeria_imagem_edit", { "id" : image.id , "filter" : filter}) }}" value="{{ image.label }}"> 	        		         
+    			</div>
+			</li>
+		{% endfor %}
+	</ul>
+	<div class="col-md-12 col-sm-12">
+	    <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+        <br />
+        <div id="container">
+            <a id="pickfiles" href="javascript:;">[Selecione os arquivos]</a> 
+            <a id="uploadfiles" href="javascript:;">[Subir arquivos]</a>
+       </div>
+	</div>
+</div>	
+
+

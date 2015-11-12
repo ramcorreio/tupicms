@@ -1,0 +1,19 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+    <parameters>
+        <parameter key="content.twig.extension.class">Tupi\ContentBundle\Twig\ContentExtension</parameter>
+    </parameters>
+    
+    <services>
+        <service id="content.twig.extension" class="%content.twig.extension.class%">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+            
+        <service id="tupi.remove.page.listener" class="Tupi\ContentBundle\EventListener\ImageRemovePageListener">
+            <tag name="doctrine.event_listener" event="onRemove"/>
+        </service>
+    </services>
+</container>

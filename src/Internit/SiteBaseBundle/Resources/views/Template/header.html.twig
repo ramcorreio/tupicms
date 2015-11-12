@@ -1,0 +1,32 @@
+{% block header %}
+<header>
+	<div class="container">
+		<div class="logo">
+			<h1><a href="{{ path('index') }}"><img src="{{ asset('bundles/internitsitebase/media/img/logo.png') }}" alt="Tupi CMS"></a></h1>
+		</div>
+				
+		<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Buscar...">
+        	<input type="submit" value="Enviar">
+        </form>
+          			
+        <div class="clearfix"></div>
+		       
+		<div class="navbar navbar-inverse" role="navigation">
+		
+		 <div class="navbar-header">
+		       	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    	<span class="icon-bar"></span>
+				</button>
+			</div>
+			
+			<nav class="collapse navbar-collapse">
+	          	{{ front.menu(siteHome(), {'root-class': 'nav navbar-nav', 'inSession': session.url, 'active': 'active'}) }}
+			</nav>
+		</div>
+	</div>
+</header>
+{% endblock %}

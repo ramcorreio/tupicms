@@ -1,0 +1,27 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Assuntos' %}
+{% set actions = {'tupi_subjectTrabalhe_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+
+{% block table_head %}
+	<th class="titulo">Assunto</th>
+	<th class="titulo">Grupos</th>
+	<th class="item1">Status</th>
+{% endblock %}
+{% block table_body %}
+	<td>
+		<a href="{{ path('tupi_subjectTrabalhe_edit', {'id':item.id}) }}">
+			<span>{{item.title}}</span>
+		</a>
+	</td>	
+	<td>
+		{% set join_groups = '' %}
+		{% for group in item.groups %}				
+			{% set join_groups = join_groups ~ group.name %}
+			{% if not loop.last %}{% set join_groups = join_groups ~ ', ' %}{% endif %}
+		{% endfor %}		
+		{{ join_groups|length > 100 ? join_groups|slice(0, 100) ~ '...' : join_groups  }}
+	</td>
+	<td>{{ item.status|status }}</td>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias noticias' %}
+
+{% block content %}
+<div class="container">    
+   	{% if categoria is not empty %}
+	    <div class="col-md-12">
+	    	<h2>Notícias da categoria {{ categoria.name }}</h2>
+	    </div>
+	    
+   		<div class="row segura-noticia">
+	   		<ul class="col-md-12 col-xs-12 ">
+	   			{% for noticia in categoria.news %}
+	   				{% set date = noticia.createdAt|date("d-m-Y") %}
+		   			<a href="{{ path('noticia', { title: noticia.title|url_encode|lower, createdAt: date }) }}">
+			   			<li class="prop col-md-12 col-xs-12">
+			   				<h3>{{ noticia.title|raw }}</h3>
+			   				<h6>{{ noticia.category.name }}</h6>
+			   				<p>{{ noticia.summary|raw }}</p>
+			   				<time>{% if noticia.createdAt == noticia.updatedAt %}Publicado em {{ noticia.createdAt|date("d/m/Y") }}{% else %}<i>Atualizado</i> em {{ noticia.updatedAt|date("d/m/Y") }}{% endif %}</time>
+			   			</li>
+			   		</a>
+			   	{% endfor %}
+	   		</ul>
+	   	{% else %}
+	   		<div class="col-md-12">
+	   			<h1 class="ops">Não há notícias nesta categoria <div class="sad">:(</div></h1>
+	   		</div>
+   		</div>
+   	{% endif %}
+</div>
+{% endblock %}

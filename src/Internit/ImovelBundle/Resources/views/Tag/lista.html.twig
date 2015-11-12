@@ -1,0 +1,13 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Tags' %}
+{% set actions = {'imovel_tag_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Nome da Tag</th>
+{% endblock %}
+
+{% block table_body %}
+	<!-- <td><input type="checkbox" value="{{item.id}}"/></td> -->	
+	<td><a href="{{ path('imovel_tag_edit', {'id':item.id}) }}">{{item.tag}}</a></td>
+{% endblock %}

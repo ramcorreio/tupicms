@@ -1,0 +1,16 @@
+<?php
+
+namespace Tupi\AdminBundle\Tests\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class PublicFolderControllerTest extends WebTestCase
+{
+    public function testDownload()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/download');
+    }
+
+}

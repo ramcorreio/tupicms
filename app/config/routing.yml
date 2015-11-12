@@ -1,0 +1,51 @@
+internit_imovel:
+    resource: "@InternitImovelBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_trabalhe:
+    resource: "@InternitTrabalheBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_interessado:
+    resource: "@InternitInteressadoBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+internit_newsletter:
+    resource: "@InternitNewsletterBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_ofereca:
+    resource: "@InternitOferecaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_banner:
+    resource: "@InternitBannerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_acompanhamento:
+    resource: "@InternitAcompanhamentoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_random_chat:
+    resource: "@InternitRandomChatBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_site_base:
+    resource: "@InternitSiteBaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
+internit_contact:
+    resource: "@InternitContactBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tupi_content:
+    resource: "@TupiContentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tupi_security:
+    resource: "@TupiSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+tupi_admin:
+    resource: "@TupiAdminBundle/Resources/config/routing.yml"
+    prefix:   /

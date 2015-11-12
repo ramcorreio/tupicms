@@ -1,0 +1,11 @@
+newsletter_export:
+    pattern:  /admin/newsletter/export
+    defaults: { _controller: "InternitNewsletterBundle:Export:generateCsv" }
+
+newsletter_home:
+    pattern:  /admin/newsletter/{actionName}/{id}
+    defaults: { _controller: "InternitNewsletterBundle:Newsletter:index", actionName: null, id: null }
+    
+newsletter_new:
+    pattern: /newsletter
+    defaults: { _controller: "InternitNewsletterBundle:Submit:newsletter" }

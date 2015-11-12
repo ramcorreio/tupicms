@@ -1,0 +1,20 @@
+tupi_admin:
+    path: /admin/
+    defaults: { _controller: "TupiAdminBundle:Default:admin" }
+          
+default:
+    pattern:  /{path}.{ext}
+    defaults: { _controller: "TupiAdminBundle:Default:pages"}
+    requirements:
+        path: "[^\\.]+"
+        ext: "html"
+
+front_menu:
+    pattern:  /{path}
+    defaults: { _controller: "TupiAdminBundle:Default:menus"}
+    requirements:
+        path: ".+"
+  
+index:
+    pattern: /
+    defaults: { _controller: "TupiAdminBundle:Default:index" }

@@ -1,0 +1,58 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	<!--
+	<script type="text/javascript">
+	$(function() {
+		$( '.tabs' ).tabs({ active: 0 });
+	});
+	</script>
+	-->
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_media_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.form_button('tupi_media_new', 'Adicionar', {'class': 'adicionar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('tupi_media_remove', 'Excluir', {'class': 'excluir', 'message': 'Esta imagem pode estar vinculada a algum conteúdo como páginas e galerias.'}) }}
+{% endblock %}
+
+{% set title_controle = title_controle ~ ' Arquivo' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs">
+		<!-- <ul class="controle">
+			<li><a href="#arquivos">Arquivos</a></li>
+			<li><a href="#media">Vídeos e Áudio (de outros sites)</a></li>
+			<li><a href="#links">Links (Web)</a></li>
+		</ul> -->
+		
+		{{ form_start(form) }}
+			{{ form_row(form.media.id) }}
+			<div id="arquivos" class="box">
+				<ul class="row">
+					<li class="col-md-12">{{ form_row(form.media.title) }}</li>
+					<li class="col-md-6">{{ form_row(form.media.summary) }}</li>
+					<li class="col-md-6">{{ form_row(form.media.label) }}</li>
+					<li class="col-md-12">{{ form_row(form.media.source) }}</li>
+					<li class="col-md-2 ">{{ form_row(form.file) }}</li>
+					{% if form.media.vars.value.bin is not empty %}
+					<li class="col-md-10 preview">
+					     {{ admin.thumb(form.media.vars.value) }}
+					</li>
+					{% endif %}
+					<li class="col-md-12">
+						<label for="">Código fonte gerado: (Copie e cole no seu conteúdo) </label>
+						<textarea name="codigo" id="" cols="30" rows="5" readonly="readonly"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div id="media" class="box">
+			</div>
+			<div id="links" class="box">
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

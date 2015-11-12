@@ -1,0 +1,7 @@
+<li id="relatorio_{{ relatorio.id }}">
+	<div class="body-image">
+         <a class="remove_relatorio" href="{{ path("tupi_acompanhamento_bloco_relatorio_remove", { "id" : relatorio.id , "filter" : filter }) }}">&times;</a>
+         <div>{{ relatorio.label }}</div>	         
+         <input type="text" data-url="{{ path("tupi_acompanhamento_bloco_relatorio_edit", { "id" : relatorio.id  , "filter" : filter}) }}" value="{{ relatorio.label }}">       
+	</div>
+</li>

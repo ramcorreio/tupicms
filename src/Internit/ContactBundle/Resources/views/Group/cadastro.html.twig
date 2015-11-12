@@ -1,0 +1,45 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+    <script src="{{ asset('bundles/internitcontact/js/contactJs.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link href="{{ asset('bundles/internitcontact/css/contactStyle.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_group_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('tupi_group_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% set title_controle = 'Grupo' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs col-md-12 col-sm-12">		
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div id="arquivos" class="box">
+			    <ul class="row">
+                    <li class="col-md-11 col-sm-11">{{ form_row(form.name) }}</li>
+				</ul>
+				<ul class="row">
+    			     <a href="#" class="more-one" title="Adicionar e-mail">+ Adicionar e-mail</a>
+    			     <ul class="clones" data-prototype="{{ form_widget(form.emails.vars.prototype)|e }}">    			         
+			             {% for email in form.emails %}
+                            <li class="col-md-12 col-sm-12 segura-li">
+                            	<div>{{ form_row(email.email) }}</div>
+                            	<a href="#" class="del-one">-</a>
+                            </li>
+                         {% endfor %}          
+    			     </ul>
+				</ul>
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

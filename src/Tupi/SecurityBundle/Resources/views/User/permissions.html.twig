@@ -1,0 +1,25 @@
+<div id="permissoes" class="box permissoes">
+	<table class="col-md-12">
+		<thead>
+			<tr>
+
+				<th class="col4">Funcionalidade</th>
+				<th class="col2">Visualizar</th>
+				<th class="col2">Incluir</th>
+				<th class="col2">Atualizar</th>
+				<th class="col2">Excluir</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			{% for permissao in form.permissoes %}
+			<tr>
+				<td class="col-md-4">{{ form_widget(permissao.resource) }} {{
+					permissao.vars.value.resource.name }}</td> {% for auth in
+				permissao.authorizations %}
+				<td class="col-md-2">{{ form_widget(auth) }}</td> {% endfor %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>

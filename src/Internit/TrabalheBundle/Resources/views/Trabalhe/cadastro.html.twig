@@ -1,0 +1,90 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$('.tabs').tabs({ active: 0 });
+	</script>	
+	<script type="text/javascript" src="{{ asset('bundles/internitacompanhante/js/plupload.full.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitacompanhante/js/jquery.ui.plupload.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/mask.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/geral.js') }}"></script>
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_trabalhe_home', 'Voltar', {'class': 'voltar'}) }}
+{% endblock %}
+
+{% set title_controle = 'Trabalhe Conosco' %}
+
+{% block main %}
+
+<div class="formulario esp_top">
+	<div class="tabs col-md-12 col-sm-12">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			
+			<ul class="controle">
+				<li><a href="#geral">Geral</a></li>
+				<li><a href="#arquivo">Arquivo</a></li>
+			</ul>
+				
+			<div id="geral" class="box">
+			    <ul class="col-md-8">
+					<li>{{ form_row(form.nome) }}</li>
+				</ul>
+			    <ul class="col-md-4">
+					<li>{{ form_row(form.subject) }}</li>
+				</ul>
+				<ul class="col-md-8">
+					<li>{{ form_row(form.email) }}</li>
+					<li>{{ form_row(form.escolaridade) }}</li>
+					<li>{{ form_row(form.conheceu) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.nascimento) }}</li>
+					<li>{{ form_row(form.faixa_salarial) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.estado) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.cidade) }}</li>
+				</ul>
+			    <ul class="col-md-4">
+				    <li>{{ form_row(form.celular) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.sexo) }}</li>
+					<li>{{ form_row(form.telefone) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.informativo) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.bairro) }}</li>
+				</ul>
+				<ul class="col-md-6">
+					<li>{{ form_row(form.facebook) }}</li>
+				</ul>
+				<ul class="col-md-6">
+					<li>{{ form_row(form.linkedin) }}</li>
+				</ul>
+			</div>
+			<div id="arquivo" class="box">
+				{% if form.vars.value.curriculo is not empty %}
+					<div class="preview">
+					   {% if form.vars.value.curriculo.url is not empty %}
+					       <a href="{{ path('tupi_trabalhe_documento',{'url' : form.vars.value.curriculo.url }) }}" download>
+					           <img src="{{ asset('bundles/internitsitebase/media/img/documento.png') }}" alt="Documento" width="150">
+					       </a>
+					   {% endif %}
+					</div>
+				{% endif %}
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

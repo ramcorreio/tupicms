@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="internit.trabalhe.menu.listener.class">Internit\TrabalheBundle\EventListener\MenuEventListener</parameter>
+        <parameter key="internit.trabalhe.mail.service.class">Internit\TrabalheBundle\Service\MailService</parameter>
+    	<parameter key="internit.controller.trabalhe.class">Internit\TrabalheBundle\Controller\TrabalheController</parameter>
+    </parameters>
+
+    <services>
+     
+        <service id="internit.trabalhe.controller" class="%internit.controller.trabalhe.class%" public="true">
+            <call method="setContainer">
+                 <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="internit.trabalhe.menu.listener" class="%internit.trabalhe.menu.listener.class%">
+            <tag name="kernel.event_listener" event="menu.build.listener" method="onCreate" />
+        </service>
+
+        <service
+                id="internit.trabalhe.mail.service" class="%internit.trabalhe.mail.service.class%"
+                factory-class="%internit.trabalhe.mail.service.class%"
+                factory-method="getInstance" >
+
+            <argument type="service" id="service_container" />
+
+        </service>
+
+    </services>
+</container>

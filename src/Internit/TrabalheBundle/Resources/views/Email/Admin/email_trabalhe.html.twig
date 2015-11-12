@@ -1,0 +1,23 @@
+{% extends 'InternitSiteBaseBundle:Email:template.html.twig' %}
+
+{% block titulo %}Novo Contato do Trabalhe Conosco{% endblock %}
+
+{% block texto %}
+	{% if assunto is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;" style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Área de Interesse:  {{ assunto }}</div>{% endif %}
+	{% if conheceu is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Como ficou sabendo da empresa?  {{ conheceu }}</div>{% endif %}
+	{% if nome is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Nome: {{ nome }}</div>{% endif %}
+	{% if nascimento is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Data de Nascimento: {{ nascimento|date("d/m/Y") }}</div>{% endif %}
+	{% if sexo is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Sexo: {{ sexo }}</div>{% endif %}
+	{% if email is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">E-mail: {{ email }}</div>{% endif %}
+	{% if telefone is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Telefone: {{ telefone }}</div>{% endif %}
+	{% if celular is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Celular: {{ celular }}</div>{% endif %}
+	{% if estado is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Estado: {{ estado }}</div>{% endif %}
+	{% if cidade is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Cidade: {{ cidade }}</div>{% endif %}
+	{% if bairro is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Bairro: {{ bairro }}</div>{% endif %}
+	{% if escolaridade is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Escolaridade: {{ escolaridade }}</div>{% endif %}
+	{% if faixa_salarial is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Faixa Salarial: {{ faixa_salarial }}</div>{% endif %}
+	{% if facebook is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Facebook: {{ facebook }}</div>{% endif %}
+	{% if linkedin is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Linkedin: {{ linkedin }}</div>{% endif %}
+	{% if informativo is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;margin-bottom: 20px;">Gostaria de receber nossos informativos? {{ informativo }}</div>{% endif %}
+		
+{% endblock %}

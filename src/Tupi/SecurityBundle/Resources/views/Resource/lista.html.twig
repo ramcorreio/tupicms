@@ -1,0 +1,13 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Funcionalidades' %}
+{% set actions = {'tupi_resource_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Módulo</th>
+	<th class="item3">URL</th>
+{% endblock %}
+{% block table_body %}
+	<td><a href="{{ path('tupi_resource_edit', {'id':item.id}) }}">{{item.name}}</a></td>
+	<td>{{item.path}}</td>
+{% endblock %}		

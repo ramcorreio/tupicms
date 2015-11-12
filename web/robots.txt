@@ -1,0 +1,2 @@
+Disallow: /admin
+User-agent: *

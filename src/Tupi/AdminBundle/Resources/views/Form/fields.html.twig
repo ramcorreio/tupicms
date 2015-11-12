@@ -1,0 +1,68 @@
+
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    {% if required and attr is defined and attr.placeholder is defined -%}
+    	{% set attr = attr|merge({'placeholder' : attr['placeholder'] ~ '*' }) %}
+    {% endif %}
+	{% if type == 'file' %}
+	<div class="fileinput">
+		<span>
+			<input type="{{ type }}" onchange="$(this).showName()" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+		</span>
+		<button type="button" class="botao_acao" onclick="$(this).chooseFile('{{ id }}');">Upload</button><label id="{{ id }}Label"></label>
+	</div>
+    {% else %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endif %}	
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_row %}
+	{% spaceless %}
+		{{ form_label(form, label|default(null)) }}
+	    {{ form_widget(form) }}
+	{% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+	{% if label is null %}
+        {% set label = name|humanize %}
+    {% endif %}
+    
+    {% if label %}
+    <label for="{{ id }}">
+        {{ label|trans }}
+        {% if required %}
+            <abbr title="Obrigatório">*</abbr>
+        {% endif %}
+    </label>
+    {% endif %}
+{% endblock %}
+
+{% block form_start %}
+{% spaceless %}
+	{% if action is empty %}
+		{% set action = app.request.getRequestUri() %}
+	{% endif %}
+	
+	{% set id_form = id|default('form') %}
+
+    {% set method = method|upper %}
+    {% if method in ["GET", "POST"] %}
+        {% set form_method = method %}
+    {% else %}
+        {% set form_method = "POST" %}
+    {% endif %}
+    
+    <form id="{{ id_form }}" method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {% if form_method != method %}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {% endif %}
+{% endspaceless %}
+{% endblock form_start %}
+
+{% block form_end %}
+	{{ form_row(form._token) }}
+    </form>
+{% endblock form_end %}

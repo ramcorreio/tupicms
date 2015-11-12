@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Rafael Magalhães">
+
+    <title>Manual do Front-End - Internit</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/agency.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Manual do Front-End</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#html">HTML</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#css">CSS</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#plugins">Plugins Utilizados</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#twig">Entendendo o Twig</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#svn">Controle de Versão (SVN)</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Manual do Front-End</div>
+                <p class="section-subheading">Neste manual você aprenderá os padrões que utilizamos na Internit!</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="html">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">HTML</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted">Na Internit, utilizamos o HTML5. Abaixo existem algumas dicas para deixar o seu código mais organizado:</p>
+                    <ul>
+                        <li>Elementos aninhados devem estar indentados uma vez;</li>
+                        <li>Sempre use aspas duplas;</li>
+                        <li>Utilize sempre o DOCTYPE do HTML5;</li>
+                        <li>Utilize sempre o charset UTF-8;</li>
+                        <li>Nunca inclua uma barra invertida nos elementos únicos (exemplo: img ou hr). No HTML5 isso não é mais necessário;</li>
+                        <li>Utilize sempre o alt nas imagens</li>
+                    </ul>
+                    
+                    <pre>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html&gt;
+                            &lt;head&gt;
+                                &lt;title>Título da Página&lt;/title&gt;
+                            &lt;/head&gt;
+
+                            &lt;body&gt;
+                                &lt;img src="imagens/logo.png" alt="Meu Logo"&gt;
+                                &lt;h1 class="destaque"&gt;Olá Mundo!&lt;/h1&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </pre>
+
+                    <ul>
+                        <li>De acordo com as especificações do HTML5, não há necessidade de especificar um atributo type quando incluímos arquivos de CSS e JavaScript como text/css e text/javascript;</li>
+                    </ul>
+
+                    <pre>
+                        <strong>&lt;-- No HTML 4 --&gt;</strong>
+                        &lt;link type="text/css" rel="stylesheet" href="main.css"&gt;
+                        &lt;script type="text/javascript" src="geral.js"&gt;
+
+
+                        <strong>&lt;-- No HTML 5 --&gt;</strong>
+                        &lt;link rel="stylesheet" href="main.css"&gt;
+                        &lt;script src="geral.js"&gt;
+                    </pre>
+
+                    <ul>
+                        <li>Esforce-se para manter o padrão e a semântica do HTML, mas não às custas da praticidade;</li>
+                        <li>Use o mínimo de código com a menor complexidade possível;</li>
+                        <li>Sempre que possível, evite elementos pais supérfluos quando escrever HTML;</li>
+                    </ul>
+
+                    <pre>
+                        <strong>&lt;-- Não muito bom --&gt;</strong>
+                        &lt;span class="avatar"&gt;
+                            &lt;img src="..."&gt;
+                        &lt;/span&gt;
+
+
+                        <strong>&lt;-- Melhor --&gt;</strong>
+                        &lt;img class="avatar" src="..."&gt;
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+    <section id="css" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">CSS</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 portfolio-item">
+                    <p class="text-muted">Abaixo algumas dicas para deixar seu código CSS mais organizado:</p>
+
+                    <ul>
+                        <li>Quando agrupar seletores, deixe seletores individuais em uma linha;</li>
+                        <li>Inclua um espaço antes de abrir um {};</li>
+                        <li>Coloque o fechamento do {} em uma nova linha;</li>
+                        <li>Inclua um espaço depois dos dois pontos em cada declaração de propriedade;</li>
+                        <li>Cada declaração deve estar em sua própria linha para encontrarmos melhor os erros;</li>
+                        <li>Feche todas as declarações com ponto-vírgula;</li>
+                        <li>Também não coloque valores iniciados com zero (ex., .5 em vez de 0.5);</li>
+                        <li>Valores separados por vírgula devem incluir um espaço logo depois da vírgula;</li>
+                        <li>Use cores em hexadecimal abrevidas quando puder, exemplo: #fff em vez de #fff;</li>
+                        <li>Coloque aspas duplas nos valores em seletores com atributos, exemplo: input[type="text"];</li>
+                        <li>Evite especificar unidades quando os valores forem 0, exemplo: margin: 0 em vez de margin: 0px;</li>
+                        <li>Só utilize position absolute quando for realmente necessário</li>
+                    </ul>
+
+                    <pre>
+                        <strong>/* RUIM */</strong>
+                       .texto, .conteudo, input[type=text] {
+                            padding:15px;
+                            margin:0px 0px 15px;
+                            background-color:rgba(0, 0, 0, 0.5);
+                            box-shadow:0 1px 2px #ccc,inset 0 1px 0 #ffffff
+                        }
+
+
+                        <strong>/* BOM */</strong>
+                       .texto,
+                       .conteudo,
+                       input[type="text"] {
+                            padding: 15px;
+                            margin: 0 0 15px;
+                            background-color:rgba(0,0,0,.5);
+                            box-shadow:0 1px 2px #ccc, inset 0 1px 0 #fff;
+                        }
+                        
+                    </pre>
+                </div>
+                <div class="clearfix"></div>
+                
+                <hr>
+
+                <figure>
+                    <img src="img/css.jpg" alt="CSS">
+                    <figcaption>Esses são os arquivos CSS que utilizamos</figcaption>
+                </figure>
+
+                <ul>
+                    <li><em>base.css</em> - Como o nome diz, esse é o CSS base do site. Ele foi baseado no bootstrap e é nele que ficam os estilos das grids, reset, plugins do bootstrap, etc. Recomendável não mexer nesse arquivo.</li>
+                    <li><em>combobox.css</em> - É o css do plugin que utilizamos para estilar o select, radio e checkbox</li>
+                    <li><em>formularios.css</em> - CSS utilizado para estilo dos formulários</li>
+                    <li><em>main.css</em> - CSS principal com os estilos do header, home e footer</li>
+                    <li><em>owl.carousel.css</em> - CSS do plugin de slider</li>
+                    <li><em>prettyPhoto.css</em> - CSS do plugin de ampliação de imagens</li>
+                    <li><em>responsive.css</em> - CSS utilizado para sites responsivos. Se o projeto em que você está trabalhando não for responsivo, tire a chamada dele no layout.twig.html</li>
+                    <li><em>secundarias.css</em> - Utilizado para estilo das páginas internas</li>
+                </ul>
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="plugins">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Plugins Utilizados</h2>
+                    <h3 class="section-subheading text-muted">Plugins padrões que utilizamos em nossos projetos. Veja o funcionamento de todos eles no site base.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <a href="http://owlgraphic.com/owlcarousel/" target="_blank">Owl Carousel</a>
+                    <p>Utilizado para banner.</p>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://www.no-margin-for-errors.com/projects/prettyphoto-jquery-lightbox-clone/">PrettyPhoto</a>
+                    <p>Utilizado para ampliação de imagens.</p>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a>
+                    <p>Utilizado para animações em CSS 3.</p>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://github.com/dirkgroenen/jQuery-viewport-checker" target="_blank">Viewport Checker</a>
+                    <p>Utilizado para fazer uma animação sempre que o usuário visualiza parte da página. É usado junto com o Animate.css</p>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://getbootstrap.com/javascript/" target="_blank">Plugins do Bootstrap</a>
+                    <p>Diversos plugins que o bootstrap oferece, como: accordion, tooltip, tab, etc</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="twig">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Entendendo o Twig</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                   <p>A primeira coisa que se deve fazer quando for recortar um novo site, é baixar a versão do site base.</p>
+                   <p>Como iniciar um projeto:</p>
+
+                   <ul>
+                        <li>Com o terminal aberto, escolha a pasta onde o projeto será instalado.</li>
+                        <li>Execute o comando abaixo para fazer uma cópia do site base para o diretório escolhido: <pre>composer create-project --repository-url=http://packs.lab58.internit.br internit/site-base . dev-master</pre></li>
+                        <li>Depois do comando acima, peça para algum programador criar o banco de dados. O sistema vai pedir algumas configurações e você preencherá 4 delas. As outras, basta deixar em branco e aperta enter.
+                            <br><br>
+                            <p>database_host&lt;localhost&gt; - db01.lab58.internit.br</p>
+                            <p>database_name&lt;site-base&gt; - nome do banco de dados (o mesmo nome que o programador criou)</em></p>
+                            <p>database_user&lt;root&gt; - labuser</p>
+                            <p>database_password&lt;root&gt; - labpass</p>
+                            <figure>
+                                <img src="img/twig/8.jpg" alt="Twig">
+                                <figcaption>Configurações explicadas acima</figcaption>
+                            </figure>
+                        </li>
+                        <li>Depois de ter o banco criado, execute o comando abaixo para criar as tabelas: <pre>php app\console doctrine:schema:update --force</pre></li>
+                        <li>Para criar uma conta de admin, utilize: <pre>php app\console admin:create:user</pre></li>
+                        <li>Depois, escolha uma senha para o admin e aperte enter. Por padrão, utilizamos IN@abc</li>
+                        <li>Execute o comando abaixo para criar o menu: <pre>php app\console admin:menu:root</pre></li>
+                        <li>E por último, execute o comando para baixar os arquivos do tupi: <pre>composer update</pre></li>
+                    </ul>
+                    
+                    <figure>
+                        <img src="img/twig/1.jpg" alt="Twig">
+                        <figcaption>Essa é a estrutura padrão.</figcaption>
+                    </figure>
+
+
+                    <p>Você só vai precisa mexer na pasta "src". Como o nome diz, é nessa pasta que fica a source do site, ou seja, todo o código fonte principal.</p>
+
+                    <figure>
+                        <img src="img/twig/2.jpg" alt="Twig">
+                        <figcaption>Todos os arquivos que se encontram na pasta "src".</figcaption>
+                    </figure>
+
+                    <p>Os que estão em destaque, são os que você precisa conhecer:</p>
+                    <ul>
+                        <li>EventListener: O único arquivo que você precisará mexer nessa pasta, é o <em class="text-muted">PageChangeListener.php</em>. É nele que você define os templates que aparecerão no admin.</li>
+                    </ul>
+
+                    <figure>
+                        <img src="img/twig/3.jpg" alt="Twig">
+                        <figcaption>Esse é o metodo que faz com que as páginas sejam listadas no admin. <pre>$event->addTemplate(new TemplateItem('<strong>Nome do Template</strong>', '<strong>Caminho onde se encontra a página</strong>'));</pre></figcaption>
+                    </figure>
+
+                    <figure>
+                        <img src="img/twig/4.jpg" alt="Twig">
+                        <figcaption>Como o admin lista os templates configurados acima.</figcaption>
+                    </figure>
+
+                    <p>Dentro da pasta <em class="text-muted">Resource</em>, existem duas páginas que precisa conhecer: <em class="text-muted">public</em> e <em class="text-muted">views</em>.
+                    <ul>
+                        <li><em class="text-muted">Public</em>: É nela em que ficarão os assets, ou seja, o css, o js e os arquivos de media (img, pdf, swf, etc).</li>
+                        <li><em class="text-muted">Views</em>: Se encontram os arquivos HTML do site. São divididos em dois:
+                            <ul>
+                                <li><em class="text-muted">Default</em>: É nessa pasta que ficam as suas páginas HTML.</li>
+                                <li><em class="text-muted">Template</em>: É nessa pasta que ficam os arquivos base: header, footer, etc. Arquivos que serão chamados praticamente em todas as páginas do site.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <br><br>
+                    <p>Para acessar o site, utilize a seguinte url: <em>caminho_de_onde_instalou_o_site/web</em></p>
+                    <p>E para acessar o admin: <em>caminho_de_onde_instalou_o_site/web/admin</em></p>
+                    <figure>
+                        <img src="img/twig/5.jpg" alt="Twig">
+                        <figcaption>Para criar as páginas, acesse o admin e clique em "Páginas".</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="img/twig/6.jpg" alt="Twig">
+                        <figcaption>Depois, clique em "Adicionar".</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="img/twig/7.jpg" alt="Twig">
+                        <figcaption>
+                            1- Nome da página
+                            <br>
+                            2- Status da página, coloque sempre "Publicado"
+                            <br>
+                            3- Conteúdo da página. Caso ela não tenha conteúdo dinâmico, pode colocar qualquer texto somente porque esse é um campo obrigatório
+                            <br>
+                            4- Caso seja página inicial, marque o checkbox
+                            <br>
+                            5- Caso queira que a página apareça no menu, selecione a opção "Ativada"
+                            <br>
+                            6- E por último, selecione o template da página.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="svn">
+        <div class="container">
+           <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Controle de versão SVN</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Depois que você criou um novo projeto e modificou ele, antes de ir embora, lembre-se sempre de commitar.</p>
+
+                    <p>Caso o projeto ainda não esteja no controle de versão, peça para Macedo criar um novo diretório. Depois que ele foi criado, vá no Eclipse e clique com o botão direito no projeto > Team > Share Project...</p>
+                    <figure>
+                        <img src="img/svn/1.jpg" alt="SVN">
+                    </figure>
+
+                    <p>Escolha a opção SVN</p>
+                    <figure>
+                        <img src="img/svn/2.jpg" alt="SVN">
+                    </figure>
+
+                    <p>Selecione "Create a new repository location" e na próxima tela, jogue o caminho do novo diretório que foi criado e depois clique em "Finish".</p>
+                    <figure>
+                        <img src="img/svn/3.jpg" alt="SVN">
+                    </figure>
+
+                    <hr>
+
+                    <figure>
+                        <img src="img/svn/4.jpg" alt="SVN">
+                        <figcaption>Caso esse ícone preto com asterisco apareça, é porque existem arquivos na sua máquina que estão diferente dos que estão no controle de versão.</figcaption>
+                    </figure>
+
+                    <p>Para commitar seus arquivos, clique com o botão direito no projeto e selecione "Commit...". Atenção: Caso o botão de "Update" esteja habilitado, selecione ele antes de commitar. Caso os arquivos da sua máquina estejam errado e você queira substituí-los pelo do controle de versão, basta clicar em "Revert...".</p>
+
+                    <figure>
+                        <img src="img/svn/5.jpg" alt="SVN">
+                    </figure>
+
+                    <p>A tela abaixo irá aparecer quando você der o commit, coloquei o número da tarefa e diga o que você alterou.</p>
+                
+                    <figure>
+                        <img src="img/svn/6.jpg" alt="SVN">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+ 
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/agency.js"></script>
+
+</body>
+
+</html>

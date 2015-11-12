@@ -1,0 +1,102 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias noticia conteudo-listagem' %}
+
+{% block content %}
+<div class="container">
+	{% if noticia is not empty %}
+	    <div class="col-md-12">
+	    	<h2>{{ noticia.title }}</h2>
+	    </div>
+	    
+   		<div class="col-md-8 col-xs-12 segura-noticia">
+	   		{% if(noticia.images is not empty) %}  
+	   			{% if(noticia.images|length > 1) %}
+	   				{% for image in noticia.images %}
+	   				<!-- ### ADICIONAR GALERIA ### -->
+	   					{{ admin.media(image[0], {'width': '100%'} ) }}
+	   				{% endfor %}
+	   			{% else %}
+	   				{{ admin.media(noticia.images[0], {'width': '100%'} ) }}   			
+	   			{% endif %}
+	   		{% endif %}
+	   		
+	   		{{ noticia.body|raw }}
+	   		{% if noticia.createdAt == noticia.updatedAt %}
+	   			{% set date = noticia.createdAt|date("d/m/Y") %}
+	   			{% set published = 'Publicado' %}
+	   		{% else %}
+	   			{% set date = noticia.createdAt|date("d/m/Y") %}
+	   			{% set published = '<i>Alterado</i>' %}
+	   		{% endif %}
+	   		<p class="publicado">{{ published|raw }} por <strong>Usuário01</strong> em <strong>{{ date }}</strong></p>
+	   		
+	   		<div class="clearfix"></div>
+	   		
+	   		<div class="col-md-3 col-sm-6 col-xs-6 no-padding">
+	   			<a href="javascript:;" class="comentarios"><span class="icon"></span> Comentários (275)</a>
+	   		</div>
+	   		
+	   		
+	   		<div class="col-md-4 col-sm-6 col-xs-6 no-padding right compartilhe">
+	   			<p>Compartilhe</p>
+	   			<ul>
+	          <li><a class="addthis_button_facebook"></a></li>
+					  <li><a class="addthis_button_twitter"></a></li>
+					  <li><a class="addthis_button_google_plusone_share"></a></li>
+					  <li><a class="addthis_button_compact"></a></li>
+	   			</ul>
+	   		</div>
+   		</div>
+   	{% else %}
+   		<div class="col-md-8 col-xs-12 segura-noticia">
+   			<h1 class="ops">Ops, essa notícia não existe <div class="sad">:(</div></h1>
+   		</div>
+   	{% endif %}
+
+    <div class="col-md-4 col-sm-12 col-xs-12 opcoes">
+      <div class="col-md-12 col-sm-4 col-xs-12 no-padding">
+        <hr>
+        <h3>Categorias</h3>
+        <ul>
+        	{% for categoria in categorias %}
+          		<li><a href="{{ path('categoria', { category: categoria.name|url_encode|lower }) }}" title="{{ categoria.name }}">{{ categoria.name }}</a></li>
+          	{% endfor %}
+        </ul>
+      </div>
+
+      <div class="col-md-12 col-sm-4 col-xs-12 no-padding">
+        <hr>
+        <h3>Outras notícias</h3>
+        <ul>
+        	{% for noticia in noticias %}
+   				{% set date = noticia.createdAt|date("d-m-Y") %}
+          		<li><a href="{{ path('noticia', { title: noticia.title|url_encode|lower, createdAt: date }) }}" title="{{ noticia.title }}">{{ noticia.title }}</a></li>
+          	{% endfor %}
+        </ul>
+      </div>
+
+      <div class="col-md-12 col-sm-4 col-xs-12 no-padding">
+        <hr>
+        <h3>Enquete</h3>
+        <form>
+          <p>Pergunta para a enquete?</p>
+        
+          <ul>
+            <li><input type="radio" name="op" id="op1"> <label for="op1">Resposta 01</label></li>
+            <li><input type="radio" name="op" id="op2"> <label for="op2">Resposta 02</label></li>
+            <li><input type="radio" name="op" id="op3"> <label for="op3">Resposta 03</label></li>
+            <li><input type="radio" name="op" id="op4"> <label for="op4">Resposta 04</label></li>
+          </ul>
+          <input class="btn btn-default" type="submit" value="Votar">
+          <a href="javascript:;">Resultado</a>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

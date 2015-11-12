@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Error</title>
+	</head>
+	<style>
+			body {
+				font-family: "Trebuchet MS", Helvetica, sans-serif
+			}
+			* {
+			    border: 0;
+			    padding: 0;
+			    margin: 0;
+			}
+			.container {
+				width: 884px;
+			   	position:absolute;
+				top:50%;
+				left:50%;
+				margin-top:-120px;
+				margin-left:-465px;
+			}
+			.apresentacao {
+			    background: #e2e2e2;
+			    height: 220px;
+			}
+			.col-md-3, .col-md-9 {
+				display: inline-block;
+				float: left;
+				position: relative;
+    			min-height: 1px;
+			}
+			.col-md-3 {
+				width: 25%;
+			}
+			.apresentacao .simbolo {
+			    float: left;
+			    margin-right: 40px;
+			    margin-left: 40px;
+			}
+			.apresentacao .mensagem {
+    			margin-top: 50px;
+			}
+			.col-md-9 {
+				width: 75%;
+			}
+			p {
+    			margin: 0 0 10px;
+			}
+			.apresentacao .mensagem h1 {
+    			font-size: 28px;
+    			margin-top: 20px;
+    			margin-bottom: 10px;
+				font-family: inherit;
+			    font-weight: 500;
+			    line-height: 1.1;
+			    color: inherit;
+			    margin: .67em 0;
+			}
+			.apresentacao .mensagem span {
+			    font-family: 'source_sans_probold',Arial, Helvetica,sans-serif;
+			    color: #39b54a;
+			    font-size: 1.6em;
+			}
+	</style>
+	<body>							
+		<div class="container">
+			<div class="apresentacao">
+				<div class="col-md-3">
+					<img src="{{ asset('bundles/tupiadmin/media/img/simbolo.png') }}" class="simbolo" alt="Tupi CMS" width="170" height="220">
+				</div>
+				<div class="mensagem col-md-9">
+					<h1><span>Oops! Ocorreu um erro!</span></h1>
+					<p>Por favor informe o código: "{{ errorCode }}" para o administrador.</p>
+				</div>
+			</div>
+		</div>
+	</div>									
+	</body>
+</html>

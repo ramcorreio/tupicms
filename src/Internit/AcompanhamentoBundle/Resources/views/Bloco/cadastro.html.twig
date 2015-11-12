@@ -1,0 +1,30 @@
+<form class="formAjax" action="{{ path('tupi_acompanhamento_bloco_new' , { 'filter' : filter }) }}">
+	{{ form_row(form.id) }} 
+	{{ form_row(form.bloco) }} 
+	{{ form_row(form._token) }}
+	<button class="novo botao_acao" type="button" data-action="{{ path('tupi_acompanhamento_bloco_new' , { 'filter' : filter }) }}">Novo</button>
+	<button class="salvar botao_acao" type="submit">Salvar</button>
+</form>
+
+<table id="table-list">
+	<thead>
+	    <tr>
+	        <th class="titulo">Nome</th>
+	        <th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+	    {% for item in list %}
+		<tr>
+	        <td>{{ item.bloco }}</td>
+	        <td>
+	           <button class="edit botao_acao" type="button" data-action="{{ path('tupi_acompanhamento_bloco_edit' , { 'filter' : filter , 'id' : item.id}) }}">Editar</button>
+    	       <button class="remove botao_acao" type="button" data-action="{{ path('tupi_acompanhamento_bloco_remove' , { 'filter' : filter , 'id' : item.id }) }}">Excluir</button>
+    	       <button class="new botao_acao changeTab" type="button" onclick="changeTab(2,'{{ path('tupi_acompanhamento_etapa_home' , { 'filter' : item.id }) }}')">Editar Etapa</button>
+    	       <button class="new botao_acao changeTab" type="button" onclick="changeTab(3,'{{ path('tupi_acompanhamento_bloco_relatorio' , { 'filter' : item.id }) }}')">Adicionar Relatório</button>
+    	       <button class="new botao_acao changeTab" type="button" onclick="changeTab(4,'{{ path('tupi_acompanhamento_galeria_new' , { 'filter' : item.id }) }}')">Adicionar Galeria</button>
+    	    </td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

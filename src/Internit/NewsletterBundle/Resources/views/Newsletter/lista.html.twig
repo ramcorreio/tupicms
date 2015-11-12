@@ -1,0 +1,25 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Cadastros Newsletter' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link href="{{ asset('bundles/internitnewsletter/css/exportStyle.css') }}" rel="stylesheet" type="text/css">	
+{% endblock %}
+
+{% block botoes %}
+	{{ parent() }}
+	{{ admin.form_button('newsletter_export', 'Exportar Cadastrados', {'class': 'export'}) }}
+{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">E-mail</th>
+	<th class="item1">Nome</th>
+	<th class="item3">Criado em</th>
+{% endblock %}
+{% block table_body %}
+	<!-- <td><input type="checkbox" value="{{ item.id }}"/></td> -->	
+	<td>{{ item.email }}</td>
+	<td>{{ item.name }}</td>
+	<td>{{ item.createdAt|date("d/m/Y H:i:s") }}</td>
+{% endblock %}

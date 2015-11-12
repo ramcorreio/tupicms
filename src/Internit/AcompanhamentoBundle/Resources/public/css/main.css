@@ -1,0 +1,148 @@
+
+/* ACOMPANHE A OBRA */
+
+.acompanhe #sync2 {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.acompanhe .owl-item img {
+	cursor: pointer;
+	-webkit-transition: opacity 0.5s ease-out;
+	-moz-transition: opacity 0.5s ease-out;
+	-ms-transition: opacity 0.5s ease-out;
+	-o-transition: opacity 0.5s ease-out;
+	transition: opacity 0.5s ease-out;
+}
+
+.acompanhe .owl-item.synced img {
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+}
+
+.acompanhe .owl-prev, .acompanhe .owl-next {
+	background: url('../media/img/prev.png') top center no-repeat;
+	display: block;
+	width: 11px;
+	height: 20px;
+	text-indent: -9999px;
+	position: absolute;
+	margin-top: 50px;
+	left: -10px;
+	z-index: 1;
+}
+
+.acompanhe .owl-next {
+	background-image: url('../media/img/next.png');
+	left: auto;
+	right: -10px;
+}
+
+.acompanhe .segura-barra {
+	margin-bottom: 20px;
+}
+
+.acompanhe .segura-barra .percentual {
+	float: right;
+}
+
+.acompanhe .segura-barra .barra-etapa {
+	height: 15px;
+	background: #ccc;
+	margin-top: 5px;
+}
+
+.acompanhe .segura-barra .barra-etapa .barra {
+	display: block;
+	height: 15px;
+	background: url('../media/img/barra-acompanhe.jpg');
+}
+
+.slide .ui-widget-header {
+	background-color: #39b54a;
+} 
+
+.segura-li .del-one {
+	margin-top: 20px;	
+}
+
+.formulario button.botao_acao {
+	margin: 10px 0px;
+}
+
+label[for="acompanhamento_image"] {
+	display: block;
+	margin: 10px 0px;
+	font-weight: bold;
+}
+
+label[for="acompanhamento_status"] {
+	margin-right: 10px;
+	vertical-align: 1px;
+}
+
+.salvar.botao_acao {
+    background-color: #39B54A;
+}
+
+.remove.botao_acao {
+    background: #B53F39;
+}
+
+.novo.botao_acao {
+    background-color: #3980B5;
+}
+
+.edit.botao_acao {
+    background-color: #3980B5;
+}
+
+.tabs ul.controle li:nth-child(6) a,
+.tabs ul.controle li:nth-child(3) a,
+.tabs ul.controle li:nth-child(4) a,
+.tabs ul.controle li:nth-child(5) a {
+	opacity: 0.3;
+}
+
+a.remove_relatorio, a.remove_image {
+    color: #B53F39;
+    font-weight: bold;
+}
+
+#pickfiles_relatorios, #pickfiles {
+    border-radius: 5px;
+    padding: 0px 10px;
+    height: 35px;
+    line-height: 35px;
+    background: #999 none repeat scroll 0% 0%;
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1em;
+    font-family: "source_sans_prolight",Arial,Helvetica,sans-serif;
+    background-color: #39B54A;
+    display: inline-block;
+}
+
+#uploadfiles_relatorios, #uploadfiles {
+	border-radius: 5px;
+    padding: 0px 10px;
+    height: 35px;
+    line-height: 35px;
+    background: #999 none repeat scroll 0% 0%;
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1em;
+    font-family: "source_sans_prolight",Arial,Helvetica,sans-serif;
+    background-color: #3980B5;
+    display: inline-block;
+}
+
+#media ul li .body-image {
+    border: 4px solid transparent;
+    overflow: hidden;
+}
+
+.sort_relatorio li, .sort_image li {
+    border: 1px dashed rgba(0,0,0,0.2);
+    margin: 13px;
+}

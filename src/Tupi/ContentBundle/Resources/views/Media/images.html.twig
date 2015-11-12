@@ -1,0 +1,43 @@
+{% extends 'TupiAdminBundle:Template:layout.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript">
+        function getUrlParam( paramName ) {
+            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' ) ;
+            var match = window.location.search.match(reParam) ;
+    
+            return ( match && match.length > 1 ) ? match[ 1 ] : null ;
+        }
+        
+        $(document).ready(function(){
+            $('img').click(function(){
+                var funcNum = getUrlParam('CKEditorFuncNum');
+                var alt = $(this).attr('alt');
+                var str = $(this).attr('src').replace("/thumb/", "/original/");
+
+                window.opener.CKEDITOR.tools.callFunction( funcNum, str, function() {
+                    var element, dialog = this.getDialog();
+            	    element = dialog.getContentElement( 'info', 'txtAlt' );
+            	    if(element)
+            	       element.setValue(alt);
+            	});
+            	window.close();
+            });
+        });
+    </script>
+    <style type="text/css">
+    li {
+    	float: left;
+    	margin-left: 10px;
+    	list-style-type: none;
+    }
+    </style>
+{% endblock %}
+
+{% block base %}
+    {% for image in images %}
+        <img src="{{ url("tupi_media_image",{'url' : image.url, 'crop' : 'thumb'}) }}" alt="{{ image.summary }}">
+    {% endfor %}
+{% endblock %}

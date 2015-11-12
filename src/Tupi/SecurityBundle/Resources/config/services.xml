@@ -1,0 +1,19 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+     <parameters>
+	    <parameter key="tupi_security.links_comum.class">Tupi\SecurityBundle\Manager\LinksComuns</parameter>
+	  </parameters>
+    
+    <services>
+        <service id="tupi.security.listener" class="Tupi\SecurityBundle\EventListener\AdminSecurityListener">
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
+        </service>
+        
+        <service id="tupi_security.links_comum" class="%tupi_security.links_comum.class%">
+	      <argument>%tupi_security.links_comum.params%</argument>
+	    </service>
+    </services>
+    
+</container>

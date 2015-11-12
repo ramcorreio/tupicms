@@ -1,0 +1,38 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block main %}
+<div id="main">
+    <div class="bemvindo">
+        <!-- <div class="alerta informacao esp_top">
+		    <p>Você está utilizando Tupi CMS v. 1.0.1 e tem uma atualização disponível. <a href="#">Clique aqui</a> para atualizar. Nova versão: Tupi CMS v. 1.0.2.</p>
+		</div> -->
+        
+        <div class="apresentacao">
+        	<div class="col-md-3">
+		    	<img src="{{ asset('bundles/tupiadmin/media/img/simbolo.png') }}" class="simbolo" alt="Tupi CMS"/>
+		    </div>
+		    <div class="mensagem col-md-9">
+		        <h1><span>Anauê!</span> Seja bem-vindo ao Tupi CMS.</h1>
+                <p>É a primeira vez que você acessa o Painel administrador? Não se preocupe, comece por aqui.</p>
+			</div>
+		</div>
+		
+		<ul class="home_bemvindo esp_top row">
+		    <li class="col-md-4 col-sm-4 linha1">
+			    <h2>Edite</h2>
+				<p>Personalize sua página e faça o seu site ganhar muitas visitas.</p>
+				<a href="{{ path("tupi_page_home") }}" class="botao_primario">Editar página</a>
+			</li>
+			<li class="col-md-4 col-sm-4">
+				<h2>Adicione</h2>
+				<p>Crie conteúdos para seu site, deixe-o cheio de informações para seu público.</p>
+				<a href="{{ path("tupi_page_new") }}" class="botao_primario">Adicionar páginas</a>
+			</li>
+			<li class="col-md-4 col-sm-4">
+				<h2>Dê vida!</h2>
+				<p>Nada melhor que imagens para comunicar e despertar a curiosidade dos usuários.</p>
+				<a href="{{ path("tupi_media_home") }}" class="botao_primario">Adicionar arquivos e imagens</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('bundles/internitacompanhamento/css/main.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('bundles/internitacompanhamento/css/prettyPhoto.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+    <script src="{{ asset('bundles/internitacompanhamento/js/acompanhamento.js') }}"></script>
+    <script src="{{ asset('bundles/internitacompanhamento/js/jquery.prettyPhoto.js') }}"></script>
+{% endblock %}
+
+{% set body_class = 'secundarias acompanhe' %}
+
+{% block content %}
+<div class="container">
+	{% if etapas != null or galerias != null %}
+		<div class="col-md-12 col-xs-12">
+			<h2>Acompanhe a obra</h2>
+		</div>		
+		<div class="col-md-6 col-xs-6 galeria">
+			<div id="sync1" class="owl-carousel">
+				{% for galeria in galerias %}
+					{% for image in galeria.images %}
+						<a href="data:{{ image.mimeType }};base64,{{ image.bin.value }}" rel="prettyPhoto[galeria_{{ galeria.id }}]" title="{{ image.label }}">
+							{{ admin.media(image, {'width': '500'} ) }}
+						</a>
+					{% endfor %}
+				{% endfor %}
+			</div>				
+			<div id="sync2" class="owl-carousel">
+				{% for galeria in galerias %}
+					{% for image in galeria.images %}
+						<div>{{ admin.media(image, {'width': '100'} ) }}</div>
+					{% endfor %}
+				{% endfor %}						
+			</div>
+		</div>
+		<div class="col-md-6 col-xs-6 gutter">
+			{% for etapa in etapas %}
+				<div class="segura-barra">
+					<p class="label"><span class="nome_etapa">{{ etapa.name }}</span><span class="percentual">{{ etapa.percent }}%</span></p>
+					<div class="barra-etapa">
+						<span class="barra" style="width:{{ etapa.percent }}%;"></span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="col-md-12 col-xs-12">
+   			<h1 class="ops">Ops, ainda não temos fotos desta obra <div class="sad">:(</div></h1>
+		</div>
+	{% endif %}
+	<div class="clearfix"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+random_chat:
+    pattern:  /chat
+    defaults: { _controller: "InternitRandomChatBundle:RandomChat:chat" }
+
+randomchat_home:
+    pattern:  /admin/chat/{actionName}/{id}
+    defaults: { _controller: "InternitRandomChatBundle:InsertChat:index", actionName: null, id: null }
+    
+randomchat_edit:
+    pattern: /admin/chat/edit/{id}
+    
+randomchat_new:
+    pattern: /admin/chat/new
+
+randomchat_remove:
+    pattern:  /admin/chat/remove/{id}

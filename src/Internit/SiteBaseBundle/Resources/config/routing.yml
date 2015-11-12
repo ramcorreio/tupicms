@@ -1,0 +1,11 @@
+image:
+    pattern:  /image/{size}/{url}.{ext}
+    defaults: { _controller: "InternitSiteBaseBundle:Media:image", size: 'original', url: null , ext : 'jpg'}
+    
+image_acompanhamento:
+    pattern:  /image/acompanhamento/{id}/{thumb}
+    defaults: { _controller: "InternitSiteBaseBundle:Media:imageAcompanhamento", id: null , thumb: false }
+
+documento:
+    pattern:  /acompanhamento/documento/{url}
+    defaults: { _controller: "InternitSiteBaseBundle:Media:documento" }

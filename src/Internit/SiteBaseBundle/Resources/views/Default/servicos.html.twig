@@ -1,0 +1,53 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias servicos' %}
+
+{% block content %}
+<div class="container">    
+    <h2>Serviços</h2>
+    
+    <ul>
+    	<li class="col-md-6 col-sm-6">
+    		<img class="col-md-6" src="http://lorempixel.com/200/140/nature" width="100%">
+    		<div class="col-md-6">
+    			<h3>Serviço 1</h3>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    		</div>
+    	</li>
+    	<li class="col-md-6 col-sm-6">
+    		<img class="col-md-6" src="http://lorempixel.com/200/140/nature" width="100%">
+    		<div class="col-md-6">
+    			<h3>Serviço 2</h3>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    		</div>
+    	</li>
+    	<li class="col-md-6 col-sm-6">
+    		<img class="col-md-6" src="http://lorempixel.com/200/140/nature" width="100%">
+    		<div class="col-md-6">
+    			<h3>Serviço 3</h3>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    		</div>
+    	</li>
+    	<li class="col-md-6 col-sm-6">
+    		<img class="col-md-6" src="http://lorempixel.com/200/140/nature" width="100%">
+    		<div class="col-md-6">
+    			<h3>Serviço 4</h3>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    		</div>
+    	</li>
+    	<li class="col-md-6 col-sm-6">
+    		<img class="col-md-6" src="http://lorempixel.com/200/140/nature" width="100%">
+    		<div class="col-md-6">
+    			<h3>Serviço 5</h3>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    		</div>
+    	</li>
+    </ul>
+    
+</div>
+{% endblock %}

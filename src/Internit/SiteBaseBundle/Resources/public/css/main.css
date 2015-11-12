@@ -1,0 +1,236 @@
+a {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+.header100, .content100, .footer100 /* estas são as divs que flutuam o layout em 100% */ {
+	width:100%;
+	float:left;
+	display: inline;
+}
+
+#topo, #conteudo, #rodape /* estas são as divs que seguram o layout em 1024X768 no meio do site. */ {
+	width:940px;
+	margin:auto;
+}
+
+.container {
+	background: #fff;
+}
+
+/* SOBRESCRITA BOOTSTRAP */
+
+.btn-default {
+	background: #333;
+	color: #fff;
+	transition: all .5s;
+}
+
+/* TOPO */
+
+header {
+	margin-top: 20px;
+}
+
+header .logo {
+	display: inline-block;
+	margin-bottom: 20px;
+	float: left;
+}
+
+header .navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+header .navbar-inverse {
+	margin-bottom: 20px;
+	background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0.5, #484848),
+	color-stop(0.54, #333333)
+);
+background-image: -o-linear-gradient(bottom, #484848 50%, #333333 54%);
+background-image: -moz-linear-gradient(bottom, #484848 50%, #333333 54%);
+background-image: -webkit-linear-gradient(bottom, #484848 50%, #333333 54%);
+background-image: -ms-linear-gradient(bottom, #484848 50%, #333333 54%);
+background-image: linear-gradient(to bottom, #484848 50%, #333333 54%);
+}
+
+
+
+
+header .navbar-inverse .navbar-nav>li>a {
+	border-right: 1px solid #000;
+	color: #ccc;
+}
+
+header .navbar-inverse .navbar-nav>li:last-child>a {
+	border: none;
+}
+
+header .navbar-inverse .navbar-nav li ul {
+	display: none;
+	float: left;
+	background: #ccc;
+	border: 1px solid #000;
+	position: absolute;
+	z-index: 2;
+	white-space: nowrap;
+}
+
+header .navbar-inverse .navbar-nav li ul li{
+	display: block;
+	padding: 10px;
+	border-top: 1px solid #000;
+}
+
+header .navbar-inverse .navbar-nav li ul li:hover>ul{
+	display: block;
+}
+
+header .navbar-inverse .navbar-nav li ul li ul{
+	margin-left: 45px;
+	margin-top: -32px;
+	border-left: none;
+}
+
+header .navbar-inverse .navbar-nav>li ul li>a{
+	color: #484848;
+	text-decoration: none;
+}
+
+header .navbar-inverse .navbar-nav>li ul li:hover>a{
+	color: #fff;
+	text-decoration: none;
+}
+
+header .navbar-inverse .navbar-nav>li:hover>ul {
+	display: block;
+}
+
+header .navbar-right {
+	margin-top: 30px;
+}
+
+header .navbar-collapse {
+	padding: 0;	
+}
+
+/* BANNER */
+
+#banner_destaque .owl-carousel .item {
+	display: block;
+	text-align: center;
+}
+
+#banner_destaque .owl-carousel .item img {
+	width: 100%;
+}
+
+#banner_destaque .owl-pagination{
+	text-align: center;
+	margin: 5px 0 25px;
+}
+
+#banner_destaque .owl-pagination .owl-page{
+	width: 7px;
+	height: 7px;
+	background: #999;
+	border-radius: 50px;
+	-webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+	display: inline-block;
+	margin: 0 5px;
+	-webkit-transition: background 0.3s ease-out;
+	-moz-transition: background 0.3s ease-out;
+	-ms-transition: background 0.3s ease-out;
+	-o-transition: background 0.3s ease-out;
+	transition: background 0.3s ease-out;
+}
+		
+#banner_destaque .owl-pagination .owl-page.active{
+	width: 11px;
+	height: 11px;
+	background: #333;
+	vertical-align: -2px;
+}
+
+/* CONTEUDO */
+
+.content100 .container {
+	padding-bottom: 30px;
+}
+
+#content_home article h2 {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+#content_home article p {
+	margin: 20px 0;
+}
+
+#content_home article h3 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+/* RODAPE */
+
+footer .container {
+	background: #333;
+	padding-top: 10px;
+	margin-bottom: 20px;
+}
+
+footer .icon {
+	background: url('../media/img/sprite.png') no-repeat -41px -34px;
+	width: 14px;
+	height: 20px;
+	display: inline-block;
+}
+
+footer p {
+	font-size: 10px;
+	color: #fff;
+	display: inline-block;
+	vertical-align: 6px;
+	margin-left: 10px;
+}
+
+/* ESCONDE BOTAO FLUTUANTE (ADDTHIS) */
+
+#at15s.atm {
+	display:none !important;
+}
+
+/* RESPONSIVO */
+
+@media(min-width:768px) and (max-width: 991px){
+	
+	#content_home article h2 { margin-top: 0; }
+
+}
+
+
+@media(max-width: 767px) {
+
+	header .navbar-nav {
+		width: 100%;
+		margin: 0;
+	}
+
+	header .navbar-inverse {
+		background: #333;
+	}
+
+	.home article {
+		margin-bottom: 20px;
+	}
+}

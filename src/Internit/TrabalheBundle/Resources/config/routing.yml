@@ -1,0 +1,45 @@
+# Trabalhe Conosco
+tupi_trabalhe_documento:
+    pattern:  /admin/trabalhe/documento/{url}
+    defaults: { _controller: "InternitTrabalheBundle:TrabalheAdmin:documento" }
+    
+tupi_trabalhe_home:
+    pattern:  /admin/trabalhe/{actionName}/{id}
+    defaults: { _controller: "InternitTrabalheBundle:TrabalheAdmin:index", actionName: null, id: null }
+
+tupi_trabalhe_front:
+    pattern:  /trabalhe/{actionName}/{id}
+    defaults: { _controller: "InternitTrabalheBundle:Trabalhe:trabalhe", actionName: null, id: null }
+
+tupi_trabalhe_edit:
+    pattern:  /admin/trabalhe/edit/{id}
+
+trabalhe_cidade:
+    pattern:  /cidades
+    defaults: { _controller: "InternitTrabalheBundle:Submit:cidades" }
+
+
+#Assunto       
+tupi_subjectTrabalhe_home:
+    pattern:  /admin/subjectTrabalhe/{actionName}/{id}
+    defaults: { _controller: "InternitTrabalheBundle:Subject:index", actionName: null, id: null }
+
+tupi_subjectTrabalhe_new:
+    pattern:  /admin/subjectTrabalhe/new
+
+tupi_subjectTrabalhe_edit:
+    pattern:  /admin/subjectTrabalhe/edit/{id}
+
+#Grupos de Email    
+tupi_groupTrabalhe_home:
+    pattern:  /admin/groupTrabalhe/{actionName}/{id}
+    defaults: { _controller: "InternitTrabalheBundle:Group:index", actionName: null, id: null }
+
+tupi_groupTrabalhe_new:
+    pattern:  /admin/groupTrabalhe/new
+
+tupi_groupTrabalhe_edit:
+    pattern:  /admin/groupTrabalhe/edit/{id}
+    
+tupi_groupTrabalhe_remove:
+    pattern:  /admin/groupTrabalhe/remove

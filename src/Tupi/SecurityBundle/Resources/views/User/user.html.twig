@@ -1,0 +1,50 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	$(function() {
+		$( '.tabs' ).tabs({ active: 0 });
+	});
+	</script>
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_user_home', 'Voltar', {'class': 'voltar'}) }}
+	{% block bt_new %}{% endblock %}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+{% endblock %}
+
+{% set title_controle = title_controle ~ ' Usuário' %}
+
+{% block main %}
+
+{{ admin.show_message() }}
+
+<div class="formulario esp_top">
+	<div class="tabs">
+		<ul class="controle">
+			<li><a href="#geral">Dados Usuários</a></li>
+			{% block tabPermissions %} {% endblock %}
+		</ul>
+		
+		{{ form_start(form) }}
+			{{ form_row(form.user.id) }}
+			{{ form_row(form.user.role) }}
+			{{ form_row(form.user.active) }}
+			<div id="geral" class="box row">
+				<ul>
+					<li class="col-md-6">{{ form_row(form.user.name) }}</li>
+					<li class="col-md-6">{{ form_row(form.user.login) }}</li>
+					<li class="col-md-3">{{ form_row(form.user.email) }}</li>
+					<li class="col-md-3">{{ form_row(form.user.birthDate) }}</li>
+					<li class="col-md-3">{{ form_row(form.user.password.first) }}</li>
+					<li class="col-md-3">{{ form_row(form.user.password.second) }}</li>
+				</ul>		
+			</div>
+			
+			{% block permissions %} {% endblock %}
+			
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

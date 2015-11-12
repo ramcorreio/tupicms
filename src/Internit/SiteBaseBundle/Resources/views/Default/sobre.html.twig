@@ -1,0 +1,28 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias sobre' %}
+
+{% block content %}
+<div class="container">    
+    <h2>Sobre a empresa</h2>
+    
+    <img src="http://lorempixel.com/1140/360/" width="100%">
+    
+    <div class="col-md-6">
+    	<h3>Introdução</h3>
+    	
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    
+    <div class="col-md-6">
+   		{% if session.publishedPages is defined %}
+			{{ session.publishedPages[0].body|raw }}
+		{% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% import 'TupiAdminBundle:Utis:front.html.twig' as front %}
+
+<!DOCTYPE html>
+{% if body_class is defined %}
+    {% set body_class = 'class="' ~ body_class ~ '"' %}
+{% else %}
+    {% set body_class = '' %}
+{% endif %}
+
+{% set settings = settings() %}
+
+<html lang="pt-br">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>{% block title %}Tupi CMS{% endblock %}</title>
+		
+		{% block metatags %}{% endblock %}
+		{% block stylesheets %}{% endblock %}
+		{% block utils %}{% endblock %}
+	</head>
+	<body {{ body_class|raw }}>
+		{% block body %}{% endblock %}
+		{% block javascripts %}{% endblock %}
+		<script src="{{ asset('bundles/tupiadmin/js/update.min.js') }}"></script>
+		<script>$buo({},false);</script>
+	</body>
+</html>

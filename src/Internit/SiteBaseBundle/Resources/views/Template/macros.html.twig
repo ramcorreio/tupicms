@@ -1,0 +1,36 @@
+{% macro newsletterFunction(name = false) %}
+	<script>
+		getNewsletterForm = function (form)
+		{
+			var name = $(form).children('input#name').val();
+        	var email = $(form).children('input#email').val();
+			$.ajax({
+				type:"POST",
+				url: '{{ path('newsletter_new') }}',
+				data: { email: email, name: name },
+				beforeSend: function(){
+					$(form).children('button#newsletter').prop('disabled', true);
+					$(form).children('button#newsletter').addClass('no-drop-button');
+				},
+				success: function(data){
+					$('#resposta_newsletter').html(data);
+					$(form).children('button#newsletter').prop('disabled', false);
+					$(form).children('button#newsletter').removeClass('no-drop-button');
+					return false;
+				}
+			});
+		return false;
+		}
+	</script>
+	<form class="newsletter" action="{{ path('newsletter_new') }}" method="post" onsubmit="return getNewsletterForm(this);">
+	    <h3>Receba novidades!</h3>
+	    {% if name != false %}
+	    <label>Nome*</label>
+	    <input type="text" id="name" name="name" placeholder="Nome" class="form-control" required />
+	    {% endif %}
+	    <label>E-mail*</label>
+		<input type="email" id="email" name="email" placeholder="E-mail" class="form-control" required />
+      	<button id="newsletter" class="btn btn-default" type="submit" value="Cadastre-se">Cadastre-se</button>
+    </form>    	
+    <div id="resposta_newsletter"></div>
+{% endmacro %}

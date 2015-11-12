@@ -1,0 +1,138 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% macro etapaCollectionItem(formData) %}
+    <li class="segura-li">
+        {{ form_row(formData.id) }}
+        {{ form_row(formData.valor) }}
+        <div class="col-md-6">{{ form_label(formData.valor) }}<div class="acompanhamento_etapa_valor">{{ formData.valor.vars.value }}%</div><div class="slide">{{ formData.valor.vars.value }}</div></div>
+    	<div class="col-md-4">{{ form_row(formData.etapa) }}</div>
+    	<div class="col-md-2"><a href="#" class="excluir-lista excluir botao_acao del-one">Excluir</a></div>
+    </li>
+{% endmacro %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitacompanhamento/css/main.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/internitacompanhamento/js/plupload.full.min.js') }}"></script>
+	<script type="text/javascript">
+		//ativação styleForm
+		$("form").styleForm();
+		$(function() {
+			$('.tabs').tabs({
+				beforeLoad: function( event, ui ) {
+					ui.panel.html("Carregando...");
+					ui.jqXHR.fail(function() {
+				          ui.panel.html(
+				            "Erro ao carregar o conteúdo da aba" );
+				    });
+				}
+			}).tabs( "option", "disabled", [ 2, 3, 4, 5 ] );
+		});
+
+		$(".tabs").on('submit','.formAjax', function( event ) {		 
+		    event.preventDefault();
+    		var $form = $(this);
+    		var url = $form.attr("action");
+
+    		$.ajax( {
+      		      url: url,
+      		      type: 'POST',
+      		      data: new FormData( this ),
+      		      processData: false,
+      		      contentType: false
+  		    }).done(function(data) {
+      		      if(!data.erro)
+    			  {
+    				   $(".alerta").removeClass("erro").addClass("sucesso").html(data.message).show();
+    				   var tabId = $(".tabs").tabs("option", "active");
+    				   $('.tabs').tabs('load', tabId); 
+    				   
+    			  }else{
+    				  $(".alerta").removeClass("sucesso").addClass("erro").html(data.message).show();
+        		  }
+  		    })
+		});
+
+		$(".tabs").on('click','.edit, .remove', function( event ) {		 
+		    event.preventDefault();
+		    var $this = $(this);
+    		if($this.hasClass('remove')){
+        		if(confirm('Deseja realmente excluír?'))
+        		    actionAjax($this);
+        	}else{
+        		actionAjax($this);
+            }
+		});
+
+		function actionAjax(button)
+		{
+    		var url = button.attr('data-action');
+    		var getting = $.get(url);
+    		
+    		getting.done(function( data ) {
+    			var tab = button.parents(".ui-tabs-panel");
+    			tab.html(data);
+    			tab.find("form").attr("action", button.attr("data-action"));
+    		});
+		}
+
+		$(".tabs").on("click", ".formAjax .novo" , function(){
+			var action = $(this).attr("data-action");
+		    $(this).parent().attr("action", action).find(":input:not([name*='_token'])").val('');
+		});
+
+		function changeTab(tabId)
+		{
+			if(arguments.length > 0){
+                 url = arguments[1];
+            }else{
+                 url = null;
+            }
+			$(".alerta").hide();
+			if(url != null)
+			{
+			   $("#menu-"+tabId).attr("href", url);
+			}
+			$(".tabs").tabs("disable")
+			$(".tabs").tabs("enable", tabId);
+			$(".tabs").tabs({ active: tabId });	
+		}
+
+		function mensagemAlerta(erro, mensagem)
+		{
+		  if(erro)
+	      {
+			  $(".alerta").removeClass("sucesso").addClass("erro").html(mensagem).show();
+		  }else{ 
+			 $(".alerta").removeClass("erro").addClass("sucesso").html(mensagem).show();
+		  }
+		}
+
+	</script>  
+	<script type="text/javascript" src="{{ asset('bundles/internitacompanhamento/js/acompanhamento.js') }}"></script>
+{% endblock %}
+
+{% block botoes %}	
+	{{ admin.form_button('tupi_acompanhamento_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.rbutton('tupi_acompanhamento_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% block main %}
+<div class="formulario esp_top row">
+    <div class="tabs col-md-12 col-sm-12"> 
+        <div class="alerta" style="display: none"></div>
+		<ul class="controle">
+			<li><a id="menu-0" href="{{ path("tupi_acompanhamento_imovel_edit", { "id" : form.id.vars.value }) }}">Imóvel</a></li>
+			<li><a id="menu-1" href="{{ path("tupi_acompanhamento_bloco_new" , { "filter" : form.id.vars.value}) }}">Blocos</a></li>
+			<li><a id="menu-2" href="javascript:;">Etapas</a></li>
+			<li><a id="menu-3" href="javascript:;">Relatórios</a></li>
+			<li><a id="menu-4" href="javascript:;">Galerias</a></li>
+			<li><a id="menu-5" href="javascript:;">Imagens</a></li>
+		</ul>
+    </div>
+</div>
+{% endblock %}

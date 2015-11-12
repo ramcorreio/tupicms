@@ -1,0 +1,28 @@
+<form class="formAjax" action="{{ path('tupi_acompanhamento_etapa_new' , { 'filter' : filter }) }}">
+    <ul>
+    {% for etapa in etapas %}
+    {% set checked = '' %}
+    
+    {% if etapa.visible %}
+    	{% set checked = 'checked' %}
+    {% endif %}
+        <li class="segura-li">
+            <input id="etapa_{{ loop.index }}_id" type="hidden" value="{{ etapa.id }}" name="etapas[{{ loop.index }}][id]">
+            <input id="etapa_{{ loop.index }}_valor" type="hidden" value="{{ etapa.valor }}" name="etapas[{{ loop.index }}][valor]">
+            <input id="etapa_{{ loop.index }}_etapa_id" type="hidden" value="{{ etapa.etapa_id }}" name="etapas[{{ loop.index }}][etapa_id]">
+            <div class="col-md-3">{{ etapa.name }}</div>
+            <div class="col-md-9"><div class="acompanhamento_etapa_valor">{{ etapa.valor }}%</div><div class="slide">{{ etapa.valor }}</div></div>
+            {% if etapa.visible is not null %}
+            <input id="etapa_{{ loop.index }}_visivel" type="checkbox" value="{{ etapa.visible }}" {{ checked }} name="etapas[{{ loop.index }}][visivel]">
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    <button class="salvar botao_acao" type="submit">Salvar</button>
+</form>
+
+<button class="new botao_acao changeTab" type="button" onclick="changeTab(1)">Voltar</button>
+
+<script type="text/javascript">
+   initSlider(".slide");
+</script>

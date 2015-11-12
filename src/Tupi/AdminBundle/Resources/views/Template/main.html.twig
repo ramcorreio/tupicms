@@ -1,0 +1,102 @@
+{% extends 'TupiAdminBundle:Template:layout.html.twig' %}
+{% block header %}
+<header>
+	<div class="navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".menu-secundario">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+         	<div class="nome">
+				<a href="{{ path("tupi_admin") }}" class="logo">
+					<img src="{{ asset('bundles/tupiadmin/media/img/logo_thumb.png') }}" alt="Tupi CMS" />
+				</a>
+				<div class="nome-loja">
+					<a href="{{ path('index') }}" target="_blank">Site</a>
+				</div>
+			</div>
+        </div>
+        <div class="collapse navbar-collapse menu-secundario navbar-right">
+          <ul class="nav navbar-nav">
+                {{ admin.button('tupi_setting_home', 'Definições do site') }}
+				{{ admin.button('tupi_resource_home', 'Configurações') }}
+				{{ admin.button('tupi_user_home', 'Usuários') }}				
+				<li class="logout">
+					<a href="{{ path('logout') }}">Sair</a>
+				</li>
+			</ul>
+        </div>
+      </div>
+    </div>	
+	
+	<div class="navbar-default menu-principal100" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".menu-principal">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+         	<div class="dados_login">
+				<p>Olá, {{ app.security.token.user.name }}.</p>
+				{{ admin.link('tupi_user_perfil', 'Editar meu perfil', '', {'id':  app.security.token.user.id }) }}
+			</div>
+        </div>
+        <div class="collapse navbar-collapse menu-principal navbar-right">
+        	<nav>
+          		{{ knp_menu_render('main') }}
+          	</nav>
+        </div>
+      </div>
+    </div>
+	
+	<div class="barra_busca100">
+		<div class="barra_busca container">
+			
+          	{{ admin.content_buttons(block('botoes')) }}
+						
+			<!-- <div class="busca col-md-4">
+				<form class="pull-right row" action="" method="post">
+					<p>Filtrar:</p>
+					<input type="text" name="q"/>
+					<button type="submit">Buscar</button>
+				</form>
+			</div>-->
+		</div>
+	</div>
+</header>
+
+{% endblock %}
+
+{% block base %}
+	
+	{% if title_controle is defined %}
+	{% block controle %}
+	<div class="controles_pagina">
+		<h1>{{ title_controle }}</h1>
+		{% block content_controle %}{% endblock %}
+	</div>
+	{% endblock %}
+	{% endif %}
+	
+	{% set errors = errors|default([]) %}
+	{{ admin.errors(errors) }}
+	{% block main %}{% endblock %}
+{% endblock %}
+
+{% block footer %}
+<footer>
+	<div class="container footer">
+		<div class="version">V. {{ tupi_version() }}</div>
+		<div class="tupi">
+			<a href="http://www.tupicms.org.br" target="_blank">
+				<img src="{{ asset('bundles/tupiadmin/media/img/powered_tupi.png') }}" alt="Tupi CMS" />
+			</a>
+		</div>
+	</div>
+</footer>
+{% endblock %}

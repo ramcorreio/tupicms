@@ -1,0 +1,84 @@
+imovel_ficha:
+    pattern:  /imovel/{url}.html
+    defaults: { _controller: "InternitImovelBundle:Front:ficha", url: null }    
+
+imovel_cidades:
+    pattern:  /imovel/cidades
+    defaults: { _controller: "InternitImovelBundle:Imovel:city" }
+
+imovel_ajax:
+   pattern:  /imoveis-ajax
+   defaults: { _controller: "InternitImovelBundle:Front:imoveisAjax", status: null}
+
+
+
+imovel_upload:
+    pattern:  /admin/imovel/upload
+    defaults: { _controller: "InternitImovelBundle:Imovel:upload" }    
+
+imovel_cidades:
+    pattern:  /imovel/cidades
+    defaults: { _controller: "InternitImovelBundle:Imovel:city" }
+
+tupi_imovel_sort:
+    pattern:  /admin/imovel/sort
+    defaults: { _controller: "InternitImovelBundle:Imovel:sort" }
+
+imovel_home:
+    pattern:  /admin/imovel/{actionName}/{id}
+    defaults: { _controller: "InternitImovelBundle:Imovel:index", actionName: null, id: null }
+    
+imovel_edit:
+    pattern: /admin/imovel/edit/{id}
+    
+imovel_new:
+    pattern: /admin/imovel/new
+
+imovel_remove:
+    pattern:  /admin/imovel/remove/{id}
+    
+imovel_tag_home:
+    pattern:  /admin/tag/{actionName}/{id}
+    defaults: { _controller: "InternitImovelBundle:ImovelTag:index", actionName: null, id: null }
+imovel_obrasrealizadas_ajax:
+   pattern:  /obrasrealizadas-ajax
+   defaults: { _controller: "InternitImovelBundle:Front:obrasRealizadasAjax"}
+
+imovel_tag_edit:
+    pattern: /admin/tag/edit/{id}
+    
+imovel_tag_new:
+    pattern: /admin/tag/new
+
+imovel_tag_remove:
+    pattern:  /admin/tag/remove/{id}
+    
+imovel_status_home:
+    pattern:  /admin/status/{actionName}/{id}
+    defaults: { _controller: "InternitImovelBundle:ImovelStatus:index", actionName: null, id: null }
+    
+imovel_status_edit:
+    pattern: /admin/status/edit/{id}
+    
+imovel_status_new:
+    pattern: /admin/status/new
+
+imovel_status_remove:
+    pattern:  /admin/status/remove/{id}
+    
+imovel_makers_home:
+    pattern:  /admin/realizadores/{actionName}/{id}
+    defaults: { _controller: "InternitImovelBundle:ImovelMakers:index", actionName: null, id: null }
+    
+imovel_makers_edit:
+    pattern: /admin/realizadores/edit/{id}
+    
+imovel_makers_new:
+    pattern: /admin/realizadores/new
+
+imovel_makers_remove:
+    pattern:  /admin/realizadores/remove/{id}
+
+imovel_documento:
+    pattern:  /documento/{url}
+    defaults: { _controller: "InternitImovelBundle:Imovel:documento", url: null }

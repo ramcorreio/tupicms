@@ -1,0 +1,214 @@
+{% macro errors(errors, label) %}
+{% spaceless %}
+    {% set label = label|default('Os seguintes erros foram econtrados') %}
+    {% if errors is defined %}
+        {% if errors|length > 0 %}
+    	<h3>{{ label }}:</h3>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+	{% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro id_element(element) %}
+{% spaceless %}
+    {{ '#' ~ element.vars.id }}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro id_by_name(form) %}
+{% spaceless %}
+    {{ '#' ~ form.vars.name }}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro show_message() %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alerta sucesso">{{flashMessage|raw}}</div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro link(path, label, sclass, params) %}
+
+    {% set sclass = sclass|default('') %}
+    {% if sclass != '' %}
+        {% set sclass = 'class="' ~ sclass ~ '"' %}
+    {% endif %}
+    
+    {% set toDrop = ['_anchor', 'attr', 'linked'] %}
+    {% set values = drop(toDrop, params|default({})) %}
+    {% set anchor = true %}
+    {% set anchorVal = '' %}
+    
+    {% set nparams = values['input'] %}
+    {% if values._anchor is defined and values._anchor == false %}
+    	{% set anchor = false %}
+    {% elseif values._anchor is defined and values._anchor is not empty %}
+    	{% set anchorVal = values['_anchor'] %}
+    {% endif %}
+    
+    {% set attr = [] %}
+    {% if values.attr is defined %}
+        {% set attr = values.attr %}
+    {% endif %}
+        
+    
+    {% if anchor == false %}
+        {% set href = 'javascript:void();' %}
+    {% else %}
+    	{% if anchorVal is not empty %}
+    		{% set href = (values.linked is defined and values.linked == true ? path(path, nparams|default({})) ~ '#' ~ anchorVal : '#' ~ anchorVal) %} 
+    	{% else %}
+    		{% set href = path(path, nparams|default({})) %}
+    	 {% endif %}
+    {% endif %}
+    
+    <a href="{{ href }}" {{ sclass|raw }} {{ block('tag_attributes') }}><span>{{ label }}</span></a>
+{% endmacro %}
+
+{% macro form_button(path, label, attrs) %}
+	
+	{% set per = verificarPermissao(path(path))%}	
+	{% if(per == true) %}
+		{{ block('action_button') }}
+	{% endif %}
+{% endmacro %}
+
+{% macro button(path, label, attrs) %}
+	
+	{% set per = verificarPermissao(path(path))%}	
+	{% if(per == true) %}
+		{{ block('default_button') }}
+	{% endif %}
+{% endmacro %}
+
+{% block button_attributes %}
+	{%- if path is defined %} 
+		{% if id is defined %}
+        	{%- set params = {'id': id } -%}
+    	{% endif %}
+    	id="{{ path }}" href="{{ path(path, params|default({})) }}"
+    {% else %}
+    	href="javascript:void();"
+	{% endif -%}
+	
+	{%- for attrname, attrvalue in attrs -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{% endblock %}
+
+{% block action_button %}
+	{% set attrs = attrs|default({}) %}
+	{% if attrs.class is defined %}
+		{%- set attrs = attrs|merge({'class': attrs.class ~ ' ' ~ 'botao_acao'}) -%}
+	{%- endif -%}
+	{{ block('default_button') }}
+{% endblock %}
+
+{% block default_button %}
+
+	{% set attrs = attrs|default({}) %}
+    {% if class is not defined or class is empty %}
+    	{% set class = '' %}	
+	{%- endif -%}
+	
+	{%- set class = class ~ ' ' ~ attrs.class|default('') -%}
+    {%- set attrs = attrs|merge({'class': class|trim}) -%}
+    
+    <li><a {{ block('button_attributes') }}>{{ label }}</a></li>
+{% endblock %}
+
+{% macro rbutton(path, label, attrs) %}
+    {% import _self as forms %}
+    
+    {% set id = app.request.get('id')  %}
+    
+    {% set per = verificarAcl('',label)%}
+ 	{% if(per == true) %}
+ 		{% if id is not null %}
+ 			{% if attrs.message is defined and attrs.message is not null %}		
+ 				{% set attrs = attrs|merge({'onclick': "return confirm('" ~  attrs.message ~ " Confirma exclusão?')"}) %}
+ 			{% else %}
+ 				{% set attrs = attrs|merge({'onclick': "return confirm('Confirma exclusão?')"}) %}
+ 			{% endif %}
+	    	{{ block('action_button') }}
+	    {% endif %}
+    {% endif %}	
+{% endmacro %}
+
+{% macro sbutton(label, sclass, form) %}
+	
+	{% import _self as forms %}	
+	{% set id = app.request.get('id') %}
+			
+	{% set permissao = 'salvar' %}
+	{% if(id is not null) %}
+		{% set permissao = 'editar' %}
+	{% endif %}	
+	
+	{% set per = verificarAcl('', permissao)%}
+ 	{% if(per == true) %}
+ 		{% set attrs = {'class': sclass, 'onclick': "return $('" ~ form ~ "').submit();"} %}
+ 		{{ block('action_button') }}
+	{% endif %}	
+{% endmacro %}
+
+#funções para tratamento de mediafile
+{% block tag_attributes %}
+{% spaceless %}
+    {% for attrname, attrvalue in attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endspaceless %}
+{% endblock tag_attributes %}
+
+{% block media %}
+{% spaceless %}
+    {% if data is not empty %}
+    {% set attr = attr|default({}) %}
+    <img title="{{ media.label }}" alt="{{ media.summary }}" src="data:{{ media.mimeType }};base64,{{ data }}" {{ block('tag_attributes') }}/>
+    {% endif %}
+{% endspaceless %}
+{% endblock media %}
+
+{% macro media(media, attr, thumb) %}
+    
+    {% if thumb %}
+        {% set data = media.thumb %}
+    {% else %}
+        {% set data = media.bin.value %}
+    {% endif %}
+    
+    {{ block('media') }}
+{% endmacro %}
+
+{% macro thumb(media, attr) %}
+    {% import _self as forms %}
+    {{ forms.media(media, attr, true) }}
+{% endmacro %}
+
+{% macro body(page) %}
+     {{ page.body|raw }}
+{% endmacro %}
+
+{% macro content_buttons(botoes) %}
+	{{ block('content_buttons') }}
+{% endmacro %}
+
+{% block content_buttons %}
+	{% if botoes %}
+		<ul class="controles">
+			{{ botoes|raw }}
+			<div class="clearfix"/>
+		</ul>
+	{% endif %}
+{% endblock %}

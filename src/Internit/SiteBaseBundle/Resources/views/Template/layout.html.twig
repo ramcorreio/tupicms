@@ -1,0 +1,60 @@
+{% extends 'TupiAdminBundle:Template:base.html.twig' %}
+{% import 'TupiAdminBundle:Form:macros.html.twig' as admin %}
+{% import 'InternitSiteBaseBundle:Template:macros.html.twig' as newsletter %}
+{% use 'TupiAdminBundle:Utis:social.html.twig' %}
+
+{% block title %}{{ settings['title'] }}{% endblock %}
+
+{% block stylesheets %}
+	<link href="{{ asset('bundles/internitsitebase/media/img/favicon.png') }}" rel="shortcut icon" />	
+	<link href="{{ asset('bundles/internitsitebase/css/base.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('bundles/internitsitebase/css/responsive.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/internitsitebase/css/main.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/internitsitebase/css/formularios.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/internitsitebase/css/combobox.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/internitsitebase/css/owl.carousel.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/internitsitebase/css/owl.transitions.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/internitsitebase/css/prettyPhoto.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+{% block javascripts %}
+	<script src="{{ asset('bundles/tupiadmin/js/jquery-1.10.2.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/owl.carousel.min.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/combobox.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/bootstrap.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/prettyPhoto.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/addthis.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/mask.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/form.js') }}"></script>
+	<script src="{{ asset('bundles/internitsitebase/js/geral.js') }}"></script>
+{% endblock %}
+
+{% block utils %}
+	{{ block('content_ga') }}
+	{{ block('content_fb') }}
+{% endblock %}
+
+{% block metatags %}
+	<meta name="description" content="{{ settings['description'] }}">
+	<meta name="keyworks" content="{{ settings['keyworks'] }}">
+
+	{{ block('metatag_fb') }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="header100">
+		{% include 'InternitSiteBaseBundle:Template:header.html.twig' %}
+	</div>
+	
+	{% block banner %}{% endblock %}		
+					
+	<div class="content100">
+		{% block content %}{% endblock %}
+    </div>		
+					
+	<div class="footer100">
+		{% include 'InternitSiteBaseBundle:Template:footer.html.twig' %}
+	</div>
+{% endblock %}

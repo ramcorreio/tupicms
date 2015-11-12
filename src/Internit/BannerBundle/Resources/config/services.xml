@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="internit.banner.menu.listener.class">Internit\BannerBundle\EventListener\MenuEventListener</parameter>
+        <parameter key="internit.banner.mail.service.class">Internit\BannerBundle\Service\MailService</parameter>
+    	<parameter key="internit.controller.banner.class">Internit\BannerBundle\Controller\BannerController</parameter>
+    </parameters>
+
+    <services>
+     
+        <service id="internit.banner.controller" class="%internit.controller.banner.class%" public="true">
+            <call method="setContainer">
+                 <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="internit.banner.menu.listener" class="%internit.banner.menu.listener.class%">
+            <tag name="kernel.event_listener" event="menu.build.listener" method="onCreate" />
+        </service>
+
+        <service
+                id="internit.banner.mail.service" class="%internit.banner.mail.service.class%"
+                factory-class="%internit.banner.mail.service.class%"
+                factory-method="getInstance" >
+
+            <argument type="service" id="service_container" />
+
+        </service>
+
+    </services>
+</container>

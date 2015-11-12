@@ -1,0 +1,36 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias acompanhamento' %}
+
+{% block content %}
+<div class="titulo">
+	<div class="container">
+		<h2>Acompanhamento de obra</h2>
+	</div>
+</div>
+<div class="container conteudo">    
+    <section id="content_empreendimentos">
+    	{% for acompanhamento in acompanhamentos %}
+    	   {% if  acompanhamento.galerias.count > 0 %}
+	    	<article class="col-md-4 col-sm-4">
+	    		<a href="{{ path('tupi_acompanhamento_ficha',{'id':acompanhamento.imovel.id, 'titulo':acompanhamento.imovel.url }) }}">
+	    			<div class="texto-destaque">
+	    				
+			    		<h4>{{ acompanhamento.imovel.address.city  }} - {{ acompanhamento.imovel.address.city.state.uf  }}</h4>
+			    		<h2>{{ acompanhamento.imovel.name }}</h2>
+		    		</div>
+		    		
+		    		{{ admin.thumb(acompanhamento.imovel.images|first.imageMedia, {'width':'295px', 'height':'281px'}) }}
+		    		<img src="{{ asset('bundles/internitsitebase/media/img/mais.png') }}">
+	    		</a>
+	    	</article>
+	    	{% endif %}
+		{% endfor %}
+    </section>
+</div>
+{% endblock %}

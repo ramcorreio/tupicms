@@ -1,0 +1,58 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias evento conteudo-listagem' %}
+
+{% block content %}
+<div class="container">
+	{% if evento is not empty %}
+	    <div class="col-md-12">
+	    	<h2>{{ evento.title }}</h2>
+	    </div>
+	    
+   		<div class="col-md-12 col-xs-12 segura-noticia">
+	   		{% if(evento.images is not empty) %}  
+	   			{% if(noticia.images|length > 1) %}
+	   				{% for image in evento.images %}
+	   				<!-- ### ADICIONAR GALERIA ### -->
+	   					{{ admin.media(image[0], {'width': '100%'} ) }}
+	   				{% endfor %}
+	   			{% else %}
+	   				{{ admin.media(evento.images[0], {'width': '100%'} ) }}   			
+	   			{% endif %}
+	   		{% endif %}
+	   		<time>Este evento acontece no dia {{ evento.startDay|date("d/m/Y") }} às {{ evento.startTime|date("h:m") }}{% if evento.endTime != null  %} até às {{ evento.endTime|date("h:m") }}{% endif %}{% if evento.endDay != null %} e perdura até o dia {{ evento.endDay|date("d/m/Y") }}{% endif %}</time>
+	   		<p><b>Local:</b> {{ evento.local }}</p>
+	   		{{ evento.body|raw }}
+	   		{% if evento.createdAt == evento.updatedAt %}
+	   			{% set date = evento.createdAt|date("d/m/Y") %}
+	   			{% set published = 'Publicado' %}
+	   		{% else %}
+	   			{% set date = evento.createdAt|date("d/m/Y") %}
+	   			{% set published = '<i>Alterado</i>' %}
+	   		{% endif %}
+	   		<p class="publicado">{{ published|raw }} por <strong>Usuário01</strong> em <strong>{{ date }}</strong></p>
+	   		
+	   		<div class="clearfix"></div>
+	   		
+	   		<div class="col-md-4 col-sm-6 col-xs-6 no-padding right compartilhe">
+	   			<p>Compartilhe</p>
+	   			<ul>
+	          <li><a class="addthis_button_facebook"></a></li>
+					  <li><a class="addthis_button_twitter"></a></li>
+					  <li><a class="addthis_button_google_plusone_share"></a></li>
+					  <li><a class="addthis_button_compact"></a></li>
+	   			</ul>
+	   		</div>
+   		</div>
+   	{% else %}
+   		<div class="col-md-12 col-xs-12 segura-noticia">
+   			<h1 class="ops">Ops, esse evento não existe <div class="sad">:(</div></h1>
+   		</div>
+   	{% endif %}
+</div>
+{% endblock %}

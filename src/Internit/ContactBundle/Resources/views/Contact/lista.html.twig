@@ -1,0 +1,33 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Contatos' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link href="{{ asset('bundles/internitcontact/css/contactStyle.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block botoes %}
+	{{ parent() }}
+	<li>
+	<a href="{{ path("tupi_contact_export", {"path":"contact"}) }}" class="export botao_acao">Exportar</a>
+	</li>
+{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">Nome</th>
+	<th class="titulo">E-mail enviado para</th>	
+	<th class="item4">Solicitado em</th>
+	<th class="item4">Respondido em</th>
+{% endblock %}
+{% block table_body %}
+	
+	<td>
+		<a href="{{ path('tupi_contact_edit', {'id':item.id}) }}">
+			<span>{{item.person.name}}</span>
+		</a>
+	</td>
+	<td>{{item.sentToEmails }}</td>
+	<td>{{item.createdAt|date("d/m/Y H:i:s")}}</td>
+	<td>{{item.updatedAt|date("d/m/Y H:i:s")}}</td>
+{% endblock %}

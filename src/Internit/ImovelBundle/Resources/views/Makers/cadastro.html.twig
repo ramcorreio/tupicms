@@ -1,0 +1,32 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block botoes %}
+	{{ admin.form_button('imovel_makers_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('imovel_makers_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% set title_controle = 'Adicionar Realizador' %}
+
+{% block main %}
+<div class="formulario esp_top row">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div class="col-md-12 col-sm-12"> 
+				<ul class="row">
+					<ul class="col-md-12 col-sm-12">
+						<li class="col-md-12 col-sm-6">{{ form_row(form.name) }}</li>
+						<li class="col-md-12 col-sm-6">{{ form_row(form.url) }}</li>
+						<li class="col-md-12 col-sm-6">
+						    {{ form_row(form.logo) }}
+						    {% if thumb_logo is defined %}
+            					<img title="{{ form.logo.vars.value.label }}" src="data:{{ form.logo.vars.value.mimeType }};base64,{{ thumb_logo.value }}"/>
+						    {% endif %}  		         
+						</li>
+					</ul>
+	    		</ul>
+    		</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

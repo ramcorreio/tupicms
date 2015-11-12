@@ -1,0 +1,4 @@
+"Nome";"E-mail";"Telefone";"Celular";"Cadastrado em:"
+{% for row in data %}
+"{{ row.name }}";"{{ row.email }}";"{{ row.telefone }}";"{{ row.celular }}";"{{ row.createdAt|date("d/m/Y") }}"
+{% endfor %}

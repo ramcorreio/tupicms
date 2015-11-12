@@ -1,0 +1,67 @@
+.skin {
+	float: none !important;
+}
+
+.skin input[type=checkbox] {
+	width: 18px;
+	height: 18px;
+}
+
+/**
+* Adaptando seleção de imagem com checkbox
+*
+* style_checkbox - imagem listada
+* input_checkboxChecked - imagem listada e selecionada 
+*/
+#media ul li {
+    width: 130px;
+    height: 130px;
+}
+
+#media ul li .body-image {
+    width: 128px;
+    height: 128px;
+}
+
+#media ul li {
+    position: relative;
+    display: inline-block;
+}
+
+#media ul li .checked  {
+    border-color: #39b54a !important;
+}
+
+#media ul li .body-image {
+    border: 4px solid;
+    border-color: transparent;
+}
+
+#media ul li img {
+    border: 1px solid transparent;
+    width: 120px;
+    height: 120px;
+    
+}
+
+#media ul li .style_checkbox {
+    position: absolute;
+    top: 0px;
+    right: 0px; 
+}
+
+.checkbox label {
+    float: left;
+    margin-right: 5px; 
+}
+
+.checkbox div {
+    vertical-align: middle;
+    line-height: normal;
+    text-indent: 0px; 
+}
+
+/* customização para correção de bug no uso indiscriminado de float left */
+.cke div {
+    float: none;
+}

@@ -1,0 +1,50 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		select option[disabled="disabled"] { background: rgba(222, 222, 222, 0.5); color: rgba(0,0,0,0.3); }
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+    <script src="{{ asset('bundles/internitcontact/js/groupJs.js') }}"></script>
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_subject_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+{% endblock %}
+
+{% set title_controle = 'Assunto' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs col-md-12 col-sm-12">		
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div id="arquivos" class="box">
+			    <ul class="row">
+                    <li class="col-md-6 col-sm-6">{{ form_row(form.title) }}</li>
+					<li class="col-md-3 col-sm-3">{{ form_row(form.status) }}</li>
+					<li class="col-md-3 col-sm-3">{{ form_row(form.randomStatus) }}</li>
+				</ul>
+				<ul class="row">
+				    <li class="col-md-12 col-sm-12">{{ form_row(form.description) }}</li>
+				</ul>
+				<ul class="row">
+					<div class="group-list">
+				        {% for group in form.groups %}
+							<li class="col-md-12 col-sm-12">
+								{{ form_widget(group) }}
+								{{ form_label(group, null) }}
+	                    	</li>
+	                    {% endfor %}
+					</div>
+				</ul>
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

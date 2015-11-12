@@ -1,0 +1,20 @@
+# Twig Configuration
+twig:
+    form:
+        resources:
+            - 'TupiAdminBundle:Form:fields.html.twig'
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: true
+    bundles:        [ TupiAdminBundle ]
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        mapping_types:
+          enum: string
+        types:
+            status: Tupi\AdminBundle\Types\StatusType
+            page_status: Tupi\ContentBundle\Types\PageStatusType

@@ -1,0 +1,16 @@
+banner_sort:
+    pattern:  /admin/banner/sort
+    defaults: { _controller: "InternitBannerBundle:Banner:sort" }
+    
+banner_home:
+    pattern:  /admin/banner/{actionName}/{id}
+    defaults: { _controller: "InternitBannerBundle:Banner:index", actionName: null, id: null }
+    
+banner_edit:
+    pattern: /admin/banner/edit/{id}
+    
+banner_new:
+    pattern: /admin/banner/new
+
+banner_remove:
+    pattern:  /admin/banner/remove/{id}

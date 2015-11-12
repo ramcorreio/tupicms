@@ -1,0 +1,53 @@
+# Ofereca Conosco
+ofereca_ajax_cep:
+    pattern:  /ofereca/buscacep
+    defaults: { _controller: "InternitOferecaBundle:Submit:buscaCep" }
+    
+tupi_ofereca_documento:
+    pattern:  /admin/ofereca/documento/{url}
+    defaults: { _controller: "InternitOferecaBundle:OferecaAdmin:documento" }
+
+ofereca_upload:
+    pattern:  /ofereca/upload
+    defaults: { _controller: "InternitOferecaBundle:Submit:upload" }
+
+tupi_ofereca_home:
+    pattern:  /admin/ofereca/{actionName}/{id}
+    defaults: { _controller: "InternitOferecaBundle:OferecaAdmin:index", actionName: null, id: null }
+
+tupi_ofereca_front:
+    pattern:  /ofereca/{actionName}/{id}
+    defaults: { _controller: "InternitOferecaBundle:Submit:ofereca", actionName: null, id: null }
+
+tupi_ofereca_edit:
+    pattern:  /admin/ofereca/edit/{id}
+
+ofereca_cidade:
+    pattern:  /oferecaEndereco/cidades
+    defaults: { _controller: "InternitOferecaBundle:Submit:cidade" }
+
+
+#Assunto       
+tupi_subjectOfereca_home:
+    pattern:  /admin/subjectOfereca/{actionName}/{id}
+    defaults: { _controller: "InternitOferecaBundle:Subject:index", actionName: null, id: null }
+
+tupi_subjectOfereca_new:
+    pattern:  /admin/subjectOfereca/new
+
+tupi_subjectOfereca_edit:
+    pattern:  /admin/subjectOfereca/edit/{id}
+
+#Grupos de Email    
+tupi_groupOfereca_home:
+    pattern:  /admin/groupOfereca/{actionName}/{id}
+    defaults: { _controller: "InternitOferecaBundle:Group:index", actionName: null, id: null }
+
+tupi_groupOfereca_new:
+    pattern:  /admin/groupOfereca/new
+
+tupi_groupOfereca_edit:
+    pattern:  /admin/groupOfereca/edit/{id}
+    
+tupi_groupOfereca_remove:
+    pattern:  /admin/groupOfereca/remove

@@ -1,0 +1,41 @@
+<form class="formAjax" action="{{ path('tupi_acompanhamento_imovel_edit', { "id" : form.id.vars.value }) }}">
+    {{ form_row(form.id) }}
+    {{ form_row(form.status) }}
+	<input id="acompanhamento_percentual" type="hidden" value="{{ acompanhamento.percentual }}" name="acompanhamento[percentual]">
+        <div class="segura-li">
+            <div class="col-md-3">Percentual Total</div>
+            <div class="col-md-9"><div class="acompanhamento_etapa_valor">{{ acompanhamento.percentual }}%</div><div class="slide">{{ acompanhamento.percentual }}</div></div>
+        </div>
+
+    {{ form_row(form.image) }}
+    {{ form_row(form._token) }}
+    {% if form.image.vars.value is not empty %}
+	<div class="preview">
+	     {% set thumb = form.image.vars.value.thumb('admin') %}
+         <img title="{{ form.image.vars.value.label }}" src="data:{{ form.image.vars.value.mimeType }};base64,{{ thumb.value }}"/>
+	</div>
+	{% endif %}
+    <button class="salvar botao_acao" type="submit">Salvar</button>
+</form>
+<script type="text/javascript">
+
+	$(".slide").each(function() {
+		
+		var value = $(this).text() ? parseInt($(this).text(), 0) : 0;
+		
+		$(this).prev().html(value + "%");
+		$("#acompanhamento_percentual").val(value);(value);
+		
+		$(this).empty().slider({
+			value: value,
+			range: "min",
+			min: 0,
+			max: 100,
+			slide: function( event, ui ) {
+				 $(this).prev().html(ui.value + "%");
+				 $("#acompanhamento_percentual").val(ui.value);
+			}
+		});
+	});
+
+</script>

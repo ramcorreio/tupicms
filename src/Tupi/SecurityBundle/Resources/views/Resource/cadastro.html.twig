@@ -1,0 +1,28 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block botoes %}
+	{{ admin.form_button('tupi_resource_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.form_button('tupi_resource_new', 'Adicionar', {'class': 'adicionar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+{% endblock %}
+
+{% set title_controle = title_controle ~ ' Funcionalidade' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs row">
+		
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div id="geral" class="box">
+				
+				<ul class="col-md-6">
+					<li>{{ form_row(form.name) }}</li>
+				</ul>
+				<ul class="col-md-6">
+					<li>{{ form_row(form.path) }}</li>
+				</ul>				
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

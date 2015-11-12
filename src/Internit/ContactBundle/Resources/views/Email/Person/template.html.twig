@@ -1,0 +1,53 @@
+{% block conteudo %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	    <title>no-reply</title>
+	    
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	    <meta name="resource-type" content="document">
+	    <meta http-equiv="pragma" content="no-cache">
+	    
+	    <style>
+	    	@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
+	    </style>
+	</head>
+	<body style="background-color: #e2e2e2;width: 620px;">
+		<font face="Open Sans" color="#000000" size="2">
+			<div class="segura-conteudo" style="padding: 15px;margin: 50px;background-color: #ffffff;color: #000000;font-family: Open Sans;font-size: 21px;">
+				<header style="border-bottom: 1px solid #e2e2e2; text-align: center;">
+					{% if logo is defined %}
+						<img src="{{ logo }}" alt="Logo do Site" height="150	px" />
+					{% else %}
+						<h1 style="text-align: center;font-size: 48px;width: 100%;margin: 10px 0;margin-bottom: 10px;">
+							JM Construções
+						</h1>
+					{% endif %}
+				</header>
+				<div class="conteudo" style="border-bottom: 1px solid #e2e2e2;">
+					{% block texto %}{% endblock %}
+				</div>
+				{% block footer %}
+					<footer style="margin-bottom: 10px;">			
+						<div class="footer-endereco" style="display: inline-block;text-align: left;width: 50%;float: left;">
+							{% if url_site is defined %}
+								<h6 style="font-size: 14px;font-weight: bold;margin: 20px 0;">
+									<a href="http://{{ url_site }}" target="_blank" style="color: #000;text-decoration: underline;">{{ url_site }}</a>
+								</h6>
+							{% endif %}
+							<p style="font-size: 14px;margin: 1px 0;">Rua Nome da Rua, 1.031</p>
+							<p style="font-size: 14px;margin: 1px 0;">Bairro, Cidade - RJ</p>
+						</div>
+						<div class="footer-telefone" style="display: inline-block;text-align: right;width: 50%;float: right;">
+							<h6 style="font-size: 14px;font-weight: bold;margin: 20px 0;">Telefones</h6>
+							<p style="font-size: 14px;margin: 1px 0;">(21) 2626 - 2626</p>
+							<p style="font-size: 14px;margin: 1px 0;">(21) 99999 - 9999</p>
+						</div>
+						<div style="clear:both"></div>
+					</footer>
+				{% endblock %}
+			</div>
+		</font>	
+	</body>
+</html>
+{% endblock %}

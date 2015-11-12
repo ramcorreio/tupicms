@@ -1,0 +1,28 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Trabalhe Conosco' %}
+
+{# {% block stylesheets %}#}
+{# 	{{ parent() }}#}
+{#     <link href="{{ asset('bundles/internitcontact/css/contactStyle.css') }}" rel="stylesheet" type="text/css">#}
+{# {% endblock %}#}
+
+{# {% block botoes %}#}
+{# 	{{ parent() }}#}
+{# 	{{ admin.form_button('tupi_contact_export', 'Exportar Contatos', {'class': 'export'}) }}#}
+{# {% endblock %}#}
+
+{% block table_head %}
+	<th class="titulo">Nome</th>
+	<th class="titulo">E-mail</th>
+	<th class="item4">Enviado em</th>
+{% endblock %}
+{% block table_body %}
+	<td>
+		<a href="{{ path('tupi_trabalhe_edit', {'id':item.id}) }}">
+			<span>{{item.person.name}}</span>
+		</a>
+	</td>
+	<td>{{item.person.email }}</td>
+	<td>{{item.createdAt|date("d/m/Y H:i:s")}}</td>
+{% endblock %}

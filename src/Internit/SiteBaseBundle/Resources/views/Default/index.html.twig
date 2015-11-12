@@ -1,0 +1,37 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block banner %}
+<section id="banner_destaque">
+
+	<ul class="owl-carousel container center">
+		<li class="item"><img src="http://lorempixel.com/1140/400/abstract" alt="Slide 01"></li>
+		<li class="item"><img src="http://lorempixel.com/1140/400/nature" alt="Slide 02"></li>
+		<li class="item"><img src="http://lorempixel.com/1140/400/sports" alt="Slide 03"></li>
+	</ul>
+       
+</section>
+{% endblock %}
+
+{% set body_class = 'home' %}
+
+{% block content %}
+<div class="container">    
+    <section id="content_home">
+    	<article class="col-md-4 col-sm-4">
+    		<h2>Bem-vindo, ao Nome do site.</h2>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    		<a class="btn btn-default" href="javascript:;">Página de Exemplo</a>
+    	</article>
+    	<article class="col-md-4 col-sm-4">
+    		<img src="http://lorempixel.com/300/200/city" width="100%">
+    		<h3>Página de exemplo 01</h3>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    	</article>
+    	<article class="col-md-4 col-sm-4">
+    		<img src="http://lorempixel.com/300/200/business" width="100%">
+    		<h3>Página de exemplo 02</h3>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper commodo sagittis donec tincidunt justo ac turpis.</p>
+    	</article>
+    </section>    
+</div>
+{% endblock %}

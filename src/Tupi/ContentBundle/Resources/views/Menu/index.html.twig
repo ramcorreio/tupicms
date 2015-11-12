@@ -1,0 +1,423 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	<link href="{{ asset('bundles/tupiadmin/css/jstree.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/tupiadmin/js/jstree.min.js') }}"></script>
+	<script type="text/javascript">
+	function createNode(e)
+	{
+		console.log('createNode');
+		var instance = $('#tree').jstree(true)
+		var parent = instance.get_node(instance.get_selected());
+		console.log("createNode instance...");
+		console.log(instance);
+		console.log("createNode parent...");
+		console.log(parent);
+				
+		$.ajax({
+			url: "{{ path('tupi_menu_form') }}",
+			beforeSend: function( xhr ) {
+				console.log("createNode beforeSend...");
+				loadIn();
+			}
+		}).fail(function( content ) {
+
+			console.log('createNode fail...');
+			loadOut();
+			
+		}).done(function( content ) {
+			
+			$( "#edit-screen" ).html(content);
+			$('#menu_parent  option[value=' + parent.id + ']').attr('selected', true);
+			console.log("createNode done...");
+			loadOut();
+			
+			$("#menu_redirect").click(function(){
+				if($("#menu_redirect").is(':checked')==false)
+				{
+					$("#menu_menuRedirect").attr('class','hide');
+					$('#menu_menuRedirect').prop('selectedIndex',0);
+				}else{
+					$("#menu_menuRedirect").removeClass('hide');
+				}
+			});
+
+			
+			
+			$( ".formularios form" ).submit(function(){
+				console.log("submitting after done");
+				return submitMenu.call(this, e, {'instance' : instance});
+			});
+
+			$( "#tupi_menu_remove" ).attr('href', 'javascript:void()');
+			$( "#tupi_menu_remove" ).removeAttr("onclick");
+			$( "#tupi_menu_remove" ).click(function() {
+				return excluirMenu.call(this, e);
+			});
+
+			$( ".limpar" ).removeAttr("onclick");
+			$( ".limpar" ).click(function() {
+				clear()
+				var instance = $('#tree').jstree(true)
+				instance.deselect_all(true);
+			});
+
+			$(".style").styleForm();
+		});
+	}
+
+	/*function buscarMenus(obj)
+	{
+		if($(obj).is(':checked')==true)
+		{
+			$.ajax({
+				url: "{{ path('tupi_menu_redirect') }}",
+			}).done(function(content){
+				$('#menu').append(content);
+			});
+		}
+		else
+		{
+			$('.menu_redirect').remove();
+		}
+	}*/
+	
+	function clear() 
+	{
+		var editScreen = $('#edit-screen');
+		editScreen.empty();
+		return editScreen;
+	}	
+	
+	function loadIn()
+	{
+		var editScreen = clear();
+		editScreen.addClass('loading');
+	}
+	
+	function loadOut()
+	{
+		var editScreen = $('#edit-screen');
+		editScreen.removeClass('loading');
+	}
+
+	function excluirMenu(e) {
+
+		if(!confirm('Confirma exclusão?'))
+		{
+			return false;
+		}
+		
+		console.log('Excluindo...');
+		var $form = $( ".formularios form" );
+
+		// Send the data using post
+		var url = "{{ path('tupi_menu_remove') }}";
+		console.log("posting to: " + url);
+
+		loadIn();
+		var posting = $.post( url, $form.serialize() );
+
+		posting.done(function( content ) {
+			
+			console.log('Excluído com sucesso...');
+			console.log(content[0]);
+			var instance = $('#tree').jstree(true);
+			instance.delete_node(instance.get_selected(), true);
+			clear();
+			loadOut();
+		});
+		
+		return false;
+	}
+
+	function submitMenu(e, data) {
+
+		loadIn();
+
+		var $form = $( this ),
+		//term = $form.find( "input[name='s']" ).val(),
+		url = $form.attr( "action" );
+
+		// Send the data using post
+		console.log("posting to: " + url);
+		var posting = $.post( url, $form.serialize() );
+
+		// Put the results in a div
+		posting.done(function( content ) {
+						
+			clear().append( content );
+			
+			if($("#menu_redirect").is(':checked') == true)
+			{
+				 $("#menu_menuRedirect").toggleClass('hide');
+			}
+			
+			$("#menu_redirect").click(function(){
+				if($("#menu_redirect").is(':checked')==false)
+				{
+					$("#menu_menuRedirect").attr('class','hide');
+					$('#menu_menuRedirect').prop('selectedIndex',0);
+				}else{
+					$("#menu_menuRedirect").removeClass('hide');
+				}
+			});
+			
+			loadOut();
+			
+			$( ".formularios form" ).submit(function(){
+				console.log("submitting after done");
+				return submitMenu.call(this, e, data);
+			});			
+
+			$( "#tupi_menu_remove" ).attr('href', 'javascript:void()');
+			$( "#tupi_menu_remove" ).removeAttr("onclick");
+			$( "#tupi_menu_remove" ).click(function() {
+				return excluirMenu.call(this, e);
+			});
+
+			$( ".limpar" ).removeAttr("onclick");
+			$( ".limpar" ).click(function() {
+				clear()
+				var instance = $('#tree').jstree(true)
+				instance.deselect_all(true);
+			});
+
+			var instance = $('#tree').jstree(true);
+			var parent = $('#menu_parent option:selected').val();
+			console.log("parent: " + parent);
+			var parentNode = instance.get_node(parent);
+			console.log(parentNode);
+			var node = { "id": $("#menu_id" ).val(), "text": $( "#menu_title" ).val(), "parent" : parent, "position" : $( "#menu_position" ).val() };
+
+			if(instance.is_loaded(parentNode) && !instance.get_node(node))
+			{
+				instance.create_node(parentNode, node, node.position);
+			}
+			
+			instance.open_node(parentNode);
+			instance.set_text($( "#menu_id" ).val(), $( "#menu_title" ).val());
+			instance.deselect_all(true);
+			instance.select_node(node, true);
+			$(".style").styleForm();
+		});
+
+		return false;
+	}
+	</script>
+	
+	<script type="text/javascript">
+		$("#tree").jstree({
+			"core" : {
+				"check_callback" : true,
+				'themes' : {
+					'responsive' : false
+				},
+    			"multiple" : false,
+				"animation" : 0,
+				"data" : {
+					"url" : "{{ path('tupi_menu_children') }}",
+					"type": 'post',
+			        "data" : function (node) {
+				        return { "node" : node };
+					}
+				}
+			},
+    		"types" : {
+		    	"#" : {
+			    	"valid_children" : ["root"]
+		    	}
+		    },
+			"plugins" : ["dnd", "types"]
+			
+		}).on('after_open.jstree', function (e, data) {
+			
+			console.log('after_open.jstree');
+			console.log(data.node);
+			if($("#menu_id" ).val())
+			{
+				data.instance.deselect_all(true);
+				data.instance.select_node($("#menu_id" ).val(), true);
+			}
+			
+		}).on('loaded.jstree', function (e, data) {
+
+			console.log('loaded.jstree');
+			data.instance.select_all(true);
+			var root = data.instance.get_node(data.instance.get_selected());
+			data.instance.open_node(root);
+			data.instance.deselect_all(true);
+		
+		}).on('create_node.jstree', function (e, data) {
+			
+			console.log('create_node.jstree');
+			console.log(data.node);
+			//data.instance.deselect_all(true);
+			//data.instance.select_node(data.node, true);
+			
+		}).on('changed-delete_node.jstree', function (e, data) {
+			
+			console.log('changed-delete_node');
+			console.log(data.node);
+			//console.log(data.instance.get_node(data.node.parent));
+			//data.instance.select_node(data.instance.get_node(data.node.parent));
+			
+		}).on('changed.jstree', function (e, data) {
+
+			if(data.action == 'delete_node') {
+				
+				data.instance.trigger('changed-delete_node', data);
+			}
+			else if(data.action == 'changed' || data.action == 'select_node' ) {
+				
+				data.instance.trigger('mychanged', data);
+			}
+			else {
+
+				console.log('Evento ' + data.action + ' não tratado.');
+			}
+			
+			
+		}).on('mychanged.jstree', function (e, data) {
+			
+			console.log('changed.jstree');
+			console.log(data.action);
+			console.log(data.node);
+
+			if($('#tree').data('processing')) {
+
+				console.log('wait');
+				var pnode = $('#tree').data('pnode');
+				data.instance.deselect_node(data.node, true);
+				data.instance.select_node(pnode, true);
+				console.log(pnode.id  + " => " + pnode.text);
+				return;
+			}
+
+			var baseUrl = "{{ path('tupi_menu_form') }}";
+			$.ajax({
+				url: baseUrl + "/" + data.node.id,
+				beforeSend: function( xhr ) {
+					$('#tree').data('pnode', data.node);
+					$('#tree').data('processing', true);
+					console.log("changed beforeSend...");
+					console.log(data.node);
+					data.instance.get_node(data.node, true).addClass("jstree-loading").attr('aria-busy', true);
+					loadIn();
+				}
+			}).fail(function( content ) {
+
+				console.log('changed fail...');
+				clear();
+				data.instance.get_node(data.node, true).removeClass("jstree-loading").attr('aria-busy', false);
+				$('#tree').data('processing', false);
+				$('#tree').removeData('pnode');
+				loadOut();
+				
+			}).done(function( content ) {
+				clear().append( content );
+
+				 if($("#menu_redirect").is(':checked') == true)
+					 $("#menu_menuRedirect").toggleClass('hide');
+
+				 $("#menu_redirect").click(function(){
+						if($("#menu_redirect").is(':checked')==false)
+						{
+							$("#menu_menuRedirect").attr('class','hide');
+							$('#menu_menuRedirect').prop('selectedIndex',0);
+						}else{
+							$("#menu_menuRedirect").removeClass('hide');
+						}
+					});
+				
+				console.log("changed done...");
+				console.log(data.node);
+				
+				data.instance.get_node(data.node, true).removeClass("jstree-loading").attr('aria-busy', false);
+				$('#tree').data('processing', false);
+				$('#tree').removeData('pnode');
+				
+				loadOut();
+				
+				$( ".formularios form" ).submit(function(){
+					console.log("submitting after done");
+					return submitMenu.call(this, e, data);
+				});
+
+				$( "#tupi_menu_remove" ).attr('href', 'javascript:void()');
+				$( "#tupi_menu_remove" ).removeAttr("onclick");
+				$( "#tupi_menu_remove" ).click(function() {
+					return excluirMenu.call(this, e);
+				});
+
+				$( ".limpar" ).removeAttr("onclick");
+				$( ".limpar" ).click(function() {
+					clear()
+					var instance = $('#tree').jstree(true)
+					instance.deselect_all(true);
+				});
+
+				$(".style").styleForm();
+			});
+		}).on('move_node.jstree', function (e, data) {
+			
+			console.log('move_node.jstree');
+			console.log(data.node.id  + " => " + data.node.text);
+			console.log(data.old_parent  + " => " + data.old_position);
+			console.log(data.parent  + " => " + data.position);
+
+			var toParent = data.instance.get_node(data.parent);
+
+			var input =  {
+				node:	{id: data.node.id, text: data.node.text},
+				to:		toParent
+			};
+			
+			console.log(input.to);
+
+			$.ajax({
+			  type: "POST",
+			  url: "{{ path('tupi_menu_move') }}",
+			  beforeSend: function( xhr ) {
+				  console.log('move_node.jstree beforeSend...');
+				  data.instance.deselect_all(true);
+				  loadIn();
+			  },
+			  data:	input
+			}).done(function( content ) {
+				console.log('move_node.jstree done...');
+				//data.instance.refresh_node(data.node.parent);
+				console.log(data.node);
+				//data.instance.select_node(data.node.id);
+				data.instance.select_node(data.node);
+			});
+			
+		});
+	</script>
+{% endblock %}
+
+{% set title_controle = 'Menu' %}
+
+{% block main %}
+<div class="col-md-12 col-sm-12">
+    <div class="col-md-4 col-sm-4">        
+        <!-- ## BOTAO ADICIONAR MENU -->
+        <div class="row">
+            <a href="javascript:void();" onclick="return createNode();" class="adicionar botao_acao col-md-12 col-sm-12"><span>Adicionar Item Menu</span></a>
+        </div>
+        
+        <!-- ## ÁRVORE DO MENU -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 esp_top">
+                <div id="tree"></div>
+            </div>
+        </div>
+    </div>
+ 
+    <div id="edit-screen" class="col-md-8 col-sm-8"/>
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias eventos listagem' %}
+
+{% block content %}
+<div class="container">    
+    <div class="col-md-12">
+    	<h2>Eventos</h2>
+    </div>
+    
+   	<div class="row segura-noticia">
+	   	{% if eventos is not empty %}
+	   		<ul class="col-md-12 col-xs-12 ">
+	   			{% for evento in eventos %}
+	   				{% set date = evento.createdAt|date("d-m-Y") %}
+		   			<a href="{{ path('evento', { title: evento.title|url_encode|lower, createdAt: date }) }}">
+			   			<li class="prop col-md-8 col-xs-12">
+			   				<h3>{{ evento.title|raw }}</h3>
+			   				<h5>{{ evento.local }}</h5>
+			   				<time>Acontece no dia {{ evento.startDay|date("d/m/Y") }} às {{ evento.startTime|date("h:m") }}</time>
+			   				<p>{{ evento.summary|raw }}</p>
+			   				<time>{% if evento.createdAt == evento.updatedAt %}Publicado em {{ evento.createdAt|date("d/m/Y") }}{% else %}<i>Atualizado</i> em {{ evento.updatedAt|date("d/m/Y") }}{% endif %}</time>
+			   			</li>
+			   		</a>
+			   	{% endfor %}
+	   		</ul>
+	   	{% else %}
+	   		<div class="col-md-12 col-xs-12">
+	   			<h2>Não há eventos ainda :(</h2>
+	   		</div>
+	   	{% endif %}
+   	</div>
+</div>
+{% endblock %}

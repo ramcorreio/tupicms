@@ -1,0 +1,20 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Chats' %}
+{% set actions = {'randomchat_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Link do Chat</th>
+	<th class="item4">Criado em</th>
+	<th class="item4">Atualizado em</th>
+{% endblock %}
+{% block table_body %}
+	<!-- <td><input type="checkbox" value="{{item.id}}"/></td> -->	
+	<td>
+		<a href="{{ path('randomchat_edit', {'id':item.id}) }}">
+			<span>{{item.chat[:50] ~ '...'}}</span>
+		</a>
+	</td>
+	<td>{{item.createdAt|date("d/m/Y H:i:s")}}</td>
+	<td>{{item.updatedAt|date("d/m/Y H:i:s")}}</td>
+{% endblock %}

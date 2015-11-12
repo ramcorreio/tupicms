@@ -1,0 +1,16 @@
+{% extends 'InternitSiteBaseBundle:Email:template.html.twig' %}
+
+{% block titulo %}Novo Contato do Fale Conosco{% endblock %}
+
+{% block texto %}
+	{% if nome is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;" style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Nome: {{ nome }}</div>{% endif %}
+	{% if email is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;" style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">E-mail: {{ email }}</div>{% endif %}
+	{% if telefone is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;" style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;">Telefone: {{ telefone }}</div>{% endif %}
+	{% if celular is not empty %}<div style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;" style="display: inline-block;float: left;width: 293px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;margin: 10px 5px;margin-bottom: 20px;">Celular: {{ celular }}</div>{% endif %}
+	{% if mensagem is not empty %}
+		<p style="	display: block;width: 640px;margin: 10px 5px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;clear: both;">{{ mensagem }}</p>
+	{% endif %}
+	{% if conheceu is not empty %}
+		<p style="	display: block;width: 640px;margin: 10px 5px;border: 1px solid #eeeeee;padding: 10px;text-align: justify;box-sizing: border-box;clear: both;">{{ conheceu }}</p>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{# {% for image in galeria.images %}#}
+{# <li>#}
+{# 	<a href="{{ path("image_acompanhamento" , { id : image.id , thumb : 0 }) }}" rel="prettyPhoto['imagens']">#}
+{# 		<img src="{{ path("image_acompanhamento" , { id : image.id , thumb : 1 }) }}">#}
+{# 	</a>#}
+{# </li>#}
+{# {% endfor %}#}
+
+
+<ul class="sync1">
+	{% for image in galeria.images %}
+	<li class="item">
+		<a href="{{ path("image_acompanhamento" , { id : image.id , thumb : 0 }) }}" rel="prettyPhoto['galeria']">
+			<img src="{{ path("image_acompanhamento" , { id : image.id , thumb : 0 }) }}" style="width:1230px;height:470px;" alt="Imóvel">
+		</a>
+	</li>
+	{% endfor %}
+</ul>					
+
+<ul class="sync2">
+	{% for image in galeria.images %}
+	<li class="item">
+		<a href="{{ path("image_acompanhamento" , { id : image.id , thumb : 1 }) }}">
+			<img src="{{ path("image_acompanhamento" , { id : image.id , thumb : 1 }) }}" alt="Imóvel">
+		</a>
+	</li>
+	{% endfor %}
+</ul>

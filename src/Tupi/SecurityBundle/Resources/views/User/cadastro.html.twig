@@ -1,0 +1,13 @@
+{% extends 'TupiSecurityBundle:User:user.html.twig' %}
+
+{% block bt_new %}
+	{{ admin.form_button('tupi_user_new', 'Adicionar', {'class': 'adicionar'}) }}
+{% endblock %}
+
+{% block tabPermissions %}
+	<li><a href="#permissoes">Permissões</a></li>
+{% endblock %}
+
+{% block permissions %}
+	{% include 'TupiSecurityBundle:User:permissions.html.twig' %}
+{% endblock %}

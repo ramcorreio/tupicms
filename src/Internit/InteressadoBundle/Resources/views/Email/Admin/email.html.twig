@@ -1,0 +1,10 @@
+{% extends 'InternitSiteBaseBundle:Email:template.html.twig' %}
+
+{% block texto %}
+	{% if nome is not empty %}<div>Nome: {{ nome }}</div>{% endif %}
+	{% if email is not empty %}<div>E-mail: {{ email }}</div>{% endif %}
+	{% if telefone is not empty %}<div>Telefone: {{ telefone }}</div>{% endif %}
+	{% if mensagem is not empty %}
+		<p>{{ mensagem }}</p>
+	{% endif %}
+{% endblock %}

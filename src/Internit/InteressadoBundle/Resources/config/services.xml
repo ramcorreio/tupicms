@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="internit.interessado.menu.listener.class">Internit\InteressadoBundle\EventListener\MenuEventListener</parameter>
+        <parameter key="internit.interessado.mail.service.class">Internit\InteressadoBundle\Service\MailService</parameter>
+    	<parameter key="internit.controller.interessado.class">Internit\InteressadoBundle\Controller\InteressadoController</parameter>
+    </parameters>
+
+    <services>
+     
+        <service id="internit.interessado.controller" class="%internit.controller.interessado.class%" public="true">
+            <call method="setContainer">
+                 <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="internit.interessado.menu.listener" class="%internit.interessado.menu.listener.class%">
+            <tag name="kernel.event_listener" event="menu.build.listener" method="onCreate" />
+        </service>
+
+        <service
+                id="internit.interessado.mail.service" class="%internit.interessado.mail.service.class%"
+                factory-class="%internit.interessado.mail.service.class%"
+                factory-method="getInstance" >
+
+            <argument type="service" id="service_container" />
+
+        </service>
+
+    </services>
+</container>

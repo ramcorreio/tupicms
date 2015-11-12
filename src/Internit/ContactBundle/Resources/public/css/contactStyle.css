@@ -1,0 +1,13 @@
+li.align-button{ float: right; }
+a.more-one{ background: #39b54a; float: left; display: block; -webkit-border-radius: 5px; border-radius: 5px; padding: 0 10px 0 10px; height: 35px; line-height: 35px;  text-decoration: none; color: #fff; margin: 0 15px 10px; }
+a.more-one:hover { background-color: #333; }
+a.del-one{   background: #b53f39; border-radius: 30px; color: #fff; display: inline-block; float: left; font-size: 50px; height: 30px; line-height: 25px; text-align: center; text-decoration: none; width: 30px; margin: 20px 0 0 10px; }
+a.del-one:hover{ background-color: #333; }
+input.lower{ text-transform: lowercase; }
+.segura-li div{ display: inline-block; float: left; }
+.segura-li div:first-child{ width: 91.66666667%; }
+/**INÍCIO BOTÃO EXPORTAR**/
+/* .controles li:has(> .botao_acao.export){ float: right; } */
+ul.controles li a.botao_acao.export{ background: #40728b url(../media/img/sprite.png) no-repeat 5px 8px; }
+ul.controles li a.botao_acao.export:hover{ background-color: #333; }
+/**FIM BOTÃO EXPORTAR**/

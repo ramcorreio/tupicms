@@ -1,0 +1,23 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block botoes %}
+	{{ admin.form_button('randomchat_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('randomchat_remove', 'Excluir', 'excluir') }}	
+{% endblock %}
+
+{% block main %}
+<div class="formulario esp_top">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div class="tabs col12">    		
+    			<div id="geral" class="box">
+    			    <ul class="col12">
+    					<li>{{ form_row(form.chat) }}</li>
+    				</ul>
+    			</div>
+    		</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

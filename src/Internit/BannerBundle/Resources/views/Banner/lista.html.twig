@@ -1,0 +1,26 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Banner' %}
+{% set actions = {'banner_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } }%}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/internitbanner/js/sort.js') }}"></script>
+{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">Nome</th>
+	<th class="titulo">Empreendimento</th>
+	<th class="titulo">Posição</th>
+	<th class="titulo">Status</th>
+	<th class="item3">Criado em</th>
+	<th class="item3">Atualizado em</th>
+{% endblock %}
+{% block table_body %}
+	<td><a href="{{ path('banner_edit', {'id':item.id}) }}">{{item.name}}</a></td>
+	<td>{{ item.imovel is not empty ? item.imovel.name : 'Sem empreendimento' }}</td>
+	<td>{{ item.position }}</td>
+	<td>{{ item.visible == 1 ? 'Ativo' : 'Desativado' }}</td>
+	<td>{{item.createdAt|date("d/m/Y H:i:s")}}</td>
+	<td>{{item.updatedAt|date("d/m/Y H:i:s")}}</td>
+{% endblock %}

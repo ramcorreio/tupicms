@@ -1,0 +1,117 @@
+<script type="text/javascript">
+var uploaderRelatorio = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'pickfiles_relatorios',
+	container: document.getElementById('relatorios_container'),
+	url : "{{ path("tupi_acompanhamento_bloco_relatorio_new" , { "filter" : filter }) }}",
+	flash_swf_url : "{{ asset("bundles/internitacompanhamento/swf/Moxie.swf") }}",
+	silverlight_xap_url : "{{ asset("bundles/internitacompanhamento/swf/Moxie.xap") }}",
+	
+	filters : {
+		max_file_size : '10mb',
+		mime_types: [
+			{title : "Arquivos", extensions : "jpg,gif,png,jpeg,pdf,doc,xls,docx"}
+		]
+	},
+
+	init: {
+		PostInit: function() {
+			document.getElementById('filelist_relatorios').innerHTML = '';
+
+			document.getElementById('uploadfiles_relatorios').onclick = function() {
+				uploaderRelatorio.start();
+				return false;
+			};
+		},
+		FilesAdded: function(up, files) {
+			plupload.each(files, function(file) {
+				document.getElementById('filelist_relatorios').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+			});
+		},
+
+		FileUploaded: function(up, file, info) {
+			$(".sort_relatorio").append(info.response);
+         },
+
+		UploadProgress: function(up, file) {
+			document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+		},
+
+		Error: function(up, err) {
+			document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+		},
+
+		UploadComplete: function(up, files) {
+			
+		}
+	}
+});
+
+uploaderRelatorio.init();
+
+
+$('.sort_relatorio').on('click','.remove_relatorio',function(e) {
+	e.preventDefault();
+	$this = $(this);
+	if(confirm("Deseja realmente excluir?"))
+	{
+		var url = $(this).attr("href");
+ 	    $.post(url)
+ 		 .done(function( data ) 
+ 		 {
+ 			  if(!data.erro)
+ 			  {
+ 				  $(".alerta.sucesso").html(data.message).show();
+ 				  $this.parent().parent().remove();
+ 			  }
+
+ 			 mensagemAlerta(data.erro, data.message);
+ 		});
+	}
+});
+
+var valueInputRelatorio;
+
+$('.sort_relatorio').on('focusin','.body-image input',function(e) {
+	valueInputRelatorio = $(this).val();
+});
+
+$('.sort_relatorio').on('focusout','.body-image input',function(e) {
+	if(valueInputRelatorio != $(this).val())
+	{
+		var $this = $(this);
+		var url = $this.attr("data-url");
+		var data = "legenda="+ $this.val();
+ 	    $.post(url, data)
+ 		 .done(function(data) 
+ 		 {
+ 			 mensagemAlerta(data.erro, data.message);
+ 		 });
+	}
+});
+
+</script>
+<div id="media" class="box">
+	<ul class="sort_relatorio col-md-12 col-sm-12">
+		{% for relatorio in relatorios %}
+			<li id="relatorio_{{ relatorio.id }}">
+				<div class="body-image">
+    		         <a class="remove_relatorio" href="{{ path("tupi_acompanhamento_bloco_relatorio_remove", { "id" : relatorio.id , "filter" : filter}) }}">&times; Remover</a>
+    		         {{ relatorio.label }} 		         
+    		         <input type="text" data-url="{{ path("tupi_acompanhamento_bloco_relatorio_edit", { "id" : relatorio.id , "filter" : filter}) }}" value="{{ relatorio.label }}"> 	        		         
+    			</div>
+			</li>
+		{% endfor %}
+	</ul>
+	<div class="relatorios col-md-12 col-sm-12">
+	    <div id="filelist_relatorios">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+        <br />
+        <div id="relatorios_container">
+            <a id="pickfiles_relatorios" href="javascript:;">[Selecione os arquivos]</a> 
+            <a id="uploadfiles_relatorios" href="javascript:;">[Subir arquivos]</a>
+       </div>
+	</div>
+</div>	
+<button class="new botao_acao changeTab" type="button" onclick="changeTab(1)">Voltar</button>
+
+

@@ -1,0 +1,28 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block botoes %}
+{{ admin.form_button('tupi_person_home', 'Voltar', {'class': 'voltar'}) }}
+{% endblock %}
+
+{% set title_controle = 'Contato' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs col12">
+		
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div id="arquivos" class="box">
+			    <ul class="col12">
+					<li>{{ form_row(form.name) }}</li>
+					<li>{{ form_row(form.email) }}</li>
+					<li>{{ form_row(form.telefone) }}</li>
+					<li>{{ form_row(form.celular) }}</li>
+					<li>{{ form_row(form.createdAt) }}</li>
+					<li>{{ form_row(form.updatedAt) }}</li>
+				</ul>
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

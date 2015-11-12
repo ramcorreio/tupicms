@@ -1,0 +1,40 @@
+security:
+    acl:
+        connection: default
+    firewalls:
+        login_firewall:
+            pattern:    ^/admin/login$
+            anonymous: ~
+        esqueci_firewall:
+            pattern:    ^/admin/forgot$
+            anonymous: ~
+        secured_area:
+            pattern:    ^/admin
+            form_login:
+                login_path:  /admin/login
+                check_path:  /admin/login_check
+            logout:
+                path:   /admin/logout
+                target: /admin
+
+    access_control:
+        - { path: ^/admin/forgot, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_USER }
+
+    providers:
+        main:
+            entity: { class: 'TupiSecurityBundle:User' }
+
+    encoders:
+        Tupi\SecurityBundle\Entity\User:
+            algorithm:        sha1
+            encode_as_base64: false
+            iterations: 1
+
+    role_hierarchy:
+        ROLE_MANAGER: ROLE_USER
+        ROLE_ADMIN: [ ROLE_USER, ROLE_MANAGER, ROLE_ALLOWED_TO_SWITCH ]
+
+tupi_security:          
+    links_comuns: [ admin, admin/login, admin/perfil, admin/forgot ]

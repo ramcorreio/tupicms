@@ -1,0 +1,244 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.less') }}" rel="stylesheet/less" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias imoveis' %}
+
+{% block content %}
+<h2 class="title">Acompanhamento de Obra</h2>
+<div class="container">
+	<div id="tabs" class="col-md-12">
+  		<ul>
+		    <li><a href="#todos">Todos</a></li>
+		    <li><a href="#lancamentos">Lançamentos</a></li>
+			<li><a href="#em-construcao">Em Construção</a></li>
+			<li><a href="#breves-lancamentos">Breves Lançamentos</a></li>
+			<li><a href="#prontos">Prontos</a></li>
+		</ul>
+ 		
+ 		<div id="todos" class="row">
+			<div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag vendido">80% vendido</span>
+			    	<span class="tag lancamento">Lançamento</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    
+		    <div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag lancamento">Lançamento</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    
+		    <div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag pronto">Pronto</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    
+		    <div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag em-construcao">Em construção</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    
+		    <div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag breve-lancamento">Breve lançamento</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    
+		    <div class="clearfix"></div>
+		    <a href="javascript:;" class="btn btn-default carregar">Carregar mais</a>
+ 		</div> <!-- #TODOS -->
+ 		
+ 		
+  		<div id="lancamentos" class="row">
+  			 <div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag lancamento">Lançamento</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    <div class="clearfix"></div>
+		    <a href="javascript:;" class="btn btn-default carregar">Carregar mais</a>
+		</div> <!-- ##LANCAMENTOS -->
+
+		<div id="em-construcao" class="row">
+			<div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag em-construcao">Em construção</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    <div class="clearfix"></div>
+		    <a href="javascript:;" class="btn btn-default carregar">Carregar mais</a>
+		</div> <!-- #EM CONSTRUCAO -->
+		
+		<div id="breves-lancamentos" class="row">
+			<div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag breve-lancamento">Breve lançamento</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		    <div class="clearfix"></div>
+		    <a href="javascript:;" class="btn btn-default carregar">Carregar mais</a>
+		</div> <!-- #BREVES LANCAMENTOS -->
+		
+		<div id="prontos" class="row">
+			<div class="col-md-4 box">
+		    	<a href="javascript:;">
+			    	<div class="segura-img">
+			    		<img src="{{ asset('bundles/internitsitebase/media/img/imovel2.jpg') }}" alt="Imóvel">
+			    		<span class="sombra"></span>
+			    	
+			    		<div class="texto">
+			    			<p>Acompanhar obra ›</p>
+			    		</div>
+			    	</div>
+			    	<span class="tag pronto">Pronto</span>
+			    	<div class="nome">
+			    		<div class="pull-left">
+			    			<p class="local">Cabo Frio</p>
+			    			<h3>Porto Praia</h3>
+			    		</div>
+			    		
+			    		<div class="clearfix"></div>
+			    	</div>
+			    </a>
+		    </div>
+		   	<div class="clearfix"></div>
+		   	<a href="javascript:;" class="btn btn-default carregar">Carregar mais</a>
+		</div> <!-- #PRONTOS -->
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+#mapping login actions
+login:
+    pattern:   /admin/login
+    defaults:  { _controller: "TupiSecurityBundle:Security:login" }
+
+login_check:
+    pattern:   /admin/login_check
+   
+logout:
+    pattern:   /admin/logout
+
+login_forgot:
+    pattern:   /admin/forgot
+    defaults:  { _controller: "TupiSecurityBundle:Security:esqueci" }
+
+
+#mapping user actions
+tupi_user_home:
+    pattern:  /admin/user/{actionName}/{id}
+    defaults: { _controller: "TupiSecurityBundle:User:index", actionName: null, id: null }
+    
+tupi_user_new:
+    pattern:  /admin/user/new
+    
+tupi_user_edit:
+    pattern:  /admin/user/edit/{id}
+    
+#tupi_user_remove:
+#    pattern:  /admin/user/remove/{id}
+
+tupi_user_perfil:
+    pattern:  /admin/perfil/{id}
+    defaults: { _controller: "TupiSecurityBundle:User:perfil", id: null }
+
+#mapping resources actions
+tupi_resource_home:
+    pattern:  /admin/resource/{actionName}/{id}
+    defaults: { _controller: "TupiSecurityBundle:Resource:index", actionName: null, id: null }
+    
+tupi_resource_new:
+    pattern:  /admin/resource/new
+    
+tupi_resource_edit:
+    pattern:  /admin/resource/edit/{id}
+    
+#mapping setting actions
+tupi_setting_home:
+    pattern:  /admin/setting/{actionName}/{id}
+    defaults: { _controller: "TupiSecurityBundle:Setting:index", actionName: edit, id: 1 }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Tupi CMS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow"/>
+	<link href="skin/css/fontes.css" rel="stylesheet" type="text/css">
+    <link href="skin/css/main.css" rel="stylesheet" type="text/css">
+    <link href="skin/css/formularios.css" rel="stylesheet" type="text/css">
+	
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+     <!--[if lte IE 7]>
+        <link href="skin/css/ie7.css" rel="stylesheet" type="text/css">
+	<![endif]-->
+    <!--[if gte IE 7]>
+        <script src="skin/js/modernizr.js" type="text/javascript"></script>
+            Modernizr.load({
+              test: Modernizr.geolocation,
+              yep : 'geo.js',
+              nope: 'geo-polyfill.js'
+            });
+        </script>
+    <![endif]-->
+	
+	 <script>
+		$(function() {
+			$( ".tabs" ).tabs({ active: 0 });
+		});
+	</script>
+</head>
+    
+    <!-- estrutura fixa -->
+<body>
+<div id="wrap_all">
+    <header class="header100">
+			<div class="barra_cms100">
+				<div class="barra_cms">
+					<div class="nome col6">
+						<a href="index.html" class="logo"><img src="skin/media/img/logo_thumb.png" alt="Tupi CMS" /></a>
+						<div class="nome_loja">
+							<a href="#" target="_blank">Nome do site</a>
+						</div>
+					</div>
+					
+					<ul class="bt_cms">
+						<li><a href="configuracoes.html">Configurações</a></li>
+						<li><a href="usuarios.html">Usuários</a></li>
+						<li class="logout"><a href="login.html">Sair</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="menu_principal100">
+				<div class="menu_principal">
+					<div class="dados_login">
+						<p>Olá, admin.</p>
+						<a href="#">Editar meu perfil.</a>
+					</div>
+						
+					<nav>
+						<ul>
+							<li><a href="index.html">Início</a></li>
+							<li><a href="arquivos.html">Arquivos e Imagens</a></li>
+							<li><a href="#">Módulos</a>
+								<ul class="submenu">
+									<li><a href="#">Estabelecimentos</a></li>
+									<li><a href="#">Colunistas</a></li>
+									<li><a href="#">Notícias</a></li>
+									<li><a href="#">Eu vi, eu conto</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Conteúdo</a>
+								<ul class="submenu">
+									<li><a href="paginas.html">Páginas</a></li>
+									<li><a href="#">Blocos</a></li>
+									<li><a href="#">Plug-ins</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Cadastros</a></li>
+							<li><a href="#">Contatos</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		
+			<div class="barra_busca100">
+				<div class="barra_busca">
+					<ul class="controles col8">
+						<li><a href="" class="voltar botao_acao">Voltar</a></li>
+						<li><a href="" class="adicionar botao_acao">Adicionar</a></li>
+						<li><a href="" class="duplicar botao_acao">Duplicar</a></li>
+						<li><a href="" class="salvar botao_acao">Salvar</a></li>
+						<li><a href="" class="excluir botao_acao">Excluir</a></li>
+					</ul>
+					
+					<div class="busca col4">
+						<form action="" method="post">
+							<p>Filtrar:</p>
+							<input type="text" name="q"/>
+							<button type="submit">Buscar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+	</header>
+    <hr>
+	
+	
+	<!-- INICIO CONTEÚDO -->
+	
+    <div class="content100">
+    	<div class="wrap">
+			
+			<div class="controles_pagina">
+				<h1>Editar Arquivo</h1>
+			</div>
+			
+			<div class="formulario esp_top">
+				<div class="tabs col12">
+					<ul class="controle">
+						<li><a href="#arquivos">Arquivos</a></li>
+						<li><a href="#media">Vídeos e Áudio (de outros sites)</a></li>
+						<li><a href="#links">Links (Web)</a></li>
+					</ul>
+					
+					<form action="">
+						<div id="arquivos" class="box">
+							<ul class="col12">
+								<li><label for="">Título da mídia <abbr title="Obrigatório">*</abbr></label><input type="text" /></li>
+								<li class="col6"><label for="">Texto alternativo (Se a imagem não carregar) <abbr title="Obrigatório">*</abbr></label><input type="text" /></li>
+								<li class="col6 esp"><label for="">Legenda da mídia</label><input type="text" /></li>
+								<li><label for="">Selecionar mídia </label><div class="fileinput"><span><input type="file" name="img"></span></div></li>
+								<li><label for="">Código fonte gerado: (Copie e cole no seu conteúdo) </label><textarea name="" id="" cols="30" rows="5"></textarea></li>
+							</ul>
+						</div>
+						
+						<div id="media" class="box">
+							<ul class="col12">
+								<li><label for="">Título da mídia <abbr title="Obrigatório">*</abbr></label><input type="text" /></li>
+								<li><label for="">URL da mídia</label><input type="text" /></li>
+								<li><label for="">ou Código de incorporação (Embbed) </label><textarea name="" id="" cols="30" rows="5"></textarea></li>
+							</ul>
+						</div>
+
+						<div id="links" class="box">
+							<ul class="col12">
+								<li><label for="">Título da mídia <abbr title="Obrigatório">*</abbr></label><input type="text" /></li>
+								<li><label for="">URL da mídia</label><input type="text" /></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+			</div>
+						
+        </div>
+    </div>
+</div>
+	
+	
+	<!-- FIM CONTEÚDO -->
+	
+    <hr>
+    <footer class="footer100">
+		<div class="footer">
+			<div class="version">V. 1.0.1</div>
+			<div class="tupi"><a href="http://www.tupicms.org.br" target="_blank"><img src="skin/media/img/powered_tupi.png" alt="Tupi CMS" /></a></div>
+		</div>
+    </footer>
+</body>
+</html>

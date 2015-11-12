@@ -1,0 +1,5 @@
+/**INÍCIO BOTÃO EXPORTAR**/
+/* .controles li:has(> .botao_acao.export){ float: right; } */
+ul.controles li a.botao_acao.export{ background: #40728b url(../media/img/sprite.png) no-repeat 5px 8px; }
+ul.controles li a.botao_acao.export:hover{ background-color: #333; }
+/**FIM BOTÃO EXPORTAR**/

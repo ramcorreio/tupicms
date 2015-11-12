@@ -1,0 +1,44 @@
+#Contato
+tupi_contact_export:
+    pattern:  /admin/contact/export/{path}
+    defaults: { _controller: "InternitContactBundle:Export:generateCsv", path: null }
+
+tupi_contact_home:
+    pattern:  /admin/contact/{actionName}/{id}
+    defaults: { _controller: "InternitContactBundle:Contact:index", actionName: null, id: null }
+
+tupi_contact_edit:
+    pattern:  /admin/contact/edit/{id}
+    
+#Person
+tupi_person_home:
+    pattern:  /admin/person/{actionName}/{id}
+    defaults: { _controller: "InternitContactBundle:Person:index", actionName: null, id: null }
+    
+tupi_person_edit:
+    pattern:  /admin/person/edit/{id}
+
+#Assunto       
+tupi_subject_home:
+    pattern:  /admin/subject/{actionName}/{id}
+    defaults: { _controller: "InternitContactBundle:Subject:index", actionName: null, id: null }
+
+tupi_subject_new:
+    pattern:  /admin/subject/new
+
+tupi_subject_edit:
+    pattern:  /admin/subject/edit/{id}
+
+#Grupos de Email    
+tupi_group_home:
+    pattern:  /admin/group/{actionName}/{id}
+    defaults: { _controller: "InternitContactBundle:Group:index", actionName: null, id: null }
+
+tupi_group_new:
+    pattern:  /admin/group/new
+
+tupi_group_edit:
+    pattern:  /admin/group/edit/{id}
+    
+tupi_group_remove:
+    pattern:  /admin/group/remove

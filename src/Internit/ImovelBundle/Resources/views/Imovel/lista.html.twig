@@ -1,0 +1,25 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Imóveis' %}
+{% set actions = {'imovel_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } }%}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/internitimovel/js/sort.js') }}"></script>
+{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">Título</th>
+	<th class="item3">Posição</th>
+	<th class="item3">Status</th>
+	<th class="item3">Criado em</th>
+	<th class="item3">Atualizado em</th>
+{% endblock %}
+{% block table_body %}
+	<!-- <td><input type="checkbox" value="{{item.id}}"/></td> -->	
+	<td {% if item.visible == 0 %}style="opacity:0.5;"{% endif %}><a href="{{ path('imovel_edit', {'id':item.id}) }}">{{item.name}}</a></td>
+	<td {% if item.visible == 0 %}style="opacity:0.5;"{% endif %}>{{ item.position }}</td>
+	<td {% if item.visible == 0 %}style="opacity:0.5;"{% endif %}>{% if item.status.status is defined%}{{ item.status.status }}{% else %}<b>Sem Status</b>{% endif %}</td>
+	<td {% if item.visible == 0 %}style="opacity:0.5;"{% endif %}>{{item.createdAt|date("d/m/Y H:i:s")}}</td>
+	<td {% if item.visible == 0 %}style="opacity:0.5;"{% endif %}>{{item.updatedAt|date("d/m/Y H:i:s")}}</td>
+{% endblock %}

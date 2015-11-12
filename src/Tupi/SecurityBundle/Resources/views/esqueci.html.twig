@@ -1,0 +1,33 @@
+{% extends 'TupiAdminBundle:Template:layout.html.twig' %}
+
+{% block base %}
+	<div id="main" class="">
+		<div class="box-login col-md-5">
+			{{ form_start(form) }}
+				<div class="logo">
+					<img src="{{ asset('bundles/tupiadmin/media/img/logo_tupi.png') }}" alt="Tupi CMS">
+				</div>
+				
+				<ul>
+					<li>
+						{{ form_widget(form.email) }}
+					</li>
+				</ul>
+				<ul class="esp_top">
+					{% if fail %}
+					<li class="botao">
+						<button class="botao_acao">Entrar</button>
+					</li>
+					{% endif %}
+					<li class="esqueci">
+						{{ admin.link('login', '< Voltar') }}
+					</li>
+				</ul>
+			{{ form_end(form) }}
+		</div>
+
+		{% if mensagem is not empty %}
+		<p class="resposta_form sucesso">{{ mensagem }}</p>
+		{% endif %}
+	</div>		
+{% endblock %}

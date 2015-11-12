@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Tupi CMS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow"/>
+    <link href="skin/css/fontes.css" rel="stylesheet" type="text/css">
+    <link href="skin/css/main.css" rel="stylesheet" type="text/css">
+    <link href="skin/css/formularios.css" rel="stylesheet" type="text/css">
+
+    <!--[if lte IE 7]>
+        <link href="skin/css/ie7.css" rel="stylesheet" type="text/css">
+	<![endif]-->
+    <!--[if gte IE 7]>
+        <script src="skin/js/modernizr.js" type="text/javascript"></script>
+            Modernizr.load({
+              test: Modernizr.geolocation,
+              yep : 'geo.js',
+              nope: 'geo-polyfill.js'
+            });
+        </script>
+    <![endif]-->
+</head>
+    <!-- estrutura fixa -->
+<body>
+<div id="wrap_all">
+    <header class="header100">
+			<div class="barra_cms100">
+				<div class="barra_cms">
+					<div class="nome col6">
+						<a href="index.html" class="logo"><img src="skin/media/img/logo_thumb.png" alt="Tupi CMS" /></a>
+						<div class="nome_loja">
+							<a href="#" target="_blank">Nome do site</a>
+						</div>
+					</div>
+					
+					<ul class="bt_cms">
+						<li><a href="configuracoes.html">Configurações</a></li>
+						<li><a href="usuarios.html">Usuários</a></li>
+						<li class="logout"><a href="login.html">Sair</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="menu_principal100">
+				<div class="menu_principal">
+					<div class="dados_login">
+						<p>Olá, admin.</p>
+						<a href="#">Editar meu perfil.</a>
+					</div>
+						
+					<nav>
+						<ul>
+							<li><a href="index.html">Início</a></li>
+							<li><a href="arquivos.html">Arquivos e Imagens</a></li>
+							<li><a href="#">Módulos</a>
+								<ul class="submenu">
+									<li><a href="#">Estabelecimentos</a></li>
+									<li><a href="#">Colunistas</a></li>
+									<li><a href="#">Notícias</a></li>
+									<li><a href="#">Eu vi, eu conto</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Conteúdo</a>
+								<ul class="submenu">
+									<li><a href="paginas.html">Páginas</a></li>
+									<li><a href="#">Blocos</a></li>
+									<li><a href="#">Plug-ins</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Cadastros</a></li>
+							<li><a href="#">Contatos</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		
+			<div class="barra_busca100">
+				<div class="barra_busca">
+					<!--h1>Painel</h1-->
+					
+					<div class="busca col4">
+						<form action="" method="post">
+							<p>Filtrar:</p>
+							<input type="text" name="q"/>
+							<button type="submit">Buscar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+	</header>
+    <hr>
+	
+	
+	<!-- INICIO CONTEÚDO -->
+	
+    <div class="content100">
+    	<div class="wrap">
+
+			<div id="main">
+
+				<div class="bemvindo col12">
+					<div class="alerta informacao esp_top">
+						<p>Você está utilizando Tupi CMS v. 1.0.1 e tem uma atualização disponível. <a href="#">Clique aqui</a> para atualizar. Nova versão: Tupi CMS v. 1.0.2.</p>
+					</div>
+
+					<div class="apresentacao">
+						<img src="skin/media/img/simbolo.png" class="simbolo" alt="Tupi CMS">
+						<div class="mensagem">
+							<h1><span>Anauê!</span> Seja benvindo ao Tupi CMS.</h1>
+							<p>É a primeira vez que você acessa o Painel administrador? Não se preocupe, começe por aqui.</p>
+						</div>
+					</div>
+
+					<ul class="home_bemvindo col12 esp_top">
+						<li class="col4">
+							<h2>Edite</h2>
+							<p>Personalize sua página e faça o seu site ganhar muitas visitas.</p>
+							<a href="#" class="botao_primario">Editar página inicial</a>
+						</li>
+						<li class="col4 esp">
+							<h2>Adicione</h2>
+							<p>Crie conteúdos para seu site, deixe-o cheio de informações para seu público.</p>
+							<a href="#" class="botao_primario">Adicionar páginas</a>
+						</li>
+						<li class="col4 esp">
+							<h2>Dê vida!</h2>
+							<p>Nada melhor que imagens para comunicar e despertar a curiosidade dos usuários.</p>
+							<a href="#" class="botao_primario">Adicionar arquivos e imagens</a>
+						</li>
+					</ul>
+				</div>
+				
+
+			</div>
+			
+
+			<!--aside class="col4 esp">
+				<div id="home_resenha">
+					<ul>
+						<li><a href="#res_geral">Geral</a></li>
+						<li><a href="#res_clientes">Clientes</a></li>
+						<li><a href="#res_pedidos">Pedidos</a></li>
+					</ul>
+					<div id="res_geral" class="box">
+						<div class="geral_grafico">
+							<div class="data">dados grafico</div>
+						</div>
+						<div class="geral_venda">
+							<p>Venda no tempo de vida</p>
+							<p class="data">R$ 12.000,00</p>
+						</div>
+						<div class="geral_media">
+							<p>Média de venda</p>
+							<p class="data">R$ 500,00</p>
+						</div>
+						<div class="geral_contato">
+							<p>Contatos</p>
+							<p class="data">300</p>
+						</div>
+					</div>
+					<div id="res_clientes" class="box">Texto de clientes</div>
+					<div id="res_pedidos" class="box">Texto de pedidos</div>
+				</div>
+				<div>
+					<div class="logo_tupi col4">
+						<img src="skin/media/img/logo_tupi.png" alt="Tupi CMS" />
+						<p class="titulo">Obrigado por utilizar sua loja virtual <br />com TupiCMS.</p>
+					</div>
+					
+					<div class="dados_tupi col4 esp_top">
+						<p>Você está utilizando Tupi CMS v. 1.0.1 e tem uma atualização disponível.</p>
+						<br/>
+						<p><a href="">Clique aqui</a> se deseja atualizar a versão para Tupi CMS v. 1.0.2.</p>
+					</div>
+				</div>
+			</aside-->
+			
+			
+        </div>
+    </div>
+</div>	
+	
+	
+	<!-- FIM CONTEÚDO -->
+	
+    <hr>
+    <footer class="footer100">
+		<div class="footer">
+			<div class="version">V. 1.0.1</div>
+			<div class="tupi"><a href="http://www.tupicms.org.br" target="_blank"><img src="skin/media/img/powered_tupi.png" alt="Tupi CMS" /></a></div>
+		</div>
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set message = 'A(s) imagem(ns) selecionada(s) pode(m) estar vinculada(s) a algum conteúdo como páginas e galerias.' %}
+{% set title = 'Arquivos e imagens' %}
+{% set actions = {'tupi_media_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Arquivo</th>
+	<th class="item1">Tipo</th>
+	<th class="item2">Criado em</th>
+	<th class="item2">Alterado em</th>
+{% endblock %}
+{% block table_body %}
+	<td>
+		<a href="{{ path('tupi_media_edit', {'id':item.id}) }}">
+			{% if item.thumb is not empty %}
+			<img alt="{{item.title}}" src="data:{{item.mimeType}};base64,{{item.thumb}}"/>
+			{% endif %}
+			<span>{{item.title}}</span>
+		</a>
+	</td>
+	<td>{{item.type}}</td>
+	<td>{{item.createdAt|date("d/m/Y")}}</td>
+	<td>{{item.updatedAt|date("d/m/Y")}}</td>
+{% endblock %}

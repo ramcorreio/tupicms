@@ -1,0 +1,72 @@
+#mapping media actions
+tupi_media_images:
+    pattern:  /admin/media/images
+    defaults: { _controller: "TupiContentBundle:Media:images" }
+    
+tupi_media_image:
+    pattern:  /image/{crop}/{url}.{ext}
+    defaults: { _controller: "TupiContentBundle:Media:image", crop: original, url: null, ext: jpg,  }
+
+tupi_media_home:
+    pattern:  /admin/media/{actionName}/{id}
+    defaults: { _controller: "TupiContentBundle:Media:index", actionName: null, id: null }
+
+tupi_media_new:
+    pattern:  /admin/media/new
+
+tupi_media_edit:
+    pattern:  /admin/media/edit/{id}
+
+tupi_media_remove:
+    pattern:  /admin/media/remove/{id}
+   
+#mapping page actions
+tupi_page_home:
+    pattern:  /admin/page/{actionName}/{id}
+    defaults: { _controller: "TupiContentBundle:Page:index", actionName: null, id: null }
+    
+tupi_page_new:
+    pattern:  /admin/page/new
+    
+tupi_page_edit:
+    pattern:  /admin/page/edit/{id}
+
+tupi_page_remove:
+    pattern:  /admin/page/remove/{id}
+    
+#mapping menu actions
+tupi_menu_children:
+    pattern:  /admin/menu/children
+    defaults: { _controller: "TupiContentBundle:Menu:children"}
+
+tupi_menu_form:
+    pattern:  /admin/menu/form/{id}
+    defaults: { _controller: "TupiContentBundle:Menu:form", id: null}    
+
+tupi_menu_redirect:
+    pattern:  /admin/menu/redirect
+    defaults: { _controller: "TupiContentBundle:Menu:redirect"}
+    
+#tupi_menu_list:
+#    pattern:  /admin/menu/list
+#    defaults: { _controller: "TupiContentBundle:Menu:list"}
+
+#tupi_menu_list:
+#    pattern:  /admin/menu/list
+#    defaults: { _controller: "TupiContentBundle:Menu:list"}
+    
+tupi_menu_remove:
+    pattern:  /admin/menu/delete
+    defaults: { _controller: "TupiContentBundle:Menu:delete"}
+    
+#tupi_menu_edit:
+#    pattern:  /admin/menu/edit
+#    defaults: { _controller: "TupiContentBundle:Menu:edit"}
+    
+tupi_menu_move:
+    pattern:  /admin/menu/move
+    defaults: { _controller: "TupiContentBundle:Menu:move"}
+
+tupi_menu_home:
+    pattern:  /admin/menu
+    defaults: { _controller: "TupiContentBundle:Menu:index"}

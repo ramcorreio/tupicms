@@ -1,0 +1,118 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$('.tabs').tabs({ active: 0 });
+	</script>	
+	<script type="text/javascript" src="{{ asset('bundles/internitacompanhante/js/plupload.full.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitacompanhante/js/jquery.ui.plupload.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/mask.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/geral.js') }}"></script>
+{% endblock %}
+
+{% block botoes %}
+	{{ admin.form_button('tupi_ofereca_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+{% endblock %}
+
+{% set title_controle = 'Ofereça seu Terreno' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs col-md-12 col-sm-12">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			
+			<ul class="controle">
+				<li><a href="#geral">Geral</a></li>
+				<li><a href="#arquivo">Arquivos</a></li>
+			</ul>
+			
+				
+			<div id="geral" class="box">
+			    
+			    <ul class="col-md-8 hidden">
+					<li>{{ form_row(form.subject) }}</li>
+				</ul>
+				<ul class="col-md-8">
+					<li>{{ form_row(form.statusUsuario) }}</li>
+				</ul>
+			    <ul class="col-md-8">
+					<li>{{ form_row(form.nome) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.email) }}</li>
+				</ul>
+				
+				<ul class="col-md-4">
+					<li>{{ form_row(form.celular) }}</li>
+					<li>{{ form_row(form.telefone) }}</li>
+				</ul>
+				<ul class="col-md-4">
+					<li>{{ form_row(form.endereco) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.cep) }}</li>
+				</ul>				
+				<ul class="col-md-3">
+					<li>{{ form_row(form.estado) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.cidade) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.bairro) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.referencia) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.localizacao) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.area) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.valor) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.formaPagamento) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.conheceu) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.informativo) }}</li>
+				</ul>
+				<ul class="col-md-3">
+					<li>{{ form_row(form.observacao) }}</li>
+				</ul>
+			</div>
+			<div id="arquivo" data-prototype='{{ form_widget(form.arquivos.vars.prototype) }}'>
+    				{% for arquivo in form.arquivos %}
+    					<div>
+    					    {% if arquivo.media.vars.value.url is not empty %}
+    					    	<a href="{{ path('tupi_ofereca_documento', {'url' : arquivo.media.vars.value.url}) }}" download><img class="doc" src="{{ asset('bundles/internitsitebase/media/img/documento.png') }}" alt="Documento" width="100px"></a>
+    					    {% else %}
+    					    	{{ arquivo.media.vars.value.title }}
+    					    {% endif %}
+    					    <div id="estabelecimento_estabelecimento_arquivos_{{ arquivo.media.vars.id }}_arquivo" class="hidden">
+    	        		         {{ form_row(arquivo.media.id) }} 
+    				             {{ form_row(arquivo.media.title) }}
+    	        		         {{ form_row(arquivo.media.summary) }}
+    	        		         {{ form_row(arquivo.media.label) }}	  
+	        		         </div>
+    					</div>
+    				{% endfor %}
+	    			<div>
+                        <br />
+                        <div class="clearfix"></div>
+	    			</div>
+				</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

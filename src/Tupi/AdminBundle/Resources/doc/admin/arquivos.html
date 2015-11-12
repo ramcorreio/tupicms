@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Tupi CMS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow"/>
+	<link href="skin/css/fontes.css" rel="stylesheet" type="text/css">
+    <link href="skin/css/main.css" rel="stylesheet" type="text/css">
+    <link href="skin/css/formularios.css" rel="stylesheet" type="text/css">
+
+     <!--[if lte IE 7]>
+        <link href="skin/css/ie7.css" rel="stylesheet" type="text/css">
+	<![endif]-->
+    <!--[if gte IE 7]>
+        <script src="skin/js/modernizr.js" type="text/javascript"></script>
+            Modernizr.load({
+              test: Modernizr.geolocation,
+              yep : 'geo.js',
+              nope: 'geo-polyfill.js'
+            });
+        </script>
+    <![endif]-->
+</head>
+    <!-- estrutura fixa -->
+<body>
+<div id="wrap_all">
+    <header class="header100">
+			<div class="barra_cms100">
+				<div class="barra_cms">
+					<div class="nome col6">
+						<a href="index.html" class="logo"><img src="skin/media/img/logo_thumb.png" alt="Tupi CMS" /></a>
+						<div class="nome_loja">
+							<a href="#" target="_blank">Nome do site</a>
+						</div>
+					</div>
+					
+					<ul class="bt_cms">
+						<li><a href="configuracoes.html">Configurações</a></li>
+						<li><a href="usuarios.html">Usuários</a></li>
+						<li class="logout"><a href="login.html">Sair</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="menu_principal100">
+				<div class="menu_principal">
+					<div class="dados_login">
+						<p>Olá, admin.</p>
+						<a href="#">Editar meu perfil.</a>
+					</div>
+						
+					<nav>
+						<ul>
+							<li><a href="index.html">Início</a></li>
+							<li><a href="arquivos.html">Arquivos e Imagens</a></li>
+							<li><a href="#">Módulos</a>
+								<ul class="submenu">
+									<li><a href="#">Estabelecimentos</a></li>
+									<li><a href="#">Colunistas</a></li>
+									<li><a href="#">Notícias</a></li>
+									<li><a href="#">Eu vi, eu conto</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Conteúdo</a>
+								<ul class="submenu">
+									<li><a href="paginas.html">Páginas</a></li>
+									<li><a href="#">Blocos</a></li>
+									<li><a href="#">Plug-ins</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Cadastros</a></li>
+							<li><a href="#">Contatos</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		
+			<div class="barra_busca100">
+				<div class="barra_busca">
+					<ul class="controles col8">
+						<li><a href="javascript:;" class="selecionar botao_acao"><span class="quadrado">Selecionar</span><span class="seta"></span></a>
+							<ul class="subcontrole">
+								<li><a href="#">Todos</a></li>
+								<li><a href="#">Nenhum</a></li>
+								<li><a href="#">Ativados</a></li>
+								<li><a href="#">Desativados</a></li>
+							</ul>
+						</li>
+						<li><a href="arquivos_inserir.html" class="adicionar botao_acao">Adicionar</a></li>
+						<li><a href="" class="excluir botao_acao">Excluir</a></li>
+					</ul>
+					
+					<div class="busca col4">
+						<form action="" method="post">
+							<p>Filtrar:</p>
+							<input type="text" name="q"/>
+							<button type="submit">Buscar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+	</header>
+    <hr>
+	
+	
+	<!-- INICIO CONTEÚDO -->
+	
+    <div class="content100">
+    	<div class="wrap">
+			
+			<div class="controles_pagina">
+			<h1>Arquivos e imagens</h1>
+				
+				<ul class="paginacao">
+					<li class="resultado"><p>(5 Resultados)</p></li>
+					<li><input type="text" name="pag" value="1" maxlength="4" /> de 1</li>
+					<li><a href="#" class="prev">Anterior</a><a href="#" class="next">Próximo</a></li>
+				</ul>
+			</div>
+			
+			<div class="tabela">
+				<table>
+					<thead>
+						<tr>
+							<th class="item1 check"><input type="checkbox" /></th>
+							<th class="item3 titulo">Arquivo</th>
+							<th class="item4">tipo</th>
+							<th class="item5">Incluído em</th>
+							<th class="item6">Data</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td><a href="#">Foto do Tigre <span class="raiz">(foto_tigre_01.jpg)</span></a></td>
+							<td>Arquivo</td>
+							<td>Sobre Nós, Serviços</td>
+							<td>00/00/0000</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td><a href="#">Vídeo da Galinha Pintadinha <span class="raiz">(Youtube)</span></a></td>
+							<td>Vídeo e Áudio</td>
+							<td>Home</td>
+							<td>00/00/0000</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td><a href="#">Link do livro em pdf <span class="raiz">(livro.pdf)</span></a></td>
+							<td>Links</td>
+							<td>Serviços</td>
+							<td>00/00/0000</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			
+        </div>
+    </div>
+</div>
+	
+	
+	<!-- FIM CONTEÚDO -->
+	
+    <hr>
+    <footer class="footer100">
+		<div class="footer">
+			<div class="version">V. 1.0.1</div>
+			<div class="tupi"><a href="http://www.tupicms.org.br" target="_blank"><img src="skin/media/img/powered_tupi.png" alt="Tupi CMS" /></a></div>
+		</div>
+    </footer>
+</body>
+</html>

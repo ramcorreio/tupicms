@@ -1,0 +1,61 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias contato' %}
+
+{% block content %}
+<div class="container">    
+    <div class="col-md-12">
+    	<h2>Contato</h2>
+		{{ front.getMap('rua itaperuna, 100', 'niteroi', 'rj', '228') }}
+    </div>
+    
+   	<div class="col-md-8 col-sm-12 col-xs-12 segura-form">
+   		<h3>Preencha o formulário abaixo</h3>   			
+		{% if admin.errors(errors) is not empty %}
+		    <div class="errors">
+		       {{ admin.errors(errors) }}
+		    </div>
+	    {% endif %}
+	    
+		{% if success is not empty %}
+			<p class="resposta_form">{{ success|raw }}</p>
+		{% else %}	
+			{{ form_start(form, {'id': 'formPerguntas'}) }}
+				<div class="col-md-6 col-sm-12 col-xs-12 left">
+					{{ form_row(form.name) }}
+					{{ form_row(form.telefone) }}
+				</div>		
+		        
+		        <div class="col-md-6 col-sm-12 col-xs-12">
+					{{ form_row(form.email) }}
+					{{ form_row(form.subject) }}
+				</div>
+				
+		        <div class="clearfix"></div>
+		        
+		        <div class="col-md-12 col-sm-12 col-xs-12 left">
+					{{ form_row(form.message) }}
+		
+					<button class="btn btn-default" type="submit" value="Enviar">Enviar</button>
+					<span class="campos-obrigatorios">*Campos obrigatórios</span>
+				</div>
+			{{ form_end(form) }}
+		{% endif %}
+   	</div>
+   	
+
+	<div class="col-md-4 col-sm-12 col-xs-12">
+    	<h3>Endereço</h3>
+		<p>Nome da empresa. Endereço 1, Bairro, Cidade, Estado. CEP: 00000-000</p>
+      	<p>Telefone: (00) 0000-0000</p>
+      	<a href="chat" target="_blank">Chat Online</a>
+      	<!-- ### PASSAR TRUE PARA USO DO CAMPO 'NOME' ###  newsletter.newsletterFunction(true) -->
+		{{ newsletter.newsletterFunction(true) }}
+    </div>
+</div>
+{% endblock %}

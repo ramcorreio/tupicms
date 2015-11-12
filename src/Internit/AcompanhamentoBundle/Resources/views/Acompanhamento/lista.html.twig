@@ -1,0 +1,28 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Imoveis' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/internitacompanhamento/js/sort.js') }}"></script>
+{% endblock %}
+
+{% block botoes %}{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">Imóvel</th>
+	<th class="titulo">Posição</th>
+	<th class="titulo">Status</th>
+{% endblock %}
+{% block table_body %}
+	<td>
+		<a href="{{ path('tupi_acompanhamento_edit', {'id':item.id}) }}">
+			<span>{{ item.imovel.name }}</span>
+		</a>
+	</td>
+	<td>{{ item.position }}</td>
+	<td>
+		<span>{% if item.status==1 %} Ativo {% else %} Desativado {% endif %}</span>
+	</td>
+	
+{% endblock %}

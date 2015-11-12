@@ -1,0 +1,216 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		//ativação styleForm
+		//$("form").styleForm();
+		$(function() {
+			$( '.tabs' ).tabs({ active: 0 });
+			$( "#slider" ).slider();
+			$(".styleFile").children('.skin').remove();
+
+			$(".btnSalvar").click(function(e){
+				var img = "{{ asset("bundles/tupiadmin/css/loading.gif") }}";
+				$('form#imovel').hide();
+				$('.formulario').css('text-align','center').html("<img src='"+img+"'>");
+				$('.msg_salvar').show();
+			});
+			
+		});
+		var cidade_ajax_call = "{{ url('imovel_cidades') }}"
+		var url_upload = "{{ url('imovel_upload') }}";
+		var flash_swf_url = "{{ asset("bundles/internitimovel/swf/Moxie.swf") }}";
+		var silverlight_xap_url = "{{ asset("bundles/internitimovel/swf/Moxie.xap") }}";
+		var media_index = "{{ form.images.count }}";
+
+		$("#imovel_address_zipcode").on("keyup",function(){
+			var urlCep = "{{ path('ofereca_ajax_cep') }}";
+			var form_name = "imovel_address";	 
+			var cep = $(this).val();
+			if(cep.length == 8 && !isNaN(cep)){
+        		var URL = urlCep;
+        		//alert(URL);
+        		$.ajax({				
+        				url:URL,		
+        				data: {cep:cep},
+        				type:'POST',
+        				success: function(xml){
+        					console.log(xml);
+        					$("#" + form_name + "_street").val(xml.rua);
+        					$("#" + form_name + "_district").val(xml.bairro);
+        					$("#" + form_name + "_state option[value='" + xml.estado.id + "']").attr({selected:"selected"});
+        					$("#" + form_name + "_city").html('');
+        					$("#" + form_name + "_city").append('<option value="' + xml.cidade.id + '">' + xml.cidade.nome + '</option>');               						
+        				}
+        			}).responseText;
+			}
+			
+		});
+		
+		
+	</script>
+    <script type="text/javascript" src="{{ asset('bundles/internitimovel/js/plupload.full.min.js') }}"></script>
+    <script src="{{ asset('bundles/internitimovel/js/script.js') }}"></script>
+    <script src="{{ asset('bundles/internitimovel/js/clone.js') }}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link href="{{ asset('bundles/internitimovel/css/style.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block botoes %}	
+	{{ admin.form_button('imovel_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar btnSalvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('imovel_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% block main %}
+<div class="msg_salvar" style="display: none; text-align: center;">
+	Salvando dados...
+</div>
+
+<div class="formulario esp_top row">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div class="tabs col-md-12 col-sm-12"> 
+				<ul class="controle">
+					<li><a href="#geral">Geral</a></li>
+					<li><a href="#galeria">Imagens</a></li>
+					<li><a href="#plantas">Imagens do Local</a></li>
+{# 					<li><a href="#videos">Vídeos</a></li>#}
+					<li><a href="#tags">Tags</a></li>
+					<li><a href="#realizadores">Realizadores</a></li>
+				</ul>
+					
+    			<div id="geral" class="box">
+					<ul class="col-md-8 col-sm-8">
+						<li class="col-md-12 col-sm-12">{{ form_row(form.name) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.nameFeatured) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.url) }}</li>
+						<li class="col-md-4 col-sm-4">{{ form_row(form.address.zipcode) }}</li>		
+						<li class="col-md-8 col-sm-8">{{ form_row(form.address.street) }}</li>
+						<li class="col-md-6 col-sm-6">{{ form_row(form.address.state) }}</li>	
+						<li class="col-md-6 col-sm-6 city">{{ form_row(form.address.city) }}</li>
+						<li class="col-md-9 col-sm-9">{{ form_row(form.address.district) }}</li>
+						<li class="col-md-3 col-sm-3">{{ form_row(form.address.number) }}</li>			
+						<li class="col-md-12 col-sm-12">{{ form_row(form.textLocation) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.resume) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.description) }}</li>
+						<li class="col-md-6 col-sm-12">{{ form_row(form.hotsite) }}</li>
+						<li class="col-md-6 col-sm-12">{{ form_row(form.corretor) }}</li>
+						<li class="col-md-6 col-sm-6">{{ form_row(form.arquivo.file) }} Arquivos permitidos: .pdf, .doc, .docx</li>
+						<li class="col-md-6 col-sm-6 preview">
+							{% if form.vars.value.arquivo is not empty %}
+							   <a href="{{ path('imovel_documento',{'url' : form.vars.value.arquivo.url }) }}">Documento</a>
+							{% endif %}
+						</li>
+						<li class="col-md-6 col-sm-6 upload-input">
+						    {{ form_row(form.imagemDestaque) }}
+						    {% if form.imagemDestaque.vars.value is not empty %}
+						    {% set thumb_destaque = form.imagemDestaque.vars.value.thumb('admin') %}
+            				<img title="{{ form.imagemDestaque.vars.value.label }}" src="data:{{ form.imagemDestaque.vars.value.mimeType }};base64,{{ thumb_destaque.value }}"/>
+						    {% endif %}  		         
+						</li>
+						<li class="col-md-6 col-sm-6 upload-input">
+						    {{ form_row(form.logo) }}
+						    {% if form.logo.vars.value is not empty %}
+						    {% set thumb_logo = form.logo.vars.value.thumb('admin') %}
+            				<img title="{{ form.logo.vars.value.label }}" src="data:{{ form.logo.vars.value.mimeType }};base64,{{ thumb_logo.value }}"/>
+						    {% endif %}  		         
+						</li>
+						<li class="col-md-6 col-sm-6 upload-input">
+						    {{ form_row(form.banner) }}
+						    {% if form.banner.vars.value is not empty %}
+						    {% set thumb_banner = form.banner.vars.value.thumb('admin') %}
+            				<img title="{{ form.banner.vars.value.label }}" src="data:{{ form.banner.vars.value.mimeType }};base64,{{ thumb_banner.value }}"/>
+						    {% endif %}  		         
+						</li>
+					</ul>
+					<ul class="col-md-4 col-sm-4">
+						<li class="col-md-12 col-sm-12">{{ form_row(form.visible) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.type) }}</li>
+						<li class="col-md-6 col-sm-12">{{ form_row(form.forecast) }}</li>
+						<li class="col-md-6 col-sm-12">{{ form_row(form.done) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.status) }}</li>
+						<li class="col-md-12 col-sm-12">{{ form_row(form.destaque) }}</li>
+						<li id="gmap_click" class="col-md-6 col-sm-6"><a class="botao_acao visualizar-mapa">Visualizar Mapa</a></li>
+    					<li class="col-md-12 col-sm-12"><div id="map" style="height: 200px;"></div></li>
+    				</ul>
+    			</div>
+    			    			
+    			<div id="galeria" class="box">
+					<ul class="sort_image col-md-12 col-sm-12">
+	    				{% for image in form.images %}
+	    				    {% if image.vars.value.area == 'galeria' %}
+	    					<li id="image_{{ image.vars.value.id }}" class="col-md-4 col-sm-4">
+            				     {% set thumb = image.vars.value.thumb('admin') %}
+            				     <img title="{{ image.vars.value.label }}" src="data:{{ image.vars.value.mimeType }};base64,{{ thumb.value }}"/>
+    	        		         <a class="remove_image">&times;</a>
+    	        		         <div id="imovel_images_{{ image.vars.value.id }}">
+	    	        		         {{ form_row(image.id) }}
+	    	        		         {{ form_row(image.position) }}
+	    	        		         {{ form_row(image.label) }}
+    	        		         </div> 	        		         
+	            			</li>
+	            			{% endif %}
+	        			{% endfor %}
+		    			<div class="col-md-12 col-sm-12">
+		    			    <div id="filelist_galeria">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+	                        <br />
+	                        <div id="container_galeria">
+	                           <a id="pickfiles_galeria" class="botao_acao" href="javascript:;">[Selecione os arquivos]</a> 
+	                        </div>
+		    			</div>
+					</ul>
+				</div>
+						
+    			<div id="plantas" class="box">
+					<ul class="sort_image col-md-12 col-sm-12">
+	    				{% for image in form.images %}
+	    				   {% if image.vars.value.area == 'plantas' %}
+	    					<li id="image_{{ image.vars.value.id }}" class="col-md-4 col-sm-4">
+            				     {% set thumb = image.vars.value.thumb('admin') %}
+            				     <img title="{{ image.vars.value.label }}" src="data:{{ image.vars.value.mimeType }};base64,{{ thumb.value }}"/>
+    	        		         <a class="remove_image">&times;</a>
+    	        		         <div id="imovel_images_{{ image.vars.value.id }}">
+	    	        		         {{ form_row(image.id) }}
+	    	        		         {{ form_row(image.position) }}
+                                     {{ form_row(image.label) }}
+    	        		         </div> 	        		         
+	            			</li>
+	            			{% endif %}
+	        			{% endfor %}
+		    			<div class="col-md-12 col-sm-12">
+		    			    <div id="filelist_plantas">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+	                        <br />
+	                        <div id="container_plantas">
+	                           <a id="pickfiles_plantas" class="botao_acao" href="javascript:;">[Selecione os arquivos]</a> 
+	                        </div>
+		    			</div>
+					</ul>
+				</div>
+						
+    			<div id="tags" class="box">
+					<ul class="row">
+						<ul class="col-md-12 col-sm-12">
+							<li class="col-md-12 col-sm-12">{{ form_row(form.tags) }}</li>
+						</ul>
+	    			</ul>
+				</div>
+						
+    			<div id="realizadores" class="box">
+					<ul class="row">
+						<ul class="col-md-12 col-sm-12">
+							<li class="col-md-12 col-sm-12">{{ form_row(form.makers) }}</li>
+						</ul>
+	    			</ul>
+				</div>
+				<div id="image_prototype" data-prototype='{{ form_widget(form.images.vars.prototype) }}'></div>
+    		</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

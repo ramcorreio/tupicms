@@ -1,0 +1,16 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Realizadores' %}
+{% set actions = {'imovel_makers_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } } %}
+
+{% block table_head %}
+	<th class="titulo">Realizador</th>
+{% endblock %}
+
+{% block table_body %}
+	<td>
+		<a href="{{ path('imovel_makers_edit', {'id':item.id}) }}">
+			<span>{{item.name}}</span>
+		</a>
+	</td>
+{% endblock %}

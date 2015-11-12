@@ -1,0 +1,4 @@
+"Nome";"E-mail";"Telefone";"Celular";"Mensagem";"Criado em"
+{% for row in data %}
+"{{ row.name }}";"{{ row.email }}";"{{ row.telefone }}";"{{ row.celular }}";"{{ row.message }}";"{{ row.created_at|date('d/m/Y H:m:s') }}"
+{% endfor %}

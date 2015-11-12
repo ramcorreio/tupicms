@@ -1,0 +1,6 @@
+{% extends 'InternitSiteBaseBundle:Email:template.html.twig' %}
+{% block texto %}
+	<h1>Resposta</h1>
+	<h4>Olá {% if name is defined %}{{ name }}{% endif %}</h4>
+	<p>{{ answerMessage }}</p>
+{% endblock %}

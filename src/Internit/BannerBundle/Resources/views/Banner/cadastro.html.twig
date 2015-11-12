@@ -1,0 +1,86 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	$(document).ready(function(){
+			verificar_select();
+		});
+
+	function verificar_select(){
+		if($('#banner_type_imovel').val() == ''){
+			$('#banner_type_url').attr({required:true});
+			$('#banner_url').show();
+		}else{
+			$('#banner_url').hide();
+			$('#banner_type_url').attr({required:false});
+			$('#banner_type_url').val('');
+		}
+	}
+	
+	$('#banner_type_imovel').change(function(){
+			verificar_select();
+		});
+	</script>
+	
+{% endblock %}
+
+{% block botoes %}	
+	{{ admin.form_button('banner_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('banner_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% block main %}
+<div class="formulario esp_top row">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div class="col-md-12 col-sm-12"> 
+				<ul class="col-md-8 col-sm-8">
+					<li class="col-md-12 col-sm-12">{{ form_row(form.name) }}</li>
+					<li class="col-md-12 col-sm-12" id="banner_url">{{ form_row(form.url) }}</li>
+					<li class="col-md-4 col-sm-4">{{ form_row(form.imovel) }}</li>
+					<li class="col-md-4 col-sm-4">{{ form_row(form.target) }}</li>
+					<li class="col-md-4 col-sm-4">{{ form_row(form.visible) }}</li>
+				</ul>
+				<ul class="col-md-4 col-sm-4">
+					<li class="col-md-12 col-sm-12">
+							{{ form_row(form.imageDesktop) }}
+							{% if form.imageDesktop.vars.value.label is defined  %}
+							    {% if form.imageDesktop.vars.value.label is not null %}
+							    {% set thumb_destaque = form.imageDesktop.vars.value.thumb('admin') %}
+	            				<img title="{{ form.imageDesktop.vars.value.label }}" src="data:{{ form.imageDesktop.vars.value.mimeType }};base64,{{ thumb_destaque.value }}"/>
+							    <br>
+							    Para alterar a imagem, faça um novo upload
+							    {% endif %}
+						    {% endif %}  
+					</li>				
+					<li class="col-md-12 col-sm-12">
+							{{ form_row(form.imageTablet) }}
+							{% if form.imageTablet.vars.value.label is defined  %}
+							    {% if form.imageTablet.vars.value.label is not null %}
+							    {% set thumb_destaque = form.imageTablet.vars.value.thumb('admin') %}
+	            				<img title="{{ form.imageTablet.vars.value.label }}" src="data:{{ form.imageTablet.vars.value.mimeType }};base64,{{ thumb_destaque.value }}"/>
+							    <br>
+							    Para alterar a imagem, faça um novo upload
+							    {% endif %}
+						    {% endif %}  
+					</li>
+					<li class="col-md-12 col-sm-12">
+							{{ form_row(form.imageCelular) }}
+							{% if form.imageCelular.vars.value.label is defined  %}
+							    {% if form.imageCelular.vars.value.label is not null %}
+							    {% set thumb_destaque = form.imageCelular.vars.value.thumb('admin') %}
+	            				<img title="{{ form.imageCelular.vars.value.label }}" src="data:{{ form.imageCelular.vars.value.mimeType }};base64,{{ thumb_destaque.value }}"/>
+							    <br>
+							    Para alterar a imagem, faça um novo upload
+							    {% endif %}
+						    {% endif %}  
+					</li>		
+				</ul>													
+    		</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+
+{% endblock %}

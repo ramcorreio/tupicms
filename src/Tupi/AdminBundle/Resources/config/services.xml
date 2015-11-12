@@ -1,0 +1,52 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="admin.twig.extension.class">Tupi\AdminBundle\Twig\AdminExtension</parameter>
+        <parameter key="admin.menu_builder.class">Tupi\AdminBundle\Menu\Builder</parameter>
+        <parameter key="admin.menu.main.class">Knp\Menu\MenuItem</parameter>
+        <parameter key="admin.perm.listener.class">Tupi\AdminBundle\Service\PermService</parameter>
+        <parameter key="admin.mail.service.class">Tupi\AdminBundle\Service\MailService</parameter>
+        <parameter key="admin.exception.listener.class">Tupi\AdminBundle\EventListener\ExceptionListener</parameter>
+    </parameters>
+    
+    <services>
+        <service id="admin.twig.extension" class="%admin.twig.extension.class%">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+        
+        <service id="admin.menu_builder" class="%admin.menu_builder.class%">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <call method="setContainer">
+                 <argument type="service" id="service_container" />
+            </call>
+        </service>
+        
+        <service id="admin.menu.main" class="%admin.menu.main.class%" factory-service="admin.menu_builder" factory-method="createMainMenu" scope="request">
+            
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="main" />
+            
+        </service>
+        
+        <service 
+            id="admin.mail.service" class="%admin.mail.service.class%" 
+                factory-class="%admin.mail.service.class%" 
+                factory-method="getInstance" >            
+            <argument type="service" id="service_container"/>            
+        </service>
+        
+        <service id="admin.exception.listener" class="%admin.exception.listener.class%">
+        	<argument type="service" id="templating"/>
+        	<argument type="service" id="logger"/>
+        	<argument>%kernel.debug%</argument>
+        	<argument type="service" id="kernel"/>
+        	<tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        	<tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+        
+    </services>
+</container>

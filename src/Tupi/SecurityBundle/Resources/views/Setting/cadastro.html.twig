@@ -1,0 +1,59 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	//ativação styleForm
+	$("form").styleForm();
+	$(function() {
+		$( '.tabs' ).tabs({ active: 0 });
+	});
+	</script>
+{% endblock %}
+{% block botoes %}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+{% endblock %}
+
+{% set title_controle = title_controle ~ ' Definições' %}
+
+{% block main %}
+<div class="formulario esp_top row">
+    {{ admin.show_message() }}	
+	{{ form_start(form) }}
+		{{ form_row(form.id) }}
+		
+		<div class="tabs col-md-12">
+			<ul class="controle">
+				<li><a href="#geral">Geral</a></li>
+				<li><a href="#google">Goggle</a></li>
+				<li><a href="#facebook">Facebook</a></li>
+			</ul>
+			
+			<div id="geral" class="box">
+				<ul class="row">
+					<li class="col-md-12">{{ form_row(form.title) }}</li>
+					<li class="col-md-12">{{ form_row(form.description) }}</li>
+					<li class="col-md-12">{{ form_row(form.metaKeywords) }}</li>
+				</ul>
+			</div>
+			
+			<div id="google" class="box">
+				<ul class="row">
+					<li class="col-md-12">{{ form_row(form.ga) }}</li>
+				</ul>
+			</div>
+			
+			<div id="facebook" class="box">
+				<ul class="row">
+					<li class="col-md-6">{{ form_row(form.fbSiteName) }}</li>
+					<li class="col-md-6">{{ form_row(form.fbTitle) }}</li>
+					<li class="col-md-6">{{ form_row(form.fbDescription) }}</li>
+					<li class="col-md-6">{{ form_row(form.fbLink) }}</li>
+					<li class="col-md-6">{{ form_row(form.fbImage) }}</li>
+					<li class="col-md-6">{{ form_row(form.fbId) }}</li>
+				</ul>
+			</div>
+						
+		</div>
+	{{ form_end(form) }}
+</div>
+{% endblock %}

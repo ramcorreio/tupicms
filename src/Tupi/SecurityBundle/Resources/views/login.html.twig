@@ -1,0 +1,32 @@
+{% extends 'TupiAdminBundle:Template:layout.html.twig' %}
+{% block base %}
+<div id="main">
+	<div class="box-login col-md-5">
+		<form id="login" action="{{ path('login_check') }}" method="post">
+			<div class="logo">
+				<img src="{{ asset('bundles/tupiadmin/media/img/logo_tupi.png') }}" alt="Tupi CMS" />
+			</div>
+			
+			<ul class="grouped">
+				<li>
+					<input placeholder="Usuário" type="text" id="username" name="_username" value="{{ last_username }}"/>
+				</li>
+				<li>
+					<input placeholder="Senha" type="password" id="password" name="_password"/>
+				</li>
+			</ul>
+			<ul class="esp_top">
+				<li class="botao">
+					<button type="submit" class="botao_acao" name="entrar">Entrar</button>
+				</li>
+				<li class="esqueci">
+					<a href="{{ path('login_forgot') }}">Esqueci minha senha</a>
+				</li>
+			</ul>
+		</form>
+		{% if error %}
+	    	<p class="col-md-12 resposta_form erro">{{ error }}</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

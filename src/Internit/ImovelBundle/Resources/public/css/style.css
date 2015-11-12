@@ -1,0 +1,88 @@
+/** CALENDARIO **/
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all { background: #39b54a; /* border-bottom: #777; */ border-radius: 0; padding: 3px; }
+.ui-datepicker-title { font-size: 16px; color: #fff; text-align: center; }
+a.ui-corner-all { color: #fff; text-decoration: none; cursor: pointer; }
+a.ui-corner-all:hover { color: #777; }
+div#ui-datepicker-div{ width: 15%; border: 1px solid #ccc; border-radius: 5px; }
+span.ui-icon.ui-icon-circle-triangle-e{ float: right; }
+a.ui-state-default { color: #fff; }
+a.ui-state-default:hover { color: #000; }
+table.ui-datepicker-calendar tbody tr { background-color: #ccc; border-bottom: 1px solid #999; }
+table.ui-datepicker-calendar tbody tr:nth-child(even){ background-color: #999; }
+table.ui-datepicker-calendar tbody tr:last-child{ border-bottom: none; }
+table.ui-datepicker-calendar thead { background-color: #39b54a; }
+table.ui-datepicker-calendar tbody tr { height: 30px; line-height: 30px; }
+
+/** GOOGLE MAPS **/
+#map-canvas { height: 400px; margin: 0px; width: 100%; padding: 0px }
+li#gmap_click a.visualizar-mapa { background: #39B54A; cursor: pointer; }
+li#gmap_click a.visualizar-mapa:hover { background-color: #333; }
+
+/** CLONES **/
+li.align-button{ float: right; }
+a.more-one{ background: #39b54a; float: left; display: block; -webkit-border-radius: 5px; border-radius: 5px; padding: 0 10px 0 10px; height: 35px; line-height: 35px;  text-decoration: none; color: #fff; margin: 0 15px 10px; }
+a.more-one:hover { background-color: #333; }
+a.del-one{   background: #b53f39; border-radius: 30px; color: #fff; display: inline-block; float: left; font-size: 50px; height: 30px; line-height: 25px; text-align: center; text-decoration: none; width: 30px; margin: 50px 0 0 10px; }
+a.del-one:hover{ background-color: #333; }
+input.lower{ text-transform: lowercase; }
+.segura-li div{ display: inline-block; float: left; }
+.segura-li div:first-child{ width: 91.66666667%; }
+
+/** STATUS **/
+a.btn-add-status, a.btn-save-status { background: #39B54A; cursor: pointer; height: 30px; line-height: 30px; padding: 0; text-align: center; }
+a.btn-add-status:hover, a.btn-save-status:hover { background-color: #333; }
+.win-add-status { border-radius: 5px; display: block; }
+.win-add-status span.close-this-win { text-align: center; background: #cccccc; height: 25px; width: 25px; padding: 2px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; }
+.win-add-status span.close-this-win:hover { background: #999999; color: #ffffff; }
+
+.right{ float: right; }
+
+button.botao_acao {
+	background: #39B54A none repeat scroll 0% 0%;
+	margin: 10px 0;
+}
+
+.upload-input {
+	text-align: center;
+	margin: 10px 0;
+}
+
+.styleFile {
+	height: 0 !important;
+}
+
+#pickfiles_galeria, #pickfiles_plantas {
+	background: #39B54A none repeat scroll 0% 0%;
+}
+
+.sort_image li {
+	display: inline-block;
+	float: left;
+	width: 200px;
+	margin: 10px;
+}
+
+.sort_image li:first-of-type {
+    clear: both;
+}
+
+a.remove_image:after {
+	content:' Remover';
+}
+
+a.remove_image {
+	color: #B53F39;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+label[for="imovel_tags"], label[for="imovel_makers"] {
+	font-size: 16px;
+	margin: 0px 0px 20px;
+}
+
+label[for*="imovel_tags_"], label[for*="imovel_makers_"] {
+	font-weight: normal;
+	margin: 0 25px 0 5px;
+	vertical-align: top;
+}

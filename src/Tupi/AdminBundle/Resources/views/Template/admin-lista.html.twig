@@ -1,0 +1,208 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block page_link %}
+    <a href="{{ link.href }}" class="{{ link.sclass|default('') }}">{{ link.label }}</a>
+{% endblock %}
+
+{% block page_button %}
+{% spaceless %}
+    {% for link in links %}
+        {{ block('page_link') }}
+    {% endfor %}
+{% endspaceless %}    
+{% endblock %}
+
+{% set message = message|default('') %}
+{% set message = (message ~ ' Confirma exclusão dos itens selecionados?')|trim %}
+
+
+{% set currentPath = path(app.request.get('_route'), app.request.get('_route_params')) %}
+{% set currentPage = paginator.currentPage %}
+{% set totalPages = paginator.totalPages %}
+
+{% set cardinality = totalPages|length %}
+{% set totalPagesArray = totalPages|split('') %}
+{% set prevalidator = '' %}
+
+{% set validator = totalPagesArray|validator(cardinality) %}
+{% if cardinality > 1 %}
+    {% for i in 1..(cardinality - 1) %}
+    
+        {% set validator_i = totalPagesArray|slice(0, i)|validator(cardinality) %}
+        
+        {% set prevalidator = prevalidator ~ '{validator: "' ~ validator_i ~  '", cardinality: ' ~ i ~ ' }' %}
+        {% if not loop.last %}
+            {% set prevalidator = prevalidator ~ ',' %}
+        {% endif %}
+        
+    {% endfor %}
+{% endif %}   
+{% set visualizar = verificarAcl('','Visualizar') %}
+{% block javascripts %}
+    {{ parent() }}
+    
+    <script src="{{ asset('bundles/tupiadmin/js/jquery.inputmask.js') }}"></script>
+    <script type="text/javascript">
+    //ativação styleForm
+	$(".tabela").styleForm();
+	
+	if('{{ visualizar }}' != '1')
+		$('#table-list td').find('a').removeAttr('href');
+	
+    $.extend($.inputmask.defaults.definitions, {
+    	'v': {
+        	validator: '{{ validator }}',
+            cardinality: '{{ cardinality }}',
+            prevalidator: [{{ prevalidator|raw }}]
+        }
+    });
+    
+    $(document).ready(function(){
+
+    	$(".tabela form").on('submit', function() {
+        	if(!$('#table-list input[type="checkbox"]').is(':checked')) {
+        		alert('É necessário escolher os itens que deseja excluir.');
+        		return false;
+            }
+
+            return confirm('{{ message }}');
+    	});
+    	
+    	$("#lines").change(function(){
+        	
+    		$(location).attr('href', $("#currentPath").val() + '?lines=' + $(this).val());
+        });
+    	
+    	$("#page").focusout(function(){
+        	if($(this).val() == '' || $(this).val() == $("#currentPage").val()) {
+        	    $(this).val($("#currentPage").val());
+        	}
+        	else {
+        	    $(location).attr('href', $("#currentPath").val() + '?page=' + $(this).val());
+            }
+        });
+        
+        $("#page").inputmask('v', { 'placeholder': '' });
+
+        $('#all').click(function() {
+        	
+        	var checkboxes = $('#table-list input[type="checkbox"]');
+        	checkboxes.prop('checked', true);
+        	checkboxes.parent().addClass('input_' + checkboxes.attr('type') + 'Checked');
+        });
+
+        $('#notall').click(function() {
+
+        	var checkboxes = $('#table-list input[type="checkbox"]');
+        	checkboxes.prop('checked', false);
+        	checkboxes.parent().removeClass('input_' + checkboxes.attr('type') + 'Checked');
+        });
+    });
+	</script>
+{% endblock %}
+
+{% set remove_route = app.request.get('_route')|replace({'home': 'remove'}) %}
+
+{% if not (remove_route ends with 'remove') %}
+	{% set remove_route = "no_route" %}
+{% endif %}
+
+{% block botoes %}
+    {% if remove_route|has_route %}
+    <li>
+        <a href="javascript:void(0);" class="selecionar botao_acao">
+            <span class="quadrado">Selecionar</span><span class="seta"></span>
+        </a>
+        <ul class="subcontrole">
+            <li><a id="all" href="javascript:void(0);">Todos</a></li>
+			<li><a id="notall" href="javascript:void(0);">Nenhum</a></li>
+		</ul>
+	</li>
+	{% endif %}
+	
+	{% if actions is defined %}
+	{% for key in actions|keys %}
+		{% set action = actions[key] %}
+		{{ admin.form_button(key, action.label, action.attrs) }}
+	{% endfor %}
+	{% endif %}
+    
+	{% if remove_route|has_route %}
+	{{ admin.sbutton('Excluir', 'excluir', '.tabela form') }}
+	{% endif %}
+{% endblock %}
+
+{% set title_controle = title %}
+
+{% block content_controle %}
+    
+    {% set values = [10, 25, 50, 100] %}
+
+    <ul class="paginacao">
+	    <li class="resultado"><p>({{ paginator|length }} Resultado(s))</p></li>
+	    <li>
+	        <select id="lines" name="lines">
+            {% for v in values %}
+    	        <option value="{{ v }}" {% if paginator.limit == v %} selected="selected" {% endif %}>{{ v }} linhas</option>
+    		{% endfor %}
+            </select>
+        </li>
+	    <li class="esp">
+	        <input type="text" id="page" name="page" value="{{ currentPage }}" maxlength="3" /> de {{ totalPages }}
+	        <input type="hidden" id="currentPage" name="currentPage" value="{{ currentPage }}"/>
+	        <input type="hidden" id="currentPath" name="currentPath" value="{{ currentPath }}"/>
+	    </li>
+	    <li>
+	    {% set links = {} %}
+        {% if currentPage > 1 and currentPage < totalPages %}
+            {% set links = links|merge({"prev": {'href': currentPath ~ '?page=' ~ (currentPage - 1), 'sclass': 'prev', 'label': 'Anterior'}}) %}
+            {% set links = links|merge({"next": {'href': currentPath ~ '?page=' ~ (currentPage + 1), 'sclass': 'next', 'label': 'Próximo'}}) %}
+        {% elseif currentPage > 1 and currentPage == totalPages %}
+            {% set links = links|merge({"prev": {'href': currentPath ~ '?page=' ~ (currentPage - 1), 'sclass': 'prev', 'label': 'Anterior'}}) %}
+            {% set links = links|merge({"next": {'href': 'javascript:void(0)', 'sclass': 'next off', 'label': 'Próximo'}}) %}
+        {% elseif currentPage == totalPages %}
+            {% set links = links|merge({"prev": {'href': 'javascript:void(0)', 'sclass': 'prev off', 'label': 'Anterior'}}) %}
+            {% set links = links|merge({"next": {'href': 'javascript:void(0)', 'sclass': 'next off', 'label': 'Próximo'}}) %}
+        {% else %}
+            {% set links = links|merge({"prev": {'href': 'javascript:void(0)', 'sclass': 'prev off', 'label': 'Anterior'}}) %}
+            {% set links = links|merge({"next": {'href': currentPath ~ '?page=' ~ (currentPage + 1), 'sclass': 'next', 'label': 'Próximo'}}) %}
+        {% endif %}
+        {{ block('page_button') }}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+	
+	{{ admin.show_message() }}
+    
+   	<div class="tabela">
+        {% if remove_route|has_route %}
+   	    <form action="{{ path(remove_route, {'id': 'all'}) }}">
+   	    {% endif %}
+       	    <table id="table-list">
+    			<thead>
+    			    <tr>
+                        {% if remove_route|has_route %}
+    			        <th class="item0 check"/>
+    			        {% endif %}
+    					{% block table_head %}{% endblock %}
+    				</tr>
+    			</thead>
+    			<tbody>
+    				
+    				{% for item in paginator %}
+    				<tr>
+                        {% if remove_route|has_route %}
+    			        <td class="checkbox"><input type="checkbox" name="idval[]" value="{{ item.id }}" /></td>
+    			        {% endif %}
+    			        
+    			        {% block table_body %}{% endblock %}
+    				</tr>
+    				{% endfor %}
+    			</tbody>
+    		</table>
+    	{% if app.request.get(remove_route) is not null %}
+		</form>
+		{% endif %}
+	</div>
+{% endblock %}

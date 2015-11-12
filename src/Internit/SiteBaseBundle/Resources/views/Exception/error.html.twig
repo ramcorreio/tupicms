@@ -1,0 +1,15 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias sobre' %}
+
+{% block content %}
+<div class="container">    
+    <h1>Oops! Ocorreu um erro!</h1>
+    <h2>O servidor retornou "{{ status_code }} {{ status_text }}".</h2>
+</div>
+{% endblock %}

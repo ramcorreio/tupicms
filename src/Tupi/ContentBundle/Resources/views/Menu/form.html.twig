@@ -1,0 +1,52 @@
+{% import 'TupiAdminBundle:Form:macros.html.twig' as admin %}
+{% extends 'TupiAdminBundle:Template:ajax.html.twig' %}
+
+{% block botoes %}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('tupi_menu_remove', 'Excluir', {'class': 'excluir'}) }}
+	{{ admin.sbutton('Limpar', 'limpar') }}
+{% endblock %}
+
+{% block content %}
+	<div class="formularios">
+		<!-- ## ALERTA MENU INCLUÍDO -->
+    	
+		{{ admin.show_message() }}
+    	
+    	{{ form_start(form) }} 
+    	{{ form_row(form.id) }}
+    	{{ form_row(form.position) }}
+    	{{ form_row(form.parent) }}
+    	<ul class="row"> 
+        	<li class="col-md-6 col-sm-6">{{ form_row(form.title) }}</li>
+            <li class="col-md-6 col-sm-6">{{ form_row(form.url) }}</li>
+		</ul>
+		<ul class="row">
+        	<li class="col-md-12 col-sm-12 style">{{ form_row(form.templateName) }}</li> 
+		</ul>
+		{% if form.active is defined %}
+		<ul class="row">
+			<li class="col-md-12 col-sm-12 checkbox style">{{ form_row(form.active) }}</li> 
+		</ul>
+		{% endif %}
+        {% if form.redirect is defined %}
+		<ul class="row">
+			<li class="col-md-12 col-sm-12 checkbox style">{{ form_row(form.redirect) }}</li> 
+		</ul>
+		{% endif %}		
+		<ul class="row">
+			{{ form_row(form.menuRedirect) }}
+		</ul>
+		<ul class="row group-list">
+        	<li class="col-md-12 col-sm-12"><label>Páginas</label></li>                      
+            {% for page in form.pages %}
+            	<li class="col-md-12 col-sm-12">
+            	{{ form_widget(page) }}
+                {{ form_label(page) }}
+			</li>
+            {% endfor %}
+		</ul>
+        {{ form_end(form) }}
+        
+	</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="internit.newsletter.menu.listener.class">Internit\NewsletterBundle\EventListener\MenuEventListener</parameter>
+        <parameter key="internit.newsletter.mail.service.class">Internit\NewsletterBundle\Service\MailService</parameter>
+    	<parameter key="internit.controller.newsletter.class">Internit\NewsletterBundle\Controller\NewsletterController</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="internit.newsletter.menu.listener" class="%internit.newsletter.menu.listener.class%">
+            <tag name="kernel.event_listener" event="menu.build.listener" method="onCreate" />
+        </service>        
+     
+        <service id="internit.newsletter.controller" class="%internit.controller.newsletter.class%" public="true">
+            <call method="setContainer">
+                 <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service
+                id="internit.newsletter.mail.service" class="%internit.newsletter.mail.service.class%"
+                factory-class="%internit.newsletter.mail.service.class%"
+                factory-method="getInstance" >
+
+            <argument type="service" id="service_container" />
+
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,33 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Cadastros' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link href="{{ asset('bundles/internitcontact/css/contactStyle.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block botoes %}
+	{{ parent() }}
+	<li>
+	<a href="{{ path("tupi_contact_export", {"path":"person"}) }}" class="export botao_acao">Exportar</a>
+	</li>
+{% endblock %}
+
+{% block table_head %}
+	<th class="titulo">Nome</th>
+	<th class="item1">Email</th>
+	<th class="item3">Criado</th>
+	<th class="item3">Atualizado</th>
+{% endblock %}
+{% block table_body %}
+	
+	<td>
+		<a href="{{ path('tupi_person_edit', {'id':item.id}) }}">
+			<span>{{item.name}}</span>
+		</a>
+	</td>
+	<td>{{item.email}}</td>
+	<td>{{item.createdAt|date("d/m/Y")}}</td>
+	<td>{{item.updatedAt|date("d/m/Y")}}</td>
+{% endblock %}

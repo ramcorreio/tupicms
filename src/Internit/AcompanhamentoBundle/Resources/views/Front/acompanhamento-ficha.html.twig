@@ -1,0 +1,82 @@
+{% extends 'InternitSiteBaseBundle:Template:layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/internitsitebase/css/secundarias.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set body_class = 'secundarias acompanhamento-ficha' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	   var idDefaultGaleria = "{{ acompanhamento.galerias|last.id }}";
+	   var galeria_ajax_call = "{{ url('tupi_galeria_ajax') }}";
+	   var urlImage = "{{ url('image') }}";
+	</script>
+	<script type="text/javascript" src="{{ asset('bundles/internitacompanhamento/js/front.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="titulo">
+	<div class="container">
+		<h2>Acompanhamento de Obras</h2>
+	</div>
+</div>
+<div class="container conteudo">    
+    <section id="content_acompanhamento-ficha">
+    	<article class="col-md-6 col-sm-12 box-fachada">
+			<a href="{{ path('image',{ 'id' : acompanhamento.imovel.images|first.imageMedia.id , 'thumb' : 0}) }}" rel="prettyPhoto">
+				<img src="{{ path('image',{ 'id' : acompanhamento.imovel.images|first.imageMedia.id , 'thumb' : 1}) }}">
+			</a> 
+    	</article>
+    	<article class="col-md-6 col-sm-12 box-descricao">
+    		<div class="logo-empreendimento">
+    		{% if not acompanhamento.logo is empty %}
+				<img src="{{ path('image', {'id' : acompanhamento.logo.id , 'thumb' : 1 }) }}" />
+			{% endif %}
+			</div>
+			<h2>{{ acompanhamento.imovel.name }}</h2>
+			<h4>{{ acompanhamento.imovel.address.street }} - {{ acompanhamento.imovel.address.number }} - {{ acompanhamento.imovel.address.city.name }} - {{ acompanhamento.imovel.address.city.state.uf }}</h4>
+			<div class="btn-corretor">
+				<ul>
+					<li><a href="{{ acompanhamento.imovel.hotSite }}" target="_blank" class="hotsite"><p>Acesse o Hotsite</p></a></li>
+					<li><a href="{{ path('front_menu', {'path' : 'contato'}) }}" class="interessei"><p>Tenho Interesse</p></a></li>
+					<li><a href="javascript:;" class="corretor"><p>Corretor Online</p></a></li>
+				</ul>
+			</div>
+    	</article>
+    	<article class="col-md-12 col-sm-12">
+    	{% if acompanhamento.etapas.count > 0 %}
+    		{% for etapa in acompanhamento.etapas %}
+    		<div class="barra">
+					<p class="label">
+						<span class="nome_etapa">{{ etapa.etapa.name }}</span>
+					</p>
+					<div class="barra_etapa">
+						<div class="barracor" style="width:{{ etapa.valor }}%;">
+						<span class="percentual">{{ etapa.valor }}%</span>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+	   {% endif %}
+    	</article>
+
+    	<div class="clearfix"></div>
+
+    	<article class="col-md-12 col-sm-12 imgs-ficha">
+    		<h2>IMAGENS</h2>
+    		<div class="imgs col-md-12 col-sm-12">
+	    		<form action="" class="col-md-4 col-sm-12">
+	    			<select name="acompanhamento-galeria" id="acompanhamento-galeria" class="form-control">
+	    			    {% for galeria in acompanhamento.galerias %}
+	    				<option value="{{ galeria.id }}">{{ galeria.name }}</option>
+	    				{% endfor %}
+	    			</select>
+	    		</form>
+    		</div>
+    	</article>
+    </section>
+</div>
+{% endblock %}
