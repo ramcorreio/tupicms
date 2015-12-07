@@ -1,0 +1,63 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$(function() {
+			$( '.tabs' ).tabs({ active: 0 });
+			$( "#slider" ).slider();
+		});
+    </script>
+    
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/mask.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/internitsitebase/js/geral.js') }}"></script>    
+    
+{% endblock %}
+{% block botoes %}	
+	{{ admin.form_button('atas_home', 'Voltar', {'class': 'voltar'}) }}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	{{ admin.rbutton('atas_remove', 'Excluir', {'class': 'excluir'}) }}
+{% endblock %}
+
+{% block main %}
+	<div class="formulario esp_top row">
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div class="tabs col-md-12 col-sm-12"> 
+				<ul class="controle">
+					<li><a href="#geral">Geral</a></li>
+				</ul>
+					
+    			<div id="geral" class="box">
+					<ul class="row">
+						<ul class="col-md-8 col-sm-8">
+							<li class="col-md-12 col-sm-12">{{ form_row(form.tags) }}</li>
+							<li class="col-md-6 col-sm-6">{{ form_row(form.active) }}</li>
+							<li class="col-md-6 col-sm-6">{{ form_row(form.dataVigente) }}</li>
+	    					<li class="col-md-12 col-sm-12">{{ form_row(form.descricao) }}</li>
+						</ul>
+						
+						<ul class="col-md-4 col-sm-4">
+							<li class="col-md-12 col-sm-12">
+								<p>{{ form_row(form.arquivo) }}</p>
+								
+								{% if form.vars.value.arquivo is not empty %}
+									<div class="preview">
+									   {% if form.vars.value.arquivo.url is not empty %}
+									       <p>Faça o download</p>
+									       <a href="{{ path('tupi_atas_documento',{'url' : form.vars.value.arquivo.url }) }}">
+									           <img src="{{ asset('bundles/internitcontact/media/img/documento.png') }}" alt="Documento" width="60">
+									       </a>
+									   {% endif %}
+									</div>
+								{% endif %}								
+							</li>
+						</ul>
+						
+    				</ul>
+    			</div>
+    		</div>
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}

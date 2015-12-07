@@ -1,0 +1,20 @@
+{% extends 'TupiAdminBundle:Template:admin-lista.html.twig' %}
+
+{% set title = 'Atas' %}
+{% set actions = {'atas_new': {'label': 'Adicionar', 'attrs': {'class': 'adicionar'} } }%}
+
+{% block table_head %}
+	<th class="titulo">Tags</th>
+	<th class="titulo">Data Vigente</th>
+	<th class="item1">Status</th>
+	<th class="item3">Criado em</th>
+	<th class="item3">Atualizado em</th>
+{% endblock %}
+{% block table_body %}
+	<!-- <td><input type="checkbox" value="{{item.id}}"/></td> -->	
+	<td {% if item.active == 0 %}style="opacity:0.5;"{% endif %}><a href="{{ path('atas_edit', {'id':item.id}) }}">{{item.tags}}</a></td>
+	<td {% if item.active == 0 %}style="opacity:0.5;"{% endif %}>{{item.dataVigente}}</td>
+	<td {% if item.active == 0 %}style="opacity:0.5;"{% endif %}>{% if item.active == 1 %}Visível{% else %}Desativado{% endif %}</td>
+	<td {% if item.active == 0 %}style="opacity:0.5;"{% endif %}>{{item.createdAt|date("d/m/Y H:i:s")}}</td>
+	<td {% if item.active == 0 %}style="opacity:0.5;"{% endif %}>{{item.updatedAt|date("d/m/Y H:i:s")}}</td>
+{% endblock %}

@@ -1,0 +1,20 @@
+atas_download:
+    pattern:  /atas-vigentes/documento/{url}
+    defaults: { _controller: "InternitAtasBundle:Atas:documento" }
+
+tupi_atas_documento:
+    pattern:  /admin/atas/documento/{url}
+    defaults: { _controller: "InternitAtasBundle:Atas:documento" }
+
+atas_home:
+    pattern:  /admin/atas/{actionName}/{id}
+    defaults: { _controller: "InternitAtasBundle:Atas:index", actionName: null, id: null }
+    
+atas_edit:
+    pattern: /admin/atas/edit/{id}
+    
+atas_new:
+    pattern: /admin/atas/new
+
+atas_remove:
+    pattern:  /admin/atas/remove/{id}

@@ -2,6 +2,10 @@ internit_imovel:
     resource: "@InternitImovelBundle/Resources/config/routing.yml"
     prefix:   /
 
+internit_atas:
+    resource: "@InternitAtasBundle/Resources/config/routing.yml"
+    prefix:   /    
+
 internit_trabalhe:
     resource: "@InternitTrabalheBundle/Resources/config/routing.yml"
     prefix:   /

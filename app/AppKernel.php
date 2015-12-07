@@ -34,6 +34,7 @@ class AppKernel extends Kernel
     	    new Internit\InteressadoBundle\InternitInteressadoBundle(),
     		new Internit\BannerBundle\InternitBannerBundle(),
     		new Internit\TrabalheBundle\InternitTrabalheBundle(),
+    	    new Internit\AtasBundle\InternitAtasBundle(),
     	    
         );
 
