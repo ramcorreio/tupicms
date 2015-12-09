@@ -16,21 +16,43 @@ class RandomChatController extends Controller
     	$url = array();
     	//array com links dos chats
     	
-    	$chatLinks = $this->getDoctrine()->getRepository('InternitRandomChatBundle:RandomChatLinks')->getChatLinks();
+    	$em = $this->getDoctrine()->getRepository('InternitRandomChatBundle:RandomChatLinks');
+    	
+    	$count = $em->getCount();
+    	
+    	if(!$count){
+    		return $this->redirect($this->generateUrl('index'));
+    	}
+    	
+    	$chatLinks = $em->getChatLinks();
+    	
+
     	
     	foreach ($chatLinks as $chatLink)
     	{
     		$url[] = $chatLink->getChat();
     	}
+    	
 
     	//soma quantos links existem
-		$sum = count($url)-1;			
+		$sum = $count - 1;
+		$turnEm = $this->getDoctrine()->getRepository('InternitRandomChatBundle:RandomChatTurn');
+		$turnCount = $turnEm->getCount();
+		
+		if(!$turnCount){
+			$randomChat = new RandomChatTurn();
+			$randomChat->setTurn(0);
+			$turnEm->persist($randomChat);
+			$turnEm->flush();
+		}
 		//pegando a vez
 		$turn = $this->getDoctrine()->getRepository('InternitRandomChatBundle:RandomChatTurn')->getChatTurn();			
 		//executa função para verifica qual foi o último chat visitado
-		$this->restartTurnOrNot($turn, $sum);			
+		$this->restartTurnOrNot($turn, $sum);
 		//atribuindo a vez
 		$turnIt = $turn->getTurn();
+		
+
 		
 		return $this->redirect($url[$turnIt]);
     }

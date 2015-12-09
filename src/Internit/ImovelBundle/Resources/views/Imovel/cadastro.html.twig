@@ -80,7 +80,7 @@
 					<li><a href="#geral">Geral</a></li>
 					<li><a href="#galeria">Imagens</a></li>
 					<li><a href="#plantas">Imagens do Local</a></li>
-{# 					<li><a href="#videos">Vídeos</a></li>#}
+					<li><a href="#videos">Vídeos</a></li>
 					<li><a href="#tags">Tags</a></li>
 					<li><a href="#realizadores">Realizadores</a></li>
 				</ul>
@@ -191,6 +191,23 @@
 	                        </div>
 		    			</div>
 					</ul>
+				</div>
+				
+				<div id="videos" class="box">
+					<ul class="row">
+						<ul class="col-md-12 col-sm-12">						
+							<a href="#" class="more-one" title="Adicionar vídeo">+ Adicionar vídeo</a>
+							<ul class="clones col-md-12 col-sm-12" data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}">    			         
+								{% for video in form.videos %}
+										<div class='list_videos'>
+											<li class="col-md-5 col-sm-5">{{ form_row(video.title) }}</li>
+											<li class="col-md-5 col-sm-5">{{ form_row(video.video) }}</li>
+											<li class="col-md-2 col-sm-2"><a href="#" class="del-one">-</a></li>
+										</div>
+								{% endfor %}
+							</ul>
+						</ul>
+	    			</ul>
 				</div>
 						
     			<div id="tags" class="box">

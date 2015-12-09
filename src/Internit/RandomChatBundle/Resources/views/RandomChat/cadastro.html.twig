@@ -3,7 +3,7 @@
 {% block botoes %}
 	{{ admin.form_button('randomchat_home', 'Voltar', {'class': 'voltar'}) }}
 	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
-	{{ admin.rbutton('randomchat_remove', 'Excluir', 'excluir') }}	
+	{{ admin.rbutton('randomchat_remove', 'Excluir', {'class': 'excluir'}) }}	
 {% endblock %}
 
 {% block main %}

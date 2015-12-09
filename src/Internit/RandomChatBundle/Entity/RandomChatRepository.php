@@ -30,4 +30,12 @@ class RandomChatRepository extends CrudRepository
 	   	 
 	   	return  $chatTurn->getQuery()->getResult();
    }
+   
+    public function getCount()
+    {
+        $qb = $this->createQueryBuilder('p')
+        ->select('count(p.id)');
+    
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
