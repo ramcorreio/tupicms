@@ -6,11 +6,29 @@
 	$("form").styleForm();
 	$(function() {
 		$( '.tabs' ).tabs({ active: 0 });
+
+	    $('#remover-cache').click(function(e){
+		    e.preventDefault();
+	    	var url = '{{ path('tupi_delete_cache') }}';
+	        $.ajax({
+    		    type : 'GET',
+    		    url: url,
+    		    beforeSend: function(){
+    		    	 $(this).attr('disabled','disabled');
+    		    	 $('.msgcache').css('margin-bottom','20px').html('Limpando cache...');
+    		    },
+    		    success: function(data){
+    		    	$('.msgcache').css('margin-bottom','20px').html(data);
+    			}
+	        });
+		});
+		
 	});
 	</script>
 {% endblock %}
 {% block botoes %}
 	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+	<li><a id="remover-cache" href="" class="botao_acao">Limpar Cache</a></li>
 {% endblock %}
 
 {% set title_controle = title_controle ~ ' Definições' %}
@@ -20,6 +38,7 @@
     {{ admin.show_message() }}	
 	{{ form_start(form) }}
 		{{ form_row(form.id) }}
+		<div class="msgcache"></div>
 		
 		<div class="tabs col-md-12">
 			<ul class="controle">

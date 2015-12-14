@@ -6,6 +6,12 @@ use Tupi\SecurityBundle\Entity\Setting;
 use Tupi\AdminBundle\Controller\ReturnVal;
 use Doctrine\ORM\EntityManager;
 use Tupi\AdminBundle\Controller\CrudController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
+use Symfony\Component\Security\Acl\Exception\Exception;
 
 class SettingController extends CrudController
 {
@@ -50,4 +56,44 @@ class SettingController extends CrudController
 			$return->setMessage('Definições alteradas com sucesso!');
 		}
     }
+    
+    public function deleteDirAction()
+    {
+        $path = $this->get('kernel')->getRootDir()."/cache/";
+        $diretorio = dir($path); 
+        try{
+            while($arquivo = $diretorio->read()){
+                if($arquivo!="." && $arquivo!=".."){
+                    $this->removeDir($path.$arquivo);
+                }
+            }
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
+        
+        $diretorio -> close();
+        
+        echo 'Cache Deletado com sucesso';
+        exit();
+    }
+    
+    
+    public function removeDir($dir){
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (filetype($dir."/".$object) == "dir") 
+                        $this->removeDir($dir."/".$object); 
+                    else 
+                        unlink($dir."/".$object);
+                }
+            }
+            reset($objects);
+            \rmdir($dir);
+        }
+    }    
+
+
 }

@@ -47,3 +47,7 @@ tupi_resource_edit:
 tupi_setting_home:
     pattern:  /admin/setting/{actionName}/{id}
     defaults: { _controller: "TupiSecurityBundle:Setting:index", actionName: edit, id: 1 }
+
+tupi_delete_cache:
+    pattern:  /admin/caching
+    defaults: { _controller: "TupiSecurityBundle:Setting:deleteDir" }
