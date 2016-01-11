@@ -61,6 +61,20 @@ class SettingType extends AbstractType
 			'label' => 'Id Facebook',
 			'required' => false,
 			'attr' => array('placeholder' => '####################')
+		))
+		->add('auth_email_status', 'checkbox', array(
+				'label' => 'Ativar E-mail Autenticado',
+				'required' => false,
+				'attr' => array('class' => 'email-autenticado')
+		))
+		
+		->add('auth_email', 'text', array(
+				'label' => 'E-mail',
+				'required' => false
+		))	
+		->add('auth_email_senha', 'text', array(
+				'label' => 'Senha',
+				'required' => false
 		));
 	}
 	

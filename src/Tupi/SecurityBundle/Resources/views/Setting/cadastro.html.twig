@@ -22,6 +22,18 @@
     			}
 	        });
 		});
+
+		$('.email-autenticado').click(function(){
+			$('.infos-email').toggle();
+
+			if($('.infos-email').attr('checked')){
+				$('.infos-email').show();
+			}
+			else{
+				$('.infos-email').hide();
+			}
+			
+		});	
 		
 	});
 	</script>
@@ -45,6 +57,7 @@
 				<li><a href="#geral">Geral</a></li>
 				<li><a href="#google">Google</a></li>
 				<li><a href="#facebook">Facebook</a></li>
+				<li><a href="#email">E-mail</a></li>
 			</ul>
 			
 			<div id="geral" class="box">
@@ -71,7 +84,17 @@
 					<li class="col-md-6">{{ form_row(form.fbId) }}</li>
 				</ul>
 			</div>
-						
+					
+			<div id="email">
+				<ul class="row">
+					<li class="col-md-12">{{ form_row(form.auth_email_status) }}</li>
+					<div class="infos-email" style='display: none'>
+						<li class="col-md-12">{{ form_row(form.auth_email) }}</li>
+						<li class="col-md-12">{{ form_row(form.auth_email_senha) }}</li>
+					</div>
+					
+				</ul>
+			</div>	
 		</div>
 	{{ form_end(form) }}
 </div>

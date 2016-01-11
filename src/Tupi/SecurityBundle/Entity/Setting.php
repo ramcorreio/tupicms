@@ -91,6 +91,26 @@ class Setting
      */
     private $fbId;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="auth_email_status", type="boolean", nullable=true)
+     */
+    private $authEmailStatus;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_email", type="string", length=1024, nullable=true)
+     */
+    private $authEmail;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_email_senha", type="string", nullable=true)
+     */
+    private $authEmailSenha;    
 
     /**
      * Get id
@@ -324,5 +344,27 @@ class Setting
 		$this->fbId = $fbId;
 		return $this;
 	}
+	public function getAuthEmailStatus() {
+		return $this->authEmailStatus;
+	}
+	public function setAuthEmailStatus($authEmailStatus) {
+		$this->authEmailStatus = $authEmailStatus;
+		return $this;
+	}
+	public function getAuthEmail() {
+		return $this->authEmail;
+	}
+	public function setAuthEmail(string $authEmail) {
+		$this->authEmail = $authEmail;
+		return $this;
+	}
+	public function getAuthEmailSenha() {
+		return $this->authEmailSenha;
+	}
+	public function setAuthEmailSenha(string $authEmailSenha) {
+		$this->authEmailSenha = $authEmailSenha;
+		return $this;
+	}
+	
 	
 }
