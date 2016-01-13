@@ -1,34 +1,36 @@
 <?php
 namespace Internit\ContactBundle\Controller;
 
-use Tupi\ContentBundle\Controller\PageController;
+use Symfony\Component\Routing\RequestContext;
+
 use Internit\ContactBundle\Form\ContactType;
 use Internit\ContactBundle\Entity\ContactRequest;
 use Internit\ContactBundle\Entity\ContactPerson;
 use Internit\ContactBundle\Service\MailService;
-use Internit\SiteBaseBundle\Controller\BaseController;
-
-use Tupi\ContentBundle\Entity\LinkContent;
-
-use Tupi\AdminBundle\Types\StatusType;
-
-use Symfony\Component\Routing\RequestContext;
-use Tupi\ContentBundle\Entity\Page;
 use Internit\ContactBundle\Entity\Trabalhe;
 use Internit\ContactBundle\Form\TrabalheType;
+use Internit\SiteBaseBundle\Controller\BaseController;
+
+use Tupi\ContentBundle\Controller\PageController;
+use Tupi\ContentBundle\Entity\LinkContent;
+use Tupi\ContentBundle\Entity\Page;
+use Tupi\AdminBundle\Types\StatusType;
+use Tupi\SecurityBundle\Entity\Setting;
+
 
 class SubmitController extends BaseController
 {
     public function perguntaAction() 
     {
     	$page = new Page();
-    	//pegando host do servidor
+    	//pegando host do servidor e criando host do e-mail
     	$host = $this->container->get('router')->getContext()->getHost();
-    	//criando host do e-mail
     	$host_email = 'no-reply@'.str_replace('www.', "", $host);
     	
-        $contactRequest = new ContactRequest();
+ 		//pega infos do email  
+    	$dados = $this->getRespositoryName('TupiSecurityBundle:Setting')->find('1');
 
+        $contactRequest = new ContactRequest();
         $contactRequest->setPerson(new ContactPerson());
         
         $form = $this->createForm(new ContactType($this->getDoctrine()->getRepository('InternitContactBundle:ContactSubject')), $contactRequest);
@@ -44,7 +46,6 @@ class SubmitController extends BaseController
         	$subject = $contactRequest->getSubject()->getTitle();
         	$subjectId = $contactRequest->getSubject()->getId();
 
-        	
         	//pegando grupos para qual a mensagem será enviada
         	$groups = $contactRequest->getSubject()->getGroups();
         	$selectedGroups = array();
@@ -112,21 +113,47 @@ class SubmitController extends BaseController
             //disparo da mensagem para usuário
             $contactRequest = $form->getData();
             
-            $message = $this->get('internit.contact.mail.service')->createMessage();
-            $message->setSubject('[Contato Elo Empreendimentos] – Efetuado com Sucesso')
-            ->setFrom($host_email, $contactRequest->getPerson()->getName())
-            ->setTo($contactRequest->getPerson()->getEmail(), $contactRequest->getPerson()->getName())
-            ->setBody(
-                $this->renderView(
-                	'InternitContactBundle:Email:Person\email.html.twig',
-                    	array(	'nome' => $contactRequest->getPerson()->getName(),
-                    			'number' => $contactRequest->getId(),
-                    	 		'url_site' => $host)
-                ), 'text/html'
-            );
-            
-            $this->get('internit.contact.mail.service')->send($message);
-            
+            //verifica se email é autenticado
+            if($dados->getAuthEmailStatus())
+            {   
+				$transport = \Swift_SmtpTransport::newInstance($dados->getAuthEmailHost(), $dados->getAuthEmailPort(), 'tls')
+				  ->setUsername($dados->getAuthEmail())
+				  ->setPassword($dados->getAuthEmailSenha());
+	 
+				$mailer = \Swift_Mailer::newInstance($transport);
+				 
+				$message = \Swift_Message::newInstance()
+					->setSubject('[Contato] – Efetuado com Sucesso')
+	            	->setFrom($host_email, $contactRequest->getPerson()->getName())
+	            	->setTo($contactRequest->getPerson()->getEmail(), $contactRequest->getPerson()->getName())
+	            	->setBody(
+	            			$this->renderView(
+	            					'InternitContactBundle:Email:Person\email.html.twig',
+	            					array(	'nome' => $contactRequest->getPerson()->getName(),
+	            							'number' => $contactRequest->getId(),
+	            							'url_site' => $host)
+	            					), 'text/html'
+	            			);
+				 
+				  $result = $mailer->send($message);
+            }
+            else{
+            	$message = $this->get('internit.contact.mail.service')->createMessage();
+            	$message->setSubject('[Contato] – Efetuado com Sucesso')
+            	->setFrom($host_email, $contactRequest->getPerson()->getName())
+            	->setTo($contactRequest->getPerson()->getEmail(), $contactRequest->getPerson()->getName())
+            	->setBody(
+            			$this->renderView(
+            					'InternitContactBundle:Email:Person\email.html.twig',
+            					array(	'nome' => $contactRequest->getPerson()->getName(),
+            							'number' => $contactRequest->getId(),
+            							'url_site' => $host)
+            					), 'text/html'
+            			);
+            	 
+            	$this->get('internit.contact.mail.service')->send($message);            	
+            }
+             
             //disparo de mensagem para administrador
             $message = $this->get('internit.contact.mail.service')->createMessage();
             $message->setSubject('CONTATO - ['.$subject.']')

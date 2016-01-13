@@ -23,16 +23,15 @@
 	        });
 		});
 
+		if($('.email-autenticado').attr('checked')){
+			$('.infos-email').show();
+		}
+		else{
+			$('.infos-email').hide();
+		}
+		
 		$('.email-autenticado').click(function(){
 			$('.infos-email').toggle();
-
-			if($('.infos-email').attr('checked')){
-				$('.infos-email').show();
-			}
-			else{
-				$('.infos-email').hide();
-			}
-			
 		});	
 		
 	});
@@ -87,10 +86,13 @@
 					
 			<div id="email">
 				<ul class="row">
-					<li class="col-md-12">{{ form_row(form.auth_email_status) }}</li>
+					<li class="col-md-12">{{ form_row(form.authEmailStatus) }}</li>
 					<div class="infos-email" style='display: none'>
-						<li class="col-md-12">{{ form_row(form.auth_email) }}</li>
-						<li class="col-md-12">{{ form_row(form.auth_email_senha) }}</li>
+						<li class="col-md-7">{{ form_row(form.authEmailHost) }}</li>
+						<li class="col-md-3">{{ form_row(form.authEmailPort) }}</li>
+						<li class="col-md-2">{{ form_row(form.authEmailTipo) }}</li>
+						<li class="col-md-12">{{ form_row(form.authEmail) }}</li>
+						<li class="col-md-12">{{ form_row(form.authEmailSenha) }}</li>
 					</div>
 					
 				</ul>

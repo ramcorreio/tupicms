@@ -108,9 +108,30 @@ class Setting
     /**
      * @var string
      *
+     * @ORM\Column(name="auth_email_host", type="string", length=1024, nullable=true)
+     */
+    private $authEmailHost;    
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(name="auth_email_senha", type="string", nullable=true)
      */
-    private $authEmailSenha;    
+    private $authEmailSenha;  
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_email_port", type="string", nullable=true)
+     */
+    private $authEmailPort;   
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_email_tipo", type="string", nullable=true)
+     */
+    private $authEmailTipo;    
 
     /**
      * Get id
@@ -354,17 +375,37 @@ class Setting
 	public function getAuthEmail() {
 		return $this->authEmail;
 	}
-	public function setAuthEmail(string $authEmail) {
+	public function setAuthEmail($authEmail) {
 		$this->authEmail = $authEmail;
 		return $this;
 	}
 	public function getAuthEmailSenha() {
 		return $this->authEmailSenha;
 	}
-	public function setAuthEmailSenha(string $authEmailSenha) {
+	public function setAuthEmailSenha($authEmailSenha) {
 		$this->authEmailSenha = $authEmailSenha;
 		return $this;
 	}
-	
-	
+	public function getAuthEmailPort() {
+		return $this->authEmailPort;
+	}
+	public function setAuthEmailPort($authEmailPort) {
+		$this->authEmailPort = $authEmailPort;
+		return $this;
+	}	
+	public function getAuthEmailHost() {
+		return $this->authEmailHost;
+	}
+	public function setAuthEmailHost($authEmailHost) {
+		$this->authEmailHost = $authEmailHost;
+		return $this;
+	}
+	public function getAuthEmailTipo() {
+		return $this->authEmailTipo;
+	}
+	public function setAuthEmailTipo($authEmailTipo) {
+		$this->authEmailTipo = $authEmailTipo;
+		return $this;
+	}
+		
 }

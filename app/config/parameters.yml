@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     localhost
+    database_host:     db01.lab58.internit.br
     database_port:     null
     database_name:     tupicms
-    database_user:     root
-    database_password: null
+    database_user:     labuser
+    database_password: labpass
 
     mailer_transport:  mail
     mailer_host:       localhost

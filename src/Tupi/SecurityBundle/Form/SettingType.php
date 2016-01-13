@@ -62,19 +62,35 @@ class SettingType extends AbstractType
 			'required' => false,
 			'attr' => array('placeholder' => '####################')
 		))
-		->add('auth_email_status', 'checkbox', array(
-				'label' => 'Ativar E-mail Autenticado',
-				'required' => false,
-				'attr' => array('class' => 'email-autenticado')
+		->add('authEmailStatus', 'checkbox', array(
+			'label' => 'Ativar E-mail Autenticado',
+			'required' => false,
+			'attr' => array('class' => 'email-autenticado')
 		))
-		
-		->add('auth_email', 'text', array(
-				'label' => 'E-mail',
-				'required' => false
-		))	
-		->add('auth_email_senha', 'text', array(
-				'label' => 'Senha',
-				'required' => false
+		->add('authEmailPort', 'text', array(
+			'label' => 'Porta',
+			'required' => false,
+			'attr' => array('class' => 'email-porta')
+		))		
+		->add('authEmail', 'text', array(
+			'label' => 'E-mail',
+			'required' => false,
+			'attr' => array('class' => 'email-email')
+		))
+		->add('authEmailHost', 'text', array(
+				'label' => 'Host',
+				'required' => false,
+				'attr' => array('class' => 'email-host','placeholder'=>'smtp.site.com.br')
+		))		
+		->add('authEmailTipo', 'text', array(
+				'label' => 'Tipo Segurança',
+				'required' => false,
+				'attr' => array('class' => 'email-tTipo','placeholder'=>'TLS')
+		))		
+		->add('authEmailSenha', 'text', array(
+			'label' => 'Senha',
+			'required' => false,
+			'attr' => array('class' => 'email-senha')
 		));
 	}
 	

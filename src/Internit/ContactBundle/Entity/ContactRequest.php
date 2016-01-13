@@ -45,7 +45,7 @@ class ContactRequest
     /**
      * @var string
      *
-     * @ORM\Column(name="informativo", type="string", length=50)
+     * @ORM\Column(name="informativo", type="string", length=50, nullable=true)
      */
     private $informativo;
     
