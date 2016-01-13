@@ -6,6 +6,10 @@ tupi_contact_export:
 tupi_contact_home:
     pattern:  /admin/contact/{actionName}/{id}
     defaults: { _controller: "InternitContactBundle:Contact:index", actionName: null, id: null }
+    
+tupi_contact_config:
+    pattern:  /admin/config/{actionName}/{id}
+    defaults: { _controller: "InternitContactBundle:ContactConfig:index", actionName: edit, id: 1 }
 
 tupi_contact_edit:
     pattern:  /admin/contact/edit/{id}

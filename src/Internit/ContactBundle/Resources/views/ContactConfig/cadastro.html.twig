@@ -1,0 +1,23 @@
+{% extends 'TupiAdminBundle:Template:main.html.twig' %}
+
+{% block botoes %}
+	{{ admin.sbutton('Salvar', 'salvar', admin.id_by_name(form)) }}
+{% endblock %}
+
+{% set title_controle = 'Configurações' %}
+
+{% block main %}
+<div class="formulario esp_top">
+	<div class="tabs col12">
+		{{ admin.show_message() }}
+		{{ form_start(form) }}
+			{{ form_row(form.id) }}
+			<div id="configuracoes" class="box">
+				<ul class="col12">
+					<li>{{ form_row(form.mensagemResposta) }}</li>
+				</ul>
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}

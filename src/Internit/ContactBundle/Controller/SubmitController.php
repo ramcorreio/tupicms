@@ -9,6 +9,7 @@ use Internit\ContactBundle\Entity\ContactPerson;
 use Internit\ContactBundle\Service\MailService;
 use Internit\ContactBundle\Entity\Trabalhe;
 use Internit\ContactBundle\Form\TrabalheType;
+use Internit\ContactBundle\Form\ContactConfigType;
 use Internit\SiteBaseBundle\Controller\BaseController;
 
 use Tupi\ContentBundle\Controller\PageController;
@@ -29,7 +30,10 @@ class SubmitController extends BaseController
     	
  		//pega infos do email  
     	$dados = $this->getRespositoryName('TupiSecurityBundle:Setting')->find('1');
-
+    	
+    	//pega mensagem automatica de resposta do email
+    	$mensagem = $this->getDoctrine()->getRepository('InternitContactBundle:ContactConfig')->find('1');
+    	
         $contactRequest = new ContactRequest();
         $contactRequest->setPerson(new ContactPerson());
         
@@ -175,7 +179,7 @@ class SubmitController extends BaseController
             
             $this->get('internit.contact.mail.service')->send($message);
             
-            $success = "Sua mensagem foi enviada com sucesso. <br/> Em breve estaremos te retornando.";
+            $success = $mensagem->getMensagemResposta();
         }
         
         return $this->render('InternitSiteBaseBundle:Default:contato.html.twig', array(
